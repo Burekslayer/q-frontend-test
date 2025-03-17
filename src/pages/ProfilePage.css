@@ -1,0 +1,55 @@
+/* Container for the entire profile page */
+.profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  /* Profile header section */
+  .profile-header {
+    margin-bottom: 2rem;
+  }
+  
+  /* Profile picture styling */
+  .profile-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+  }
+  
+  /* Profile name styling */
+  .profile-name {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  /* Action buttons */
+  .profile-actions {
+    margin-bottom: 2rem;
+  }
+  
+  .profile-actions button {
+    margin: 0 0.5rem;
+  }
+  
+  /* Gallery layout */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Individual gallery item */
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
