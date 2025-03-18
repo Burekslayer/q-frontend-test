@@ -1,0 +1,201 @@
+/* src/pages/HomePage.css */
+*{
+    overflow: hidden;
+}
+.home-page {
+    position: relative;
+    width: 100%;/* adjust as needed */
+    margin: 0 auto;
+    overflow: hidden;
+}
+  
+.background {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+}
+  
+  /* Position the easel; adjust coordinates as needed */
+.easel {
+    position: absolute;
+    top: 0.5%;
+    left: 0.5%;
+    width: 27%; /* adjust size as needed */
+    transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 1;
+    overflow: hidden;
+    filter: drop-shadow(0.1vw 0.1vw 0 white)
+            drop-shadow(-0.1vw 0.1vw 0 white)
+            drop-shadow(0.1vw -0.1vw 0 white)
+            drop-shadow(-0.1vw -0.1vw 0 white);
+}
+  /* Position the chair; clicking on this navigates to login/register */
+.chair {
+    position: absolute;
+    top: 46%;
+    left: 67%;
+    width: 20.5%; /* adjust size as needed */
+    transition: transform 0.2s, box-shadow 0.5s;
+    z-index: 1;
+    overflow: hidden;filter: drop-shadow(2px 2px 0 white);
+    filter: drop-shadow(0.02vw 0.02vw 0 white)
+            drop-shadow(-0.02vw 0.02vw 0 white)
+            drop-shadow(0.02vw -0.02vw 0 white)
+            drop-shadow(-0.02vw -0.02vw 0 white);
+}
+.picture {
+    position: absolute;
+    top: 26%;
+    left: 44.2%;
+    width: 8.7%; /* adjust size as needed */
+    transition: transform 0.2s, box-shadow 0.5s;
+    z-index: 1;
+    overflow: hidden;filter: drop-shadow(2px 2px 0 white);
+    filter: drop-shadow(0.02vw 0.02vw 0 white)
+            drop-shadow(-0.02vw 0.02vw 0 white)
+            drop-shadow(0.02vw -0.02vw 0 white)
+            drop-shadow(-0.02vw -0.02vw 0 white);
+}
+  
+
+.picture:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0.1vw 0.1vw 0 white)
+            drop-shadow(-0.02vw 0.02vw 0 white)
+            drop-shadow(0.02vw -0.02vw 0 white)
+            drop-shadow(-0.02vw -0.02vw 0 white);
+            cursor: pointer;
+}
+.chair:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0.1vw 0.1vw 0 white)
+            drop-shadow(-0.02vw 0.02vw 0 white)
+            drop-shadow(0.02vw -0.02vw 0 white)
+            drop-shadow(-0.02vw -0.02vw 0 #ffffff);
+            cursor: pointer;
+}
+
+.easel:hover{
+    transform: scale(1.05);
+    filter: drop-shadow(0.1vw 0.1vw 0 white)
+            drop-shadow(-0.1vw 0.1vw 0 white)
+            drop-shadow(0.1vw -0.1vw 0 white)
+            drop-shadow(-0.1vw -0.1vw 0 white);
+    cursor: pointer;
+}
+
+.galerija-anim{
+    position: absolute;
+    top: 21%;
+    left: 8%;
+    width: 13vw;
+    height: 8vw;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.onama-anim{
+    position: absolute;
+    top: 13%;
+    left: 43%;
+    width: 11vw;
+    height: 9vw;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.login-anim{
+    position: absolute;
+    top: 57%;
+    left: 70%;
+    width: 11vw;
+    height: 9vw;
+    z-index: 2;
+    pointer-events: none;
+}
+
+@-webkit-keyframes svg-text-anim {
+    0%{
+        stroke-dashoffset: var(--dash-length);
+        fill: transparent;
+    }
+    40% {
+        stroke-dashoffset: 0;
+        fill: transparent;
+    }
+    60% {
+        stroke-dashoffset: 0;
+        fill: #000000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+        fill: #000000;
+    }
+}
+
+@-webkit-keyframes svg-text-anim-reverse {
+    0% {
+      stroke-dashoffset: 0;
+      fill: #000000;
+    }
+    40% {
+        stroke-dashoffset: var(--dash-length);
+        fill: transparent;
+    }
+    60% {
+        stroke-dashoffset: var(--dash-length);
+    }    
+    100% {
+      stroke-dashoffset: var(--dash-length);
+      fill: transparent;
+    }
+  }
+
+@keyframes svg-text-anim-reverse {
+  0% {
+    stroke-dashoffset: 0;
+    fill: #000000;
+  }
+  40% {
+    stroke-dashoffset: var(--dash-length);
+    fill: transparent;
+  }
+  60% {
+    stroke-dashoffset: var(--dash-length);
+    fill: transparent;
+  }
+  100% {
+    stroke-dashoffset: var(--dash-length);
+    fill: transparent;
+  }
+}
+      
+@keyframes svg-text-anim {
+    0%{
+        stroke-dashoffset: var(--dash-length);
+        fill: transparent;
+    }
+    40% {
+        stroke-dashoffset: 0;
+        fill: transparent;
+    }
+    60% {
+        stroke-dashoffset: 0;
+        fill: #000000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+        fill: #000000;
+    }
+
+}
+
+.animate {
+    animation: svg-text-anim 2s ease forwards;
+}
+
+.animate-reverse {
+    animation: svg-text-anim-reverse 2s ease forwards;
+}
+ 
+  
