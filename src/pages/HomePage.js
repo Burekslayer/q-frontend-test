@@ -15,7 +15,7 @@ function HomePage() {
     const [isEaselHovered, setIsEaselHovered] = useState(false);
     const [isChairHovered, setIsChairHovered] = useState(false);
     const [isPictureHovered, setIsPictureHovered] = useState(false);
-    const [isTableHovered, setIsTableHovered] = useState(false);
+    //const [isTableHovered, setIsTableHovered] = useState(false);
 
     const handleChairClick = () =>  {
         navigate('/login');
