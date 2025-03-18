@@ -144,6 +144,7 @@ function HomePage() {
             <img
                 className="picture"
                 src="/images/slika.png"
+                alt="slicka"
                 style={{ cursor: "pointer" }}
                 
                 onMouseEnter={() => setIsPictureHovered(true)}
