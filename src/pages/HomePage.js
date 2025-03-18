@@ -11,6 +11,8 @@ function HomePage() {
     const gallerySvgRef = useRef(null);
     const aboutSvgRef = useRef(null);
     const loginSvgRef = useRef(null);
+    const audioRef = useRef(null);
+
     const navigate = useNavigate();    
     const [isEaselHovered, setIsEaselHovered] = useState(false);
     const [isChairHovered, setIsChairHovered] = useState(false);
@@ -19,6 +21,12 @@ function HomePage() {
 
     const handleChairClick = () =>  {
         navigate('/login');
+    };
+
+    const handlePictureClick = () => {
+        if (audioRef.current) {
+            audioRef.current.play();
+        }
     };
     /* const handleEaselClick = () => {
         navigate('/gallery');
@@ -141,6 +149,10 @@ function HomePage() {
                 onMouseEnter={() => setIsChairHovered(true)}
                 onMouseLeave={() => setIsChairHovered(false)}
             />
+
+            <audio ref={audioRef} src="/recordings/oNama.wav" />
+
+            {/* Picture image lel */}
             <img
                 className="picture"
                 src="/images/slika.png"
@@ -149,6 +161,7 @@ function HomePage() {
                 
                 onMouseEnter={() => setIsPictureHovered(true)}
                 onMouseLeave={() => setIsPictureHovered(false)}
+                onClick={handlePictureClick}
             />
         </div>
     );
