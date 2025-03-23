@@ -36,20 +36,4 @@
     margin: 0 0.5rem;
   }
   
-  /* Gallery layout */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    grid-gap: 1rem;
-    margin-bottom: 2rem;
-  }
-  
-  /* Individual gallery item */
-  .gallery-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
   

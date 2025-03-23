@@ -9,7 +9,7 @@ const useHoverAnimation = (duration = 2800) => {
   const handleMouseLeave = () => {
     setAnimationState("animate-reverse");
     // Optionally reset to no animation after the reverse animation finishes:
-    setTimeout(() => setAnimationState(""), duration);
+    //setTimeout(() => setAnimationState(""), duration);
   };
 
   return { animationState, handleMouseEnter, handleMouseLeave };

@@ -1,16 +1,111 @@
 /* src/pages/HomePage.css */
-.home-page {
-    position: relative;
-    width: 100%;/* adjust as needed */
-    margin: 0 auto;
+.home-page{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+.home-fixed {
+    position: fixed;
     overflow: hidden;
+    top: 0%;
+    width: 100vw;/* adjust as needed */
+    margin: 0 auto;
+    z-index: 0;
 }
   
 .background {
-    width: 100%;
+    width: 100vw;
     display: block;
-    overflow: hidden;
 }
+
+/* ----------------- GALLERY CONTENT ----------------- */
+
+.gallery{
+    z-index: 3; /* starts below the fixed home images */
+    background: white;
+    transition: opacity 1s ease, transform 0.5s ease;
+    /* Default state (when galleryPhase === "visible") */
+    position: relative;
+    margin-top: calc(100vw * 5 / 9);
+    height: 3000px;
+    /* You can add padding, margins, etc., as needed */
+}
+
+
+.react-photo-album--rows{
+    
+    max-width: 1440px;
+    width: 100%;
+    margin: 100px auto;
+}
+.react-photo-album--button {
+    margin: 0.2vw;
+    /* Optionally adjust padding if needed */
+    padding: 0.5rem; /* or whatever suits your design */
+  }
+
+/* ----------------- Gallery animation section ----------------- */
+
+.gallery.disintegrate {
+    position: fixed;
+    margin-top: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Optionally, set 'top' to the current position or leave it as is */
+    opacity: 0;
+}
+
+.gallery.reset {
+    position: relative;
+    top: calc(100vw * 5 / 9); /* This moves it to its starting position */
+    opacity: 0;
+}
+
+.gallery.collapsed {
+    /* Adjust this max-height based on your targetRowHeight and spacing.
+       For example: 4 rows of 200px plus 3 gaps of 5px = 4*200 + 3*5 = 815px */
+    max-height: 815px;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  
+  .gallery.expanded {
+    max-height: none;
+    transition: max-height 0.5s ease;
+  }
+  
+  /* Style for the toggle button container (optional) */
+  .gallery-toggle {
+    z-index: 3;
+    text-align: center;
+    height: 200px;
+    background: white;
+  }
+  
+  .gallery-toggle button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 4;
+  }
+
+
+.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 40%;
+    width: 20%;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.699);
+    padding: 0.5rem;
+    text-align: center;
+  }
+.nav-bar button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
   
   /* Position the easel; adjust coordinates as needed */
 .easel {
@@ -34,7 +129,7 @@
     width: 20.5%; /* adjust size as needed */
     transition: transform 0.2s, box-shadow 0.5s;
     z-index: 1;
-    overflow: hidden;filter: drop-shadow(2px 2px 0 white);
+    overflow: hidden;   
     filter: drop-shadow(0.02vw 0.02vw 0 white)
             drop-shadow(-0.02vw 0.02vw 0 white)
             drop-shadow(0.02vw -0.02vw 0 white)
@@ -43,11 +138,11 @@
 .picture {
     position: absolute;
     top: 26%;
-    left: 44.2%;
+    left: 44.3%;
     width: 8.7%; /* adjust size as needed */
     transition: transform 0.2s, box-shadow 0.5s;
-    z-index: 1;
-    overflow: hidden;filter: drop-shadow(2px 2px 0 white);
+    z-index: 2;
+    overflow: hidden;
     filter: drop-shadow(0.02vw 0.02vw 0 white)
             drop-shadow(-0.02vw 0.02vw 0 white)
             drop-shadow(0.02vw -0.02vw 0 white)
@@ -57,11 +152,11 @@
 .things {
     position: absolute;
     top: 33.7%;
-    left: 30.5%;
+    left: 30.7%;
     width: 17.5%; /* adjust size as needed */
     transition: transform 0.2s, box-shadow 0.5s;
     z-index: 1;
-    overflow: hidden;filter: drop-shadow(2px 2px 0 white);
+    overflow: hidden;
     filter: drop-shadow(0.02vw 0.02vw 0 white)
             drop-shadow(-0.02vw 0.02vw 0 white)
             drop-shadow(0.02vw -0.02vw 0 white)
@@ -69,17 +164,17 @@
 }
 .things:hover {
     transform: scale(1.05);
-    filter: drop-shadow(0.1vw 0.1vw 0 white)
-            drop-shadow(-0.02vw 0.02vw 0 white)
-            drop-shadow(0.02vw -0.02vw 0 white)
-            drop-shadow(-0.02vw -0.02vw 0 white);
+    filter: drop-shadow(0.01vw 0.01vw 0 white)
+            drop-shadow(-0.01vw 0.01vw 0 white)
+            drop-shadow(0.01vw -0.01vw 0 white)
+            drop-shadow(-0.01vw -0.01vw 0 white);
             cursor: pointer;
 }
   
 
 .picture:hover {
     transform: scale(1.05);
-    filter: drop-shadow(0.1vw 0.1vw 0 white)
+    filter: drop-shadow(0.02vw 0.02vw 0 white)
             drop-shadow(-0.02vw 0.02vw 0 white)
             drop-shadow(0.02vw -0.02vw 0 white)
             drop-shadow(-0.02vw -0.02vw 0 white);
@@ -87,7 +182,7 @@
 }
 .chair:hover {
     transform: scale(1.05);
-    filter: drop-shadow(0.1vw 0.1vw 0 white)
+    filter: drop-shadow(0.02vw 0.02vw 0 white)
             drop-shadow(-0.02vw 0.02vw 0 white)
             drop-shadow(0.02vw -0.02vw 0 white)
             drop-shadow(-0.02vw -0.02vw 0 #ffffff);
@@ -106,7 +201,7 @@
 
 .search-anim{
     position: absolute;
-    top: 21%;
+    top: 44%;
     left: 33%;
     width: 10vw;
     height: 8vw;
@@ -116,7 +211,7 @@
 
 .galerija-anim{
     position: absolute;
-    top: 21%;
+    top: 22%;
     left: 8%;
     width: 13vw;
     height: 8vw;
@@ -126,7 +221,7 @@
 
 .onama-anim{
     position: absolute;
-    top: 13%;
+    top: 12%;
     left: 43%;
     width: 11vw;
     height: 9vw;
