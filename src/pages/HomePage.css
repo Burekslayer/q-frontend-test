@@ -48,10 +48,12 @@
   padding: 0.0rem; /* or whatever suits your design */
   overflow: hidden;
 }
+
 .react-photo-album--button img{
   transition: 0.5s;
   scale: 1;
 }
+
 .react-photo-album--button img:hover{
   scale: 1.04;
 }
@@ -102,6 +104,10 @@
     z-index: 4;
   }
 
+  .yarl__container {
+    background-color: rgba(0, 0, 0, 0.92) !important;
+  }
+  
 
 .nav-bar {
     position: fixed;

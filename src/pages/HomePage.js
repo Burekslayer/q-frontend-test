@@ -1,29 +1,18 @@
-// src/pages/HomePage.js
-import React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './HomePage.css';
 import useHoverAnimation from '../hooks/useHoverAnimation';
-//import { photos } from '../data/photos';
 import { fetchPhotos } from '../data/photos';
-
 import { RowsPhotoAlbum } from 'react-photo-album';
-import "react-photo-album/rows.css";
-
 import Lightbox from 'yet-another-react-lightbox';
-// import optional lightbox plugins
-import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
-import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
+
+import './HomePage.css';
+import "react-photo-album/rows.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import 'yet-another-react-lightbox/styles.css';
 
-// When the chair is clicked, navigate to the login/register page.
-
 
 function HomePage() {
-
     const gallerySvgRef = useRef(null);
     const aboutSvgRef = useRef(null);
     const loginSvgRef = useRef(null);
@@ -32,6 +21,7 @@ function HomePage() {
     const audioRef = useRef(null);
 
     const navigate = useNavigate(); 
+
     const easelHover = useHoverAnimation();
     const pictureHover = useHoverAnimation();
     const chairHover = useHoverAnimation();
@@ -42,11 +32,9 @@ function HomePage() {
     const [photos, setPhotos] = useState([]);
     const [showAllRows, setShowAllRows] = useState(false);
     const [lightboxIndex, setLightboxIndex] = useState(-1);
-
     
     const collapseRef = showAllRows ? "expanded" : "collapsed";
     const collapsedRowCount = 2;
-
 
     useEffect(() => {
         async function loadPhotos() {
@@ -55,7 +43,6 @@ function HomePage() {
         }
         loadPhotos();
     }, []);
-
     const handleChairClick = () =>  {
         navigate('/login');
     };
@@ -92,7 +79,6 @@ function HomePage() {
 
     useEffect(() => {
         const handleScroll = () => {
-            // Calculate the threshold using the 5/9 ratio of the viewport width.
             const threshold = window.innerWidth * (5 / 9);
             if (window.scrollY > threshold) {
                 setShowNav(true);
@@ -259,9 +245,9 @@ function HomePage() {
                     spacing={0}
                     margin={0}
                     componentsProps={{
-                        container: { className: collapseRef }, // Apply expanded/collapsed class here
+                        container: { className: collapseRef },
                     }}
-                    // When a photo is clicked, open the lightbox at that index.
+                    
                     onClick={({ index }) => setLightboxIndex(index)}
                 />
                 <div className="gallery-toggle">
@@ -272,7 +258,7 @@ function HomePage() {
                     )}
                 </div>
                 {/* Inline styles to control row visibility */}
-                <style jsx>
+                <style>
                     {`
                         .collapsed .react-photo-album--track:nth-child(n + ${
                           collapsedRowCount + 1
@@ -283,39 +269,44 @@ function HomePage() {
                           display: flex;
                         }
                     `}
-                </style>
+                </style>    
             </div> 
             
 
             <Lightbox
-                open={lightboxIndex >= 0}
-                index={lightboxIndex}
-                close={() => setLightboxIndex(-1)}
-                slides={photos.map((photo) => ({ src: photo.src }))}
-                toolbar={{
-                    buttons: [
-                        <button
-                            key="artist-profile"
-                            type="button"
-                            className="yarl__button"
-                            onClick={() => alert("Go to artist profile!")}
-                        >
-                            Artist Profile
-                        </button>,
-                        <span key="price" className="yarl__price">$500.00</span>,
-                        <button
-                            key="add-to-cart"
-                            type="button"
-                            className="yarl__button"
-                            onClick={() => alert("Added to cart!")}
-                        >
-                            Add to Cart
-                        </button>,
-                        "close",
-                    ],
-                }}
-                plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
-/>
+            open={lightboxIndex >= 0}
+            index={lightboxIndex}
+            close={() => setLightboxIndex(-1)}
+            slides={photos.map((photo) => ({ src: photo.src, alt: photo.alt }))}
+            plugins={[Thumbnails]}
+            toolbar={{
+                buttons: [
+                    <button
+                        key="artist-profile"
+                        type="button"
+                        className="yarl__button"
+                        onClick={() => alert("Go to artist profile!")}
+                    >
+                        {lightboxIndex >= 0 ? photos[lightboxIndex].alt : "Artist Profile"}
+                    </button>,
+                    <span key="price" className="yarl__price">
+                        $500.00
+                    </span>,
+                    <button
+                        key="add-to-cart"
+                        type="button"
+                        className="yarl__button"
+                        onClick={() => alert("Added to cart!")}
+                    >
+                        Add to Cart
+                    </button>,
+                    "close",
+                ],
+            }}
+            on={{
+                view: ({ index }) => setLightboxIndex(index), // Sync index when slide changes
+            }}
+        />
             
             
 
