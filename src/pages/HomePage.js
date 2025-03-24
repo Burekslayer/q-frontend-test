@@ -45,7 +45,7 @@ function HomePage() {
 
     
     const collapseRef = showAllRows ? "expanded" : "collapsed";
-    const collapsedRowCount = 4;
+    const collapsedRowCount = 2;
 
 
     useEffect(() => {
@@ -255,7 +255,7 @@ function HomePage() {
             <div ref={galleryRef} className={`gallery ${galleryPhase}`}>
                 <RowsPhotoAlbum 
                     photos={photos}
-                    targetRowHeight={200} 
+                    targetRowHeight={400} 
                     spacing={0}
                     margin={0}
                     componentsProps={{
