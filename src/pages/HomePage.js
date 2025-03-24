@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './HomePage.css';
 import useHoverAnimation from '../hooks/useHoverAnimation';
-
 //import { photos } from '../data/photos';
 import { fetchPhotos } from '../data/photos';
 
@@ -30,35 +29,23 @@ function HomePage() {
     const loginSvgRef = useRef(null);
     const searchSvgRef = useRef(null);
     const galleryRef = useRef(null);
-
     const audioRef = useRef(null);
 
     const navigate = useNavigate(); 
-    // State for the lightbox (which image is open)
-    const [lightboxIndex, setLightboxIndex] = useState(-1);
-
-
-    // Use separate hover animation hooks for each element
     const easelHover = useHoverAnimation();
     const pictureHover = useHoverAnimation();
     const chairHover = useHoverAnimation();
     const thingsHover = useHoverAnimation();
 
-    //const photosWithKeys = photos.map((photo, index) => ({
-    //    ...photo,
-    //    key: photo.id || index, // use the id if available, otherwise fallback to index
-    //  }));
-
-     // State for gallery visibility: when false, gallery content “disintegrates”
     const [galleryPhase, setGalleryPhase] = useState("visible");
     const [showNav, setShowNav] = useState(false);
-    
     const [photos, setPhotos] = useState([]);
-
-    // New state to toggle between collapsed and expanded view.
     const [showAllRows, setShowAllRows] = useState(false);
+    const [lightboxIndex, setLightboxIndex] = useState(-1);
 
-
+    
+    const collapseRef = showAllRows ? "expanded" : "collapsed";
+    const collapsedRowCount = 4;
 
 
     useEffect(() => {
@@ -67,7 +54,7 @@ function HomePage() {
           setPhotos(photosData);
         }
         loadPhotos();
-      }, []);
+    }, []);
 
     const handleChairClick = () =>  {
         navigate('/login');
@@ -85,34 +72,23 @@ function HomePage() {
         window.scrollTo({ top: window.innerWidth * (5 / 9), behavior: "smooth" });
     }
 
-        
-    // Handler for returning to home: trigger disintegration of the gallery content
     const handleReturnHome = () => {
-
-         // Before changing the phase, get the current top offset of the gallery element.
         if (galleryRef.current) {
             const currentTop = galleryRef.current.getBoundingClientRect().top;
             galleryRef.current.style.top = `${currentTop}px`;
         }
-        // 1. Trigger disintegration (fade out and fix position)
         setGalleryPhase("disintegrate");
-        // 2. Instantly scroll to top
         window.scrollTo({ top: 0 });
-        // 3. After 0.5s (the fade-out duration), reposition the gallery off-screen while still hidden
         setTimeout(() => {
             setGalleryPhase("reset");
-            // 4. Then (optionally immediately or after a brief delay) show the gallery again
             setTimeout(() => {
                 setGalleryPhase("visible");
                 if (galleryRef.current) {
                     galleryRef.current.style.top = "";
                   }
-            }, 10);
-            
+            }, 10);    
         }, 500);
     };
-
-
 
     useEffect(() => {
         const handleScroll = () => {
@@ -124,7 +100,6 @@ function HomePage() {
                 setShowNav(false);
             }
         };
-      
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
@@ -140,7 +115,6 @@ function HomePage() {
                 path.style.setProperty('--dash-length', length);
             });
         };
-      
         const svgRefs = [gallerySvgRef.current, aboutSvgRef.current, loginSvgRef.current, searchSvgRef.current];
         svgRefs.forEach(initPaths);
     }, []);
@@ -278,31 +252,41 @@ function HomePage() {
             </div>
 
             {/* Gallery content section that appears below the fixed images */}
-            <div ref={galleryRef} className={`gallery ${galleryPhase}  ${showAllRows ? "expanded" : "collapsed"}`}>
+            <div ref={galleryRef} className={`gallery ${galleryPhase}`}>
                 <RowsPhotoAlbum 
                     photos={photos}
                     targetRowHeight={200} 
                     spacing={0}
                     margin={0}
+                    componentsProps={{
+                        container: { className: collapseRef }, // Apply expanded/collapsed class here
+                    }}
                     // When a photo is clicked, open the lightbox at that index.
                     onClick={({ index }) => setLightboxIndex(index)}
                 />
+                <div className="gallery-toggle">
+                    {showAllRows ? (
+                        <button onClick={() => setShowAllRows(false)}>Show Less</button>
+                    ) : (
+                        <button onClick={() => setShowAllRows(true)}>Show More</button>
+                    )}
+                </div>
+                {/* Inline styles to control row visibility */}
+                <style jsx>
+                    {`
+                        .collapsed .react-photo-album--track:nth-child(n + ${
+                          collapsedRowCount + 1
+                        }) {
+                          display: none;
+                        }
+                        .expanded .react-photo-album--track {
+                          display: flex;
+                        }
+                    `}
+                </style>
             </div> 
-            {/* <Lightbox
-                open={lightboxIndex >= 0}
-                index={lightboxIndex}
-                close={() => setLightboxIndex(-1)}
-                slides={photos.map((photo) => ({ src: photo.src }))}
-                // For example, use renderFooter to add custom buttons:
-                renderFooter={({ currentSlide }) => (
-                    <div className="lightbox-footer">
-                        <button onClick={() => alert("Go to artist profile!")}>Artist Profile</button>
-                        <span>Price: $XX.XX</span>
-                        <button onClick={() => alert("Added to cart!")}>Add to Cart</button>
-                    </div>
-                )}
-                plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
-            /> */}
+            
+
             <Lightbox
                 open={lightboxIndex >= 0}
                 index={lightboxIndex}
@@ -333,13 +317,7 @@ function HomePage() {
                 plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
 />
             
-            <div className="gallery-toggle">
-                {showAllRows ? (
-                    <button onClick={() => setShowAllRows(false)}>Show Less</button>
-                ) : (
-                    <button onClick={() => setShowAllRows(true)}>Show More</button>
-                )}
-            </div>
+            
 
             {/* Navigation Bar with a button to return home */}
             {showNav && (
@@ -348,7 +326,6 @@ function HomePage() {
                 </nav>
             )}
 
-            
         </div>
         
     );
