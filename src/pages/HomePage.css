@@ -40,9 +40,11 @@
     margin: 100px auto;
 }
 .react-photo-album--button {
-    margin: 0.2vw;
+    margin: 0.1vw;
+    border-radius: 0.5vw;
     /* Optionally adjust padding if needed */
-    padding: 0.5rem; /* or whatever suits your design */
+    padding: 0.0rem; /* or whatever suits your design */
+    overflow: hidden;
   }
 
 /* ----------------- Gallery animation section ----------------- */
@@ -106,7 +108,17 @@
     font-size: 1rem;
     cursor: pointer;
   }
-  
+  .yarl__price {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0 0.5em;
+    font-size: 1em;
+    color: #fff;
+    font-size: 1rem;
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,.8));
+    /* additional styling */
+  }
   /* Position the easel; adjust coordinates as needed */
 .easel {
     position: absolute;
