@@ -79,7 +79,7 @@
 .collapsed {
     /* Adjust this max-height based on your targetRowHeight and spacing.
        For example: 4 rows of 200px plus 3 gaps of 5px = 4*200 + 3*5 = 815px */
-    max-height: 815px;
+    max-height: 1200px;
     overflow: hidden;
     /* transition: max-height 0.5s ease; */
   }
@@ -103,6 +103,7 @@
     cursor: pointer;
     z-index: 4;
   }
+
 
   .yarl__container {
     background-color: rgba(0, 0, 0, 0.92) !important;
@@ -192,37 +193,21 @@
 }
 .things:hover {
     transform: scale(1.05);
-    filter: drop-shadow(0.01vw 0.01vw 0 white)
-            drop-shadow(-0.01vw 0.01vw 0 white)
-            drop-shadow(0.01vw -0.01vw 0 white)
-            drop-shadow(-0.01vw -0.01vw 0 white);
             cursor: pointer;
 }
   
 
 .picture:hover {
     transform: scale(1.05);
-    filter: drop-shadow(0.02vw 0.02vw 0 white)
-            drop-shadow(-0.02vw 0.02vw 0 white)
-            drop-shadow(0.02vw -0.02vw 0 white)
-            drop-shadow(-0.02vw -0.02vw 0 white);
             cursor: pointer;
 }
 .chair:hover {
     transform: scale(1.05);
-    filter: drop-shadow(0.02vw 0.02vw 0 white)
-            drop-shadow(-0.02vw 0.02vw 0 white)
-            drop-shadow(0.02vw -0.02vw 0 white)
-            drop-shadow(-0.02vw -0.02vw 0 #ffffff);
             cursor: pointer;
 }
 
 .easel:hover{
     transform: scale(1.05);
-    filter: drop-shadow(0.1vw 0.1vw 0 white)
-            drop-shadow(-0.1vw 0.1vw 0 white)
-            drop-shadow(0.1vw -0.1vw 0 white)
-            drop-shadow(-0.1vw -0.1vw 0 white);
     cursor: pointer;
 }
 
@@ -258,19 +243,15 @@
 }
 
 .login-anim{
-    position: absolute;
-    top: 57%;
-    left: 70%;
-    width: 11vw;
-    height: 9vw;
-    z-index: 2;
-    pointer-events: none;
+  position: absolute;
+  top: 57%;
+  left: 70%;
+  width: 11vw;
+  height: 9vw;
+  z-index: 2;
+  pointer-events: none;
 }
 
-.galerija-anim path{
-    stroke-dashoffset: var(--dash-length);
-    fill: transparent;
-  }
 @-webkit-keyframes svg-text-anim {
     0%{
         stroke-dashoffset: var(--dash-length);
