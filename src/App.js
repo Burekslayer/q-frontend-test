@@ -1,23 +1,30 @@
 // App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';         // New interactive home page
-import AuthPage from './pages/AuthPage';           // Login/Register page
 import GeneralPage from './pages/GeneralPage';
 import ProfilePage from './pages/ProfilePage';
 import PublicProfilePage from './pages/PublicProfilePage';
 import SearchProfiles from './pages/SearchProfiles';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import "./App.css";
 
 function App() {
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   // Define the logout function here
   const handleLogout = () => {
     setToken(''); // clears the token in App state
-    localStorage.removeItem('authToken'); // or wherever you store it
+    localStorage.removeItem('token'); // or wherever you store it
   };
+
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem('token', token);
+    }
+  }, [token]);
 
   return (
     <Router>
@@ -29,9 +36,14 @@ function App() {
           {/* Login/Register page */}
           <Route
             path="/login"
-            element={!token ? <AuthPage setToken={setToken} /> : <Navigate to="/general" />}
+            element={!token ? <LoginPage setToken={setToken} /> : <Navigate to="/general" />}
           />
 
+          <Route
+            path="/register"
+            element={!token ? <RegisterPage /> : <Navigate to="/general" />}
+          />
+          
           {/* General page (requires login) */}
           <Route
             path="/general"
@@ -51,7 +63,7 @@ function App() {
           />
 
           {/* Public profile page */}
-          <Route path="/user/:username" element={<PublicProfilePage />} />
+          <Route path="/users/:id" element={<PublicProfilePage />} />
 
           {/* Search page */}
           <Route path="/search" element={<SearchProfiles />} />

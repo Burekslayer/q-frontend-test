@@ -7,7 +7,7 @@
   align-items: center;
 }
 
-.auth-container, .general-container, .profile-container {
+.auth-container, .general-container {
   background: white;
   padding: 2rem;
   border-radius: 8px;

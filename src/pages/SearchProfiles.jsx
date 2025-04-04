@@ -24,33 +24,32 @@ function SearchProfiles() {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Type a username..."
+        placeholder="Type a name, email or art style..."
       />
       <button onClick={handleSearch}>Search</button>
 
       <div style={{ marginTop: '1rem' }}>
         {results.map(user => (
           <div
-            key={user.username}
-            style={{
-              margin: '0.5rem auto',
-              border: '1px solid #ccc',
-              maxWidth: '400px',
-              padding: '0.5rem',
-            }}
-          >
-            {/* If you have a public profile route, link to it */}
-            <a href={`/user/${user.username}`}>
-              {user.profilePicture && (
-                <img
-                  src={user.profilePicture}
-                  alt={user.username}
-                  style={{ width: 50, height: 50, objectFit: 'cover', marginRight: 8 }}
-                />
-              )}
-              {user.username}
-            </a>
-          </div>
+          key={user._id || user.email}
+          style={{
+            margin: '0.5rem auto',
+            border: '1px solid #ccc',
+            maxWidth: '400px',
+            padding: '0.5rem',
+          }}
+        >
+          <a href={`/users/${user._id}`}>
+            {user.profilePicture && (
+              <img
+                src={user.profilePicture}
+                alt={`${user.firstName} ${user.lastName}`}
+                style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+              />
+            )}
+            <p>{user.firstName} {user.lastName}</p>
+          </a>
+        </div>
         ))}
       </div>
     </div>

@@ -190,8 +190,8 @@ function HomePage() {
                                     className=''
                                     style={{
                                         position: 'absolute',
-                                        top: 5,
-                                        left: 5,
+                                        top: 0,
+                                        left: 0,
                                         width: '100%',
                                         height: '100%',
                                         // pointerEvents: 'none' would prevent mouse events;
@@ -219,7 +219,7 @@ function HomePage() {
                             padding: '5px 10px',
                             borderRadius: '4px',
                             pointerEvents: 'none',
-                            zIndex: 1000,
+                            zIndex: 4,
                         }}
                     >
                         {tooltip.content}
