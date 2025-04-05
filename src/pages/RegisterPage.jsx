@@ -1,7 +1,7 @@
 // src/pages/RegisterPage.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useSearchParams, useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function RegisterPage() {
   const [firstName, setFirstName] = useState('');
