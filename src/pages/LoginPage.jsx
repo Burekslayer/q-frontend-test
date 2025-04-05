@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 function LoginPage({ setToken }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-  
+
   useEffect(() => {
     const verified = searchParams.get('verified');
     const token = searchParams.get('token');
