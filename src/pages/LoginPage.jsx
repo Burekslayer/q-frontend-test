@@ -8,6 +8,17 @@ function LoginPage({ setToken }) {
   const [message, setMessage] = useState('');
 
   const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+  
+  useEffect(() => {
+    const verified = searchParams.get('verified');
+    const token = searchParams.get('token');
+
+    if (verified && token) {
+      setToken(token);
+      localStorage.setItem('token', token);
+      navigate('/profile');
+    }
+  }, [searchParams, setToken, navigate]);
 
   const handleLogin = async () => {
     try {
@@ -27,8 +38,18 @@ function LoginPage({ setToken }) {
   return (
     <div className="auth-container">
       <h1>Login</h1>
-      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <input 
+        type="email" 
+        placeholder="Email"
+        value={email} 
+        onChange={(e) => setEmail(e.target.value)} 
+      />
+      <input 
+        type="password" 
+        placeholder="Password" 
+        value={password} 
+        onChange={(e) => setPassword(e.target.value)} 
+      />
       <button onClick={handleLogin}>Login</button>
       <p>{message}</p>
       <p>
