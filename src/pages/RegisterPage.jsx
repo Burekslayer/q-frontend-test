@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+// src/pages/RegisterPage.jsx
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 
 function RegisterPage() {
   const [firstName, setFirstName] = useState('');
@@ -13,7 +14,7 @@ function RegisterPage() {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post(`${apiUrl}/api/users/register`, {
+      await axios.post(`${apiUrl}/api/users/register`, {
         firstName,
         lastName,
         email,
