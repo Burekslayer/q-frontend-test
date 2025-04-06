@@ -56,11 +56,9 @@ function HomePage() {
             const gallery = user.gallery || []; 
 
             const findClosestImportant = (gallery, rotationIndex) => {
-                let index = rotationIndex;
-                while (index >= 0) {
-                    const match = gallery.find(img => img.importantIndex === index);
+                for (let i = rotationIndex; i >= 0; i--) {
+                    const match = gallery.find(img => img.importantIndex === i);
                     if (match) return match;
-                    index--;
                 }
                 return null;
             };
