@@ -12,7 +12,30 @@ function ProfilePage({ token, onLogout }) {
   const [selectedImages, setSelectedImages] = useState([]);
   const [galleryImages, setGalleryImages] = useState([]);
   const [deleteMode, setDeleteMode] = useState(false);
+  const [user, setUser] = useState(null);
   const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
+  // Fetch user names
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/api/users/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+  
+        setProfilePicture(response.data.profilePicture || '');
+        setArtGallery(response.data.gallery || []);
+        setUser({
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
+        });
+      } catch (err) {
+        console.error('Failed to fetch profile:', err);
+      }
+    };
+  
+    fetchProfile(); // ✅ Call the async function
+  }, [apiUrl, token]);
 
   const handleProfileUpload = async (event) => {
     event.preventDefault();
@@ -178,7 +201,7 @@ function ProfilePage({ token, onLogout }) {
     <div className="profile-container">
       <div className="profile-header">
         <img className="profile-image" src={profilePicture} alt="Profile" />
-        <h2 className="profile-name">John Doe</h2>
+        <h2 className="profile-name">{user?.firstName} {user?.lastName}</h2>
       </div>
 
       <div className="profile-actions">
