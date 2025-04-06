@@ -94,7 +94,34 @@ function ProfilePage({ token, onLogout }) {
       console.error(err);
       alert('Gallery upload failed');
     }
-    
+  };
+
+  const markAsImportant = async (url) => {
+    try {
+      await axios.patch(`${apiUrl}/api/users/gallery/important`, {
+        url,
+        isImportant: true,
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      window.location.reload();
+    } catch (err) {
+      alert(err.response?.data || 'Failed to mark as important');
+    }
+  };
+
+  const unmarkImportant = async (url) => {
+    try {
+      await axios.patch(`${apiUrl}/api/users/gallery/important`, {
+        url,
+        isImportant: false,
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      window.location.reload();
+    } catch (err) {
+      alert(err.response?.data || 'Failed to unmark important');
+    }
   };
 
   useEffect(() => {
@@ -140,7 +167,6 @@ function ProfilePage({ token, onLogout }) {
       setSelectedImages([]);
       setDeleteMode(false);
       alert('Images deleted successfully.');
-      
       window.location.reload();
     } catch (error) {
       console.error(error);
@@ -210,6 +236,13 @@ function ProfilePage({ token, onLogout }) {
             <p>Dimensions: {painting.width} x {painting.height}</p>
             <p>Price: ${painting.price}</p>
             <p>Tags: {painting.tags.join(', ')}</p>
+            {painting.isImportant && <p>🌟 Featured Image #{painting.importantIndex + 1}</p>}
+            {!painting.isImportant && artGallery.filter(img => img.isImportant).length < 3 && (
+              <button onClick={() => markAsImportant(painting.url)}>⭐ Mark as Featured</button>
+            )}
+            {painting.isImportant && (
+              <button onClick={() => unmarkImportant(painting.url)}>❌ Remove from Featured</button>
+            )}
           </div>
         ))}
       </div>

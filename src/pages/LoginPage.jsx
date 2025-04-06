@@ -38,7 +38,7 @@ function LoginPage({ setToken }) {
   };
 
   return (
-    <div className="auth-container">
+    <div className="auth-container"  onKeyDown={(e) => e.key === 'Enter' && handleLogin()}>
       <h1>Login</h1>
       <input 
         type="email" 

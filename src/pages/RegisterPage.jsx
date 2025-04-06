@@ -27,7 +27,7 @@ function RegisterPage() {
   };
 
   return (
-    <div className="auth-container">
+    <div className="auth-container"  onKeyDown={(e) => e.key === 'Enter' && handleRegister()}>
       <h1>Register</h1>
       <input
         type="text"
