@@ -91,7 +91,7 @@ const MasonryLayout = ({
     });
 
     return { items: placed, containerHeight: Math.max(...colHeights) - gap };
-  }, [images, effectiveColumns, galleryWidth, gap, spanThreshold, alignTolerance, focusedId, columnWidth]);
+  }, [images, effectiveColumns, gap, spanThreshold, alignTolerance, focusedId, columnWidth]);
 
   return (
     <div ref={wrapperRef} style={{ width: '100%' }}>
