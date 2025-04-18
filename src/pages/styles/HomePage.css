@@ -22,41 +22,22 @@
 /* ----------------- GALLERY CONTENT ----------------- */
 
 .gallery{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 3 !important; /* starts below the fixed home images */
+  z-index: 3 !important;
   background: white;
   transition: opacity 1s ease, transform 0.5s ease;
-  /* Default state (when galleryPhase === "visible") */
   position: relative;
   margin-top: calc(100vw * 5 / 9);
-  /* You can add padding, margins, etc., as needed */
 }
 
 
-.react-photo-album--rows{ 
-  max-width: 1440px;
+
+.gallery-wrapper {
   width: 100%;
-  margin: 100px auto;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
-.react-photo-album--button {
-  margin: 0.1vw;
-  border-radius: 0.14253vw;
-  /* Optionally adjust padding if needed */
-  padding: 0.0rem; /* or whatever suits your design */
-  overflow: hidden;
-}
 
-.react-photo-album--button > img{
-  transition: 0.5s;
-  scale: 1;
-}
-
-.react-photo-album--button > img:hover{
-  scale: 1.04;
-}
 
 /* ----------------- Gallery animation section ----------------- */
 
@@ -76,33 +57,16 @@
     opacity: 0;
 }
 
-.collapsed {
-    /* Adjust this max-height based on your targetRowHeight and spacing.
-       For example: 4 rows of 200px plus 3 gaps of 5px = 4*200 + 3*5 = 815px */
-    max-height: 1200px;
+/* .collapsed {
+    max-height: 2000px;
     overflow: hidden;
-    /* transition: max-height 0.5s ease; */
   }
-  
+
   .expanded  {
     max-height: none;
     overflow: hidden;
-    /* transition: max-height 0.5s ease; */
-  }
+  } */
   
-  /* Style for the toggle button container (optional) */
-  .gallery-toggle {
-    z-index: 3;
-    text-align: center;
-    height: 200px;
-    background: white;
-  }
-  
-  .gallery-toggle button {
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    z-index: 4;
-  }
 
 
   .yarl__container {

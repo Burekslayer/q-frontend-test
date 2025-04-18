@@ -5,7 +5,7 @@ export async function fetchPhotos() {
   );
 
   // Fetch photos from Picsum
-  const photosResponse = await fetch('https://picsum.photos/v2/list?page=2&limit=50');
+  const photosResponse = await fetch('https://picsum.photos/v2/list?page=2&limit=100');
   const photosData = await photosResponse.json();
 
   // Map photos with prices

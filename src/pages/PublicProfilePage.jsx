@@ -3,12 +3,31 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+import './styles/PublicProfilePage.css'
+
 function PublicProfilePage() {
   const { id } = useParams();
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState('');
+  const [theme, setTheme] = useState('default');
+
+
   const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-  
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/api/users/public/${id}`);
+        setProfile(response.data);
+        setTheme(response.data.profileTheme || 'default');
+      } catch (error) {
+        setError(error.response?.data || 'Error fetching profile');
+      }
+    };
+    fetchProfile();
+  }, [apiUrl, id])
+
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -21,11 +40,13 @@ function PublicProfilePage() {
     fetchProfile();
   }, [apiUrl, id]);
 
+  
+
   if (error) return <div>{error}</div>;
   if (!profile) return <div>Loading...</div>;
 
   return (
-    <div>
+    <div className={`public-profile ${theme}`}>
       <h1>Profile of {profile.firstName} {profile.lastName}</h1>
       {profile.profilePicture && (
         <img src={profile.profilePicture} alt="Profile" style={{ width: 150, height: 150, borderRadius: '50%' }} />

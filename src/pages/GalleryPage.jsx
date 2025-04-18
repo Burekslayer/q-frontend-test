@@ -1,6 +1,6 @@
 // GalleryPage.js
 import React, { useState } from 'react';
-import './GalleryPage.css';
+import './styles/GalleryPage.css';
 
 function GalleryPage() {
   // State to trigger the disintegration (fade-out/slide-out) animation

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './ProfilePage.css';
+import './styles/ProfilePage.css';
 
 const TAG_OPTIONS = ['Nature', 'Abstract', 'Modern', 'Portrait', 'Landscape', 'Fantasy', 'Realism'];
 
@@ -13,7 +13,21 @@ function ProfilePage({ token, onLogout }) {
   const [galleryImages, setGalleryImages] = useState([]);
   const [deleteMode, setDeleteMode] = useState(false);
   const [user, setUser] = useState(null);
+
+  const [showThemeModal, setShowThemeModal] = useState(false);
+  const [selectedTheme, setSelectedTheme] = useState('default');
+
+  useEffect(() => {
+    if (user?.profileTheme) {
+      setSelectedTheme(user.profileTheme);
+    }
+  }, [user]);
+
+
+
   const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
+  
 
   // Fetch user names
   useEffect(() => {
@@ -25,10 +39,8 @@ function ProfilePage({ token, onLogout }) {
   
         setProfilePicture(response.data.profilePicture || '');
         setArtGallery(response.data.gallery || []);
-        setUser({
-          firstName: response.data.firstName,
-          lastName: response.data.lastName,
-        });
+        setUser(response.data)
+        
       } catch (err) {
         console.error('Failed to fetch profile:', err);
       }
@@ -36,7 +48,21 @@ function ProfilePage({ token, onLogout }) {
   
     fetchProfile(); // ✅ Call the async function
   }, [apiUrl, token]);
+  console.log(user)
 
+  const applyTheme = async (theme) => {
+    try {
+      await axios.patch(`${apiUrl}/api/users/profile-theme`, { theme }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setSelectedTheme(theme);
+      setShowThemeModal(false);
+      window.location.reload(); // Optional: force CSS update
+    } catch (err) {
+      alert('Failed to update theme');
+    }
+  };
+  console.log(selectedTheme)
   const handleProfileUpload = async (event) => {
     event.preventDefault();
     const file = event.target.elements.profilePic.files[0];
@@ -198,9 +224,11 @@ function ProfilePage({ token, onLogout }) {
   };
 
   return (
-    <div className="profile-container">
+    <div className={`profile-container ${selectedTheme}`}>
       <div className="profile-header">
-        <img className="profile-image" src={profilePicture} alt="Profile" />
+        {profilePicture && (
+          <img className="profile-image" src={profilePicture} alt="Profile" />
+        )}
         <h2 className="profile-name">{user?.firstName} {user?.lastName}</h2>
       </div>
 
@@ -243,6 +271,22 @@ function ProfilePage({ token, onLogout }) {
 
         <button onClick={handleGalleryUpload}>Upload to Gallery</button>
       </form>
+
+
+      <button onClick={() => setShowThemeModal(true)}>🎨 Choose Theme</button>
+      {showThemeModal && (
+        <div className="theme-modal">
+          <div className="theme-options">
+            {['default', 'dark', 'pastel'].map((theme) => (
+              <div key={theme} className={`theme-card ${theme}`} onClick={() => applyTheme(theme)}>
+                {theme}
+              </div>
+            ))}
+          </div>
+          <button onClick={() => setShowThemeModal(false)}>Cancel</button>
+        </div>
+      )}
+
 
       <div className="profile-gallery">
         {artGallery.map((painting, index) => (

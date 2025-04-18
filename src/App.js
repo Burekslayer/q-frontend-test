@@ -67,6 +67,7 @@ function App() {
 
           {/* Search page */}
           <Route path="/search" element={<SearchProfiles />} />
+
         </Routes>
       </div>
     </Router>
