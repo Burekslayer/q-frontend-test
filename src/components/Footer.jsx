@@ -7,11 +7,11 @@ export default function Footer() {
       <div className="footer-content">
         <p>© 2025 Your Company. All rights reserved.</p>
         <nav className="footer-nav">
-          <a href="#">Privacy Policy</a>
+          <span>Privacy</span>
           <span> | </span>
-          <a href="#">Terms of Service</a>
+          <span>Terms of Service</span>
           <span> | </span>
-          <a href="#">Contact</a>
+          <span>Contact</span>
         </nav>
       </div>
     </footer>
