@@ -36,6 +36,12 @@ function makeMockupUrl(
     `${paintingPublicId}.jpg`,
   ].join("/");
 }
+
+const MOCKUP_TEMPLATES = [
+  "templates/living_room",
+  "templates/living_room_2",
+  "templates/studio_wall",
+];
 // https://res.cloudinary.com/dn30aabyv/image/upload/v1747224202/templates/living_room.jpg
 export default function ProductPage() {
   const { state } = useLocation();
@@ -45,20 +51,10 @@ export default function ProductPage() {
   const navigate = useNavigate();
 
   const [showCartPrompt, setShowCartPrompt] = useState(false);
-  console.log(id)
+  console.log(id);
   const publicId = useMemo(() => extractPublicId(src), [src]);
 
   console.log(publicId);
-
-  // define your templates once
-  const mockupTemplates = useMemo(
-    () => [
-      "templates/living_room",
-      "templates/living_room_2",
-      "templates/studio_wall",
-    ],
-    []
-  );
 
   // build your shots array: bare + each template
   const shots = useMemo(() => {
@@ -66,21 +62,21 @@ export default function ProductPage() {
     return [
       src,
       // living_room: centered, but nudged down 100px
-      makeMockupUrl(publicId, mockupTemplates[0], {
+      makeMockupUrl(publicId, MOCKUP_TEMPLATES[0], {
         overlayW: 200,
         gravity: "north",
         offsetX: 0,
         offsetY: 100,
       }),
       // second mockup: pin to top-right, move left 50px
-      makeMockupUrl(publicId, mockupTemplates[1], {
+      makeMockupUrl(publicId, MOCKUP_TEMPLATES[1], {
         overlayW: 600,
         gravity: "north_east",
         offsetX: -50,
         offsetY: 0,
       }),
       // studio wall: default center
-      makeMockupUrl(publicId, mockupTemplates[2], {
+      makeMockupUrl(publicId, MOCKUP_TEMPLATES[2], {
         overlayW: 800,
       }),
     ];
@@ -120,7 +116,14 @@ export default function ProductPage() {
         </div>
         <div className="item-details">
           <button className="cart-button" onClick={handleAddToCart}>
-            <a href='#' className="figma-button-test">
+            <a
+              href="/cart"
+              className="figma-button-test"
+              onClick={(e) => {
+                e.preventDefault(); // stop the browser from immediately reloading to /cart
+                handleAddToCart(); // now explicitly run your addToCart + navigate
+              }}
+            >
               <span className="figma-button-test-text">Add to cart</span>
             </a>
           </button>
