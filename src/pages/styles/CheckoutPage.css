@@ -1,0 +1,162 @@
+/* CheckoutPage.css */
+
+/* Overall container: two columns on desktop, single column on narrow screens */
+.checkout-page {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+/* Title at the top */
+.checkout-page h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  grid-column: 1 / -1; /* span both columns if desired */
+}
+
+/* Accordion Section Container */
+.accordion-section {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7fafc;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2d3748;
+}
+
+.accordion-header:hover {
+  background: #edf2f7;
+}
+
+.accordion-content {
+  display: none;
+  padding: 1rem;
+  background: white;
+  /* border-top: 1px solid #e2e8f0;  optional */
+}
+
+.accordion-content.show {
+  display: block;
+}
+
+/* Chevron rotation */
+.accordion-header .fa-chevron-down {
+  transition: transform 0.3s ease;
+}
+
+.accordion-header .rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Within each content, style form fields */
+.accordion-content input,
+.accordion-content select,
+.accordion-content button {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.accordion-content button {
+  background: #3182ce;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.accordion-content button:hover {
+  background: #2b6cb0;
+}
+
+/* Payment/Shipping forms often two‐column on desktop */
+.accordion-content .two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Right sidebar: order summary */
+.checkout-summary {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #fff;
+  padding: 1.5rem;
+  position: sticky;
+  top: 1.5rem; /* so it stays visible while scrolling */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Summary header */
+.checkout-summary h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Summary lines */
+.checkout-summary .summary-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: #444;
+}
+
+.checkout-summary .summary-total {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+/* Place Order button */
+.place-order-btn {
+  margin-top: auto;
+  padding: 0.75rem 0;
+  background: #38a169;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.place-order-btn:hover {
+  background: #2f855a;
+}
+
+.place-order-btn:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* On very narrow screens, switch to one‐column layout */
+@media (max-width: 768px) {
+  .checkout-page {
+    grid-template-columns: 1fr;
+  }
+  .checkout-summary {
+    position: static;
+    width: 100%;
+  }
+}

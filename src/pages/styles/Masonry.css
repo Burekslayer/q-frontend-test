@@ -54,6 +54,7 @@
   height: 100%;
   background-color: #f3f3f3;
   z-index: -1;
+  height: calc(100% + var(--gallery-top-padding, 0px) + 50px);
   border-top: 1px solid #ddd;
 }
 .masonry-item img {
@@ -89,3 +90,19 @@
 .load-more:hover {
   background: #005bb5;
 }
+.icon {
+  color: #333;
+  transition: color 150ms ease;
+}
+.icon:hover {
+  color: #0070f3;
+}
+.cart-button{
+  padding: 0px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.cart-button:hover {
+  background-color: transparent;
+} 

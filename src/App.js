@@ -9,6 +9,10 @@ import PublicProfilePage from './pages/PublicProfilePage';
 import SearchProfiles from './pages/SearchProfiles';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import ProductPage from './pages/ProductPage'
+import CartPage from './pages/CartPage';
+import CheckoutPage from './pages/CheckoutPage';
+import { CartProvider } from './context/CartContext';
 import "./App.css";
 
 function App() {
@@ -29,46 +33,61 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <Routes>
-          {/* Home Page with interactive image */}
-          <Route path="/" element={<HomePage />} />
+        <CartProvider>
+          <Routes>
+            {/* Home Page with interactive image */}
+            <Route path="/" element={<HomePage />} />
 
-          {/* Login/Register page */}
-          <Route
-            path="/login"
-            element={!token ? <LoginPage setToken={setToken} /> : <Navigate to="/general" />}
-          />
+            {/* Login/Register page */}
+            <Route
+              path="/login"
+              element={!token ? <LoginPage setToken={setToken} /> : <Navigate to="/general" />}
+            />
 
-          <Route
-            path="/register"
-            element={!token ? <RegisterPage /> : <Navigate to="/general" />}
-          />
-          
-          {/* General page (requires login) */}
-          <Route
-            path="/general"
-            element={token ? <GeneralPage token={token} /> : <Navigate to="/login" />}
-          />
+            <Route
+              path="/register"
+              element={!token ? <RegisterPage /> : <Navigate to="/general" />}
+            />
 
-          {/* Profile page (requires login) */}
-          <Route
-            path="/profile"
-            element={
-              token ? (
-                <ProfilePage token={token} onLogout={handleLogout} />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
+            {/* General page (requires login) */}
+            <Route
+              path="/general"
+              element={token ? <GeneralPage token={token} /> : <Navigate to="/login" />}
+            />
 
-          {/* Public profile page */}
-          <Route path="/users/:id" element={<PublicProfilePage />} />
+            {/* Profile page (requires login) */}
+            <Route
+              path="/profile"
+              element={
+                token ? (
+                  <ProfilePage token={token} onLogout={handleLogout} />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
 
-          {/* Search page */}
-          <Route path="/search" element={<SearchProfiles />} />
+            {/* Public profile page */}
+            <Route path="/users/:id" element={<PublicProfilePage />} />
 
-        </Routes>
+            {/* Search page */}
+            <Route path="/search" element={<SearchProfiles />} />
+
+            {/* Product page */}
+
+            <Route path="/product/:id" element={<ProductPage />} />
+
+            {/* Cart page */}
+
+            <Route path="/cart" element={<CartPage />} />
+            
+            {/* Checkout page */}
+
+            <Route path="/checkout" element={ <CheckoutPage />}/>
+
+          </Routes>
+        </CartProvider>
+
       </div>
     </Router>
   );

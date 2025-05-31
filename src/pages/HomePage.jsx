@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useHoverAnimation from '../hooks/useHoverAnimation';
 import { GallerySvg, LoginSvg, SearchSvg, AboutSvg } from '../components/SvgIcons';
@@ -26,6 +27,7 @@ function HomePage() {
 
     const [galleryPhase, setGalleryPhase] = useState("visible");
     const [showNav, setShowNav] = useState(false);
+    const [photos, setPhotos] = useState([]);
     const [apiPhotos, setApiPhotos] = useState([]);
 
     // Load once on mount
@@ -35,7 +37,65 @@ function HomePage() {
         setApiPhotos(pics);
       })();
     }, []);
+      
+    const apiUrl = process.env.REACT_APP_API_URL || "https://localhost:5000"
 
+    // Fetch Gallery Images (+ Featured)
+    useEffect(() => {
+        const currentHour = new Date().getUTCHours();
+        const rotationIndex = currentHour % 3;
+        
+        const fetchGallery = async () => {
+          try {
+            const response = await axios.get(`${apiUrl}/api/users/all`);
+            const users = response.data;
+            const featured = [];
+            const nonFeatured = [];
+
+            users.forEach(user => {
+                const gallery = user.gallery || []; 
+
+                const findClosestImportant = (gallery, rotationIndex) => {
+                    for (let i = rotationIndex; i >= 0; i--) {
+                        const match = gallery.find(img => img.importantIndex === i);
+                        if (match) return match;
+                    }
+                    return null;
+                };
+
+                const important = findClosestImportant(gallery, rotationIndex);
+                if (important) featured.push({ ...important, artistName: `${user.firstName} ${user.lastName}` });
+
+                gallery.forEach(img => {
+                    if (img !== important) {
+                        nonFeatured.push({ ...img, artistName: `${user.firstName} ${user.lastName}` });
+                    }
+                });
+            });
+
+            for (let i = nonFeatured.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [nonFeatured[i], nonFeatured[j]] = [nonFeatured[j], nonFeatured[i]];
+            }
+
+            const allPhotos = [...featured, ...nonFeatured].map(img => ({
+                id: img._id,
+                src: img.url,
+                width: img.width,
+                height: img.height,
+                alt: img.artistName,
+                price: img.price,
+                tags: img.tags,
+                averageHue: img.averageHue,
+            }));
+            setPhotos(allPhotos);
+        } catch (err) {
+        console.error('Failed to load gallery:', err);
+        }
+    };
+
+        fetchGallery();
+    }, [apiUrl]);
 
     const handleChairClick = () =>  {
         navigate('/login');
@@ -157,7 +217,7 @@ function HomePage() {
             {/* Gallery content section that appears below the fixed images */}
 
             <div ref={galleryRef} className={`gallery ${galleryPhase}`} style={{ position: "relative", zIndex: 10 }}>
-                <MasonryLayout images={apiPhotos} />  
+                <MasonryLayout images={photos} />  
             </div>
 
             {/* Navigation Bar with a button to return home */}

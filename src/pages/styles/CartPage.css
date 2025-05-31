@@ -1,0 +1,177 @@
+/* CartPage.css */
+
+/* Container for the entire cart page */
+.cart-page {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+/* Two‐column layout: items on left (2fr), summary on right (1fr) */
+.cart-page .cart-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+/* Header at top */
+.cart-page h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* “Your cart is empty” message */
+.cart-page .empty-message {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Each line‐item container */
+.cart-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #e2e8f0; /* light gray */
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+/* Fixed image box */
+.cart-line img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* Details to the right of the image */
+.cart-line .line-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Product title */
+.cart-line .line-details h2 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Unit price, subtotal, etc. */
+.cart-line .line-details .line-text {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Quantity controls container */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* “−” and “+” buttons */
+.quantity-controls button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #cbd5e0;
+  background: white;
+  font-size: 1.2rem;
+  line-height: 1;
+  border-radius: 4px;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.quantity-controls button:hover {
+  background: #edf2f7;
+}
+
+/* Quantity display itself */
+.quantity-controls span {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Remove‐line button (trash/X icon) */
+.cart-line .remove-btn {
+  margin-left: 1rem;
+  color: #a0aec0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.cart-line .remove-btn:hover {
+  color: #e53e3e;
+}
+
+/* Sidebar: order summary */
+.order-summary {
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: fit-content;
+}
+
+/* Order summary header */
+.order-summary h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Total lines */
+.order-summary .summary-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: #444;
+}
+
+/* Grand total */
+.order-summary .grand-total {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  color: #2d3748;
+}
+
+/* Checkout button */
+.order-summary .checkout-btn {
+  margin-top: 1rem;
+  padding: 0.75rem 0;
+  background: #38a169; /* green */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.order-summary .checkout-btn:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+}
+
+.order-summary .checkout-btn:hover:not(:disabled) {
+  background: #2f855a;
+}
