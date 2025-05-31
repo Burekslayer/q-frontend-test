@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useHoverAnimation from '../hooks/useHoverAnimation';
@@ -28,15 +28,7 @@ function HomePage() {
     const [galleryPhase, setGalleryPhase] = useState("visible");
     const [showNav, setShowNav] = useState(false);
     const [photos, setPhotos] = useState([]);
-    const [apiPhotos, setApiPhotos] = useState([]);
 
-    // Load once on mount
-    useEffect(() => {
-      (async () => {
-        const pics = await fetchPhotos();
-        setApiPhotos(pics);
-      })();
-    }, []);
       
     const apiUrl = process.env.REACT_APP_API_URL || "https://localhost:5000"
 
