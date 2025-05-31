@@ -10,6 +10,7 @@ import './styles/HomePage.css';
 import './styles/Masonry.css'
 
 
+
 function HomePage() {
     const gallerySvgRef = useRef(null);
     const aboutSvgRef = useRef(null);

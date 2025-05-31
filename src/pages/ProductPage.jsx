@@ -1,5 +1,5 @@
 // CartPage.jsx
-import React, { useState, useMemo, useContext } from "react";
+import { useState, useMemo, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import "../pages/styles/ProductPage.css";
@@ -119,7 +119,7 @@ export default function ProductPage() {
         </div>
         <div className="item-details">
           <button className="cart-button" onClick={handleAddToCart}>
-            <a className="figma-button-test">
+            <a href='#' className="figma-button-test">
               <span className="figma-button-test-text">Add to cart</span>
             </a>
           </button>

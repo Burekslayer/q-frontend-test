@@ -1,6 +1,6 @@
 // src/pages/CheckoutPage.jsx
 
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { FaChevronDown } from "react-icons/fa";
 import axios from "axios";

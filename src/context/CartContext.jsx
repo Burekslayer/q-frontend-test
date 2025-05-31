@@ -1,14 +1,4 @@
-// src/context/CartContext.jsx
-import React, { createContext, useState, useEffect } from 'react';
-
-// Shape of each item in cart:
-// {
-//   id:       string,       // unique identifier (e.g. publicId or DB _id)
-//   title:    string,       // name or alt text
-//   price:    number,       // numeric price
-//   imageUrl: string,       // URL of the image
-//   quantity: number        // how many copies of this line
-// }
+import { createContext, useState, useEffect } from 'react';
 
 export const CartContext = createContext({
   items: [],               // array of { id, title, price, imageUrl, quantity }
