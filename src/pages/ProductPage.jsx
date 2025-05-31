@@ -107,6 +107,7 @@ export default function ProductPage() {
             {shots.map((src, i) => (
               <img
                 key={i}
+                alt="thumbnail"
                 src={src}
                 className={i === selectedIdx ? "thumb selected" : "thumb"}
                 onClick={() => setSelectedIdx(i)}
