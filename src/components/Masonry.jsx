@@ -184,14 +184,9 @@ const MasonryLayout = ({
   };
 
   const handleClick = (item) => {
-    const isUnfocus = item.id === focusedId;
-    /* if (isUnfocus) {
-      navigate(`/product/${item.id}`, { state: { cartItem: item } });
-    } else { */
     setFocusedId(item.id);
     console.log(item);
     fetchNearest(item.averageHue);
-    //}
   };
 
   const handleAddToCart = (item) => {

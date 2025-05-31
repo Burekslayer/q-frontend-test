@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useHoverAnimation from '../hooks/useHoverAnimation';
 import { GallerySvg, LoginSvg, SearchSvg, AboutSvg } from '../components/SvgIcons';
-import { fetchPhotos } from '../data/photos'
+
 import MasonryLayout from '../components/Masonry';
 
 import './styles/HomePage.css';
