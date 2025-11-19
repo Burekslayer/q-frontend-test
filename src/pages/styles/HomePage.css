@@ -1,28 +1,32 @@
 /* src/pages/HomePage.css */
-.home-page{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    overflow-x: hidden;
-
+.home-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
 }
 .home-fixed {
-    position: fixed;
-    overflow: hidden;
-    top: 0%;
-    width: 100vw;/* adjust as needed */
-    margin: 0 auto;
-    z-index: 0;
+  position: fixed;
+  overflow: hidden;
+  top: 0%;
+  width: 100vw; /* adjust as needed */
+  margin: 0 auto;
+  z-index: 0;
 }
-  
+.background-parent {
+  width: 100vw;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
 .background {
-    width: 100vw;
-    display: block;
+  width: 100vw;
+  position: relative;
+  top: -10%;
 }
 
 /* ----------------- GALLERY CONTENT ----------------- */
 
-.gallery{
+.gallery {
   z-index: 3 !important;
   background: white;
   transition: opacity 1s ease, transform 0.5s ease;
@@ -30,27 +34,22 @@
   margin-top: calc(100vw * 5 / 9);
 }
 
-
-
-
-
-
 /* ----------------- Gallery animation section ----------------- */
 
 .gallery.disintegrate {
-    position: fixed;
-    margin-top: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    /* Optionally, set 'top' to the current position or leave it as is */
-    opacity: 0;
+  position: fixed;
+  margin-top: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Optionally, set 'top' to the current position or leave it as is */
+  opacity: 0;
 }
 
 .gallery.reset {
-    position: relative;
-    top: calc(100vw * 5 / 9); /* This moves it to its starting position */
-    opacity: 0;
+  position: relative;
+  top: calc(100vw * 5 / 9); /* This moves it to its starting position */
+  opacity: 0;
 }
 
 /* .collapsed {
@@ -62,192 +61,207 @@
     max-height: none;
     overflow: hidden;
   } */
-  
 
-
-  .yarl__container {
-    background-color: rgba(0, 0, 0, 0.92) !important;
-  }
-  
+.yarl__container {
+  background-color: rgba(0, 0, 0, 0.92) !important;
+}
 
 .nav-bar {
-    position: fixed;
-    top: 0;
-    left: 40%;
-    width: 20%;
-    z-index: 10;
-    background: rgba(255, 255, 255, 0.699);
-    padding: 0.5rem;
-    text-align: center;
-  }
-.nav-bar button {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  .yarl__price {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0 0.5em;
-    font-size: 1em;
-    color: #fff;
-    font-size: 1rem;
-    filter: drop-shadow(2px 2px 2px rgba(0,0,0,.8));
-    /* additional styling */
-  }
-  /* Position the easel; adjust coordinates as needed */
-.easel {
-    position: absolute;
-    top: 0.5%;
-    left: 0.5%;
-    width: 27%; /* adjust size as needed */
-    transition: transform 0.2s, box-shadow 0.2s;
-    z-index: 1;
-    overflow: hidden;
-    filter: drop-shadow(0.1vw 0.1vw 0 white)
-            drop-shadow(-0.1vw 0.1vw 0 white)
-            drop-shadow(0.1vw -0.1vw 0 white)
-            drop-shadow(-0.1vw -0.1vw 0 white);
+  position: fixed;
+  top: 0;
+  left: 40%;
+  width: 20%;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.699);
+  padding: 0.5rem;
+  text-align: center;
 }
-  /* Position the chair; clicking on this navigates to login/register */
-.chair {
-    position: absolute;
-    top: 46%;
-    left: 67%;
-    width: 20.5%; /* adjust size as needed */
-    transition: transform 0.2s, box-shadow 0.5s;
-    z-index: 1;
-    overflow: hidden;   
-    filter: drop-shadow(0.02vw 0.02vw 0 white)
+.nav-bar button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.yarl__price {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 0.5em;
+  font-size: 1em;
+  color: #fff;
+  font-size: 1rem;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.8));
+  /* additional styling */
+}
+/* Position the easel; adjust coordinates as needed */
+.easel {
+  position: absolute;
+  top: 4.3%;
+  left: 6.8%;
+  width: 20.8%;
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 1;
+  overflow: hidden;
+  /* filter: drop-shadow(0.01vw 0.01vw 0 white)
+            drop-shadow(-0.01vw 0.01vw 0 white)
+            drop-shadow(0.01vw -0.01vw 0 white)
+            drop-shadow(-0.01vw -0.01vw 0 white); */
+  /* filter: grayscale(100%); */
+}
+
+/* Position the brushes; clicking on this navigates to login/register */
+.brushes {
+  position: absolute;
+  top: 41.5%;
+  left: 34.5%;
+  width: 5.2%;
+  transition: transform 0.2s, box-shadow 0.5s;
+  z-index: 1;
+  overflow: hidden;
+  /* filter: drop-shadow(0.02vw 0.02vw 0 white)
             drop-shadow(-0.02vw 0.02vw 0 white)
             drop-shadow(0.02vw -0.02vw 0 white)
-            drop-shadow(-0.02vw -0.02vw 0 white);
+            drop-shadow(-0.02vw -0.02vw 0 white); */
+  /* filter: grayscale(100%); */
 }
 .picture {
-    position: absolute;
-    top: 26%;
-    left: 44.3%;
-    width: 8.7%; /* adjust size as needed */
-    transition: transform 0.2s, box-shadow 0.5s;
-    z-index: 2;
-    overflow: hidden;
-    filter: drop-shadow(0.02vw 0.02vw 0 white)
+  position: absolute;
+  top: 23%;
+  left: 71%;
+  width: 6.8%; /* adjust size as needed */
+  transition: transform 0.2s, box-shadow 0.5s;
+  z-index: 2;
+  overflow: hidden;
+  /* filter: drop-shadow(0.02vw 0.02vw 0 white)
             drop-shadow(-0.02vw 0.02vw 0 white)
             drop-shadow(0.02vw -0.02vw 0 white)
-            drop-shadow(-0.02vw -0.02vw 0 white);
+            drop-shadow(-0.02vw -0.02vw 0 white); */
+  /* filter: grayscale(100%); */
 }
 
-.things {
-    position: absolute;
-    top: 33.7%;
-    left: 30.7%;
-    width: 17.5%; /* adjust size as needed */
-    transition: transform 0.2s, box-shadow 0.5s;
-    z-index: 1;
-    overflow: hidden;
-    filter: drop-shadow(0.02vw 0.02vw 0 white)
-            drop-shadow(-0.02vw 0.02vw 0 white)
-            drop-shadow(0.02vw -0.02vw 0 white)
-            drop-shadow(-0.02vw -0.02vw 0 white);
+.lupa {
+  position: absolute;
+  top: 41.5%;
+  left: 60.05%;
+  width: 3.9%; /* adjust size as needed */
+  transition: transform 0.2s, box-shadow 0.5s;
+  z-index: 1;
+  overflow: hidden;
+  /* filter: drop-shadow(0.01vh 0.01vh 0.6vh rgba(255, 255, 255, 0.4))
+            drop-shadow(-0.01vh 0.01vh 0.6vh rgba(255, 255, 255, 0.4))
+            drop-shadow(0.01vh -0.01vh 0.6vh rgba(255, 255, 255, 0.4))
+            drop-shadow(-0.01vh -0.01vh 0.6vh rgba(255, 255, 255, 0.4)); */
+  /* filter: grayscale(100%); */         
 }
-.things:hover {
-    transform: scale(1.05);
-            cursor: pointer;
+.lupa:hover {
+  transform: scale(1.01);
+  cursor: pointer;
+  filter: brightness(120%) contrast(95%); 
 }
-  
 
 .picture:hover {
-    transform: scale(1.05);
-            cursor: pointer;
+  transform: scale(1.01);
+  cursor: pointer;
+  filter: brightness(120%) contrast(95%); 
 }
-.chair:hover {
-    transform: scale(1.05);
-            cursor: pointer;
-}
-
-.easel:hover{
-    transform: scale(1.05);
-    cursor: pointer;
+.brushes:hover {
+  transform: scale(1.01);
+  cursor: pointer;
+  filter: brightness(120%) contrast(95%); 
 }
 
-
-.search-anim{
-    position: absolute;
-    top: 44%;
-    left: 33%;
-    width: 10vw;
-    height: 8vw;
-    z-index: 2;
-    pointer-events: none;
+.easel:hover {
+  transform: scale(1.01);
+  cursor: pointer;
+  filter: brightness(120%) contrast(95%);  
 }
 
-.galerija-anim{
-    position: absolute;
-    top: 22%;
-    left: 8%;
-    width: 13vw;
-    height: 8vw;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.onama-anim{
-    position: absolute;
-    top: 12%;
-    left: 43%;
-    width: 11vw;
-    height: 9vw;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.login-anim{
+.autumn-animation-day {
   position: absolute;
-  top: 57%;
-  left: 70%;
-  width: 11vw;
-  height: 9vw;
+  top: 0%;
+  left: 40%;
+  width: 20%;
+  z-index: -1;
+  pointer-events: none;
+  filter: brightness(130%)
+}
+.search-anim {
+  position: absolute;
+  top: 33%;
+  left: 57%;
+  width: 10%;
+  height: 8%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.galerija-anim {
+  position: absolute;
+  top: 36%;
+  left: 7.5%;
+  width: 20%;
+  height: 12%;
+  z-index: 2;
+  pointer-events: none;
+  rotate: -3deg;
+}
+
+.onama-anim {
+  position: absolute;
+  top: 14%;
+  left: 68%;
+  width: 12%;
+  height: 10%;
+  z-index: 2;
+  transform: rotate(-5deg);
+  pointer-events: none;
+}
+
+.login-anim {
+  position: absolute;
+  top: 33%;
+  left: 31.5%;
+  width: 11%;
+  height: 9%;
   z-index: 2;
   pointer-events: none;
 }
 
 @-webkit-keyframes svg-text-anim {
-    0%{
-        stroke-dashoffset: var(--dash-length);
-        fill: transparent;
-    }
-    40% {
-        stroke-dashoffset: 0;
-        fill: transparent;
-    }
-    60% {
-        stroke-dashoffset: 0;
-        fill: #000000;
-    }
-    100% {
-        stroke-dashoffset: 0;
-        fill: #000000;
-    }
+  0% {
+    stroke-dashoffset: var(--dash-length);
+    fill: transparent;
+  }
+  40% {
+    stroke-dashoffset: 0;
+    fill: transparent;
+  }
+  60% {
+    stroke-dashoffset: 0;
+    fill: #000000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: #000000;
+  }
 }
 
 @-webkit-keyframes svg-text-anim-reverse {
-    0% {
-      stroke-dashoffset: 0;
-      fill: #000000;
-    }
-    40% {
-        stroke-dashoffset: var(--dash-length);
-        fill: transparent;
-    }
-    60% {
-        stroke-dashoffset: var(--dash-length);
-    }    
-    100% {
-      stroke-dashoffset: var(--dash-length);
-      fill: transparent;
-    }
+  0% {
+    stroke-dashoffset: 0;
+    fill: #000000;
   }
+  40% {
+    stroke-dashoffset: var(--dash-length);
+    fill: transparent;
+  }
+  60% {
+    stroke-dashoffset: var(--dash-length);
+  }
+  100% {
+    stroke-dashoffset: var(--dash-length);
+    fill: transparent;
+  }
+}
 
 @keyframes svg-text-anim-reverse {
   0% {
@@ -267,33 +281,76 @@
     fill: transparent;
   }
 }
-      
-@keyframes svg-text-anim {
-    0%{
-        stroke-dashoffset: var(--dash-length);
-        fill: transparent;
-    }
-    40% {
-        stroke-dashoffset: 0;
-        fill: transparent;
-    }
-    60% {
-        stroke-dashoffset: 0;
-        fill: #000000;
-    }
-    100% {
-        stroke-dashoffset: 0;
-        fill: #000000;
-    }
 
+@keyframes svg-text-anim {
+  0% {
+    stroke-dashoffset: var(--dash-length);
+    fill: transparent;
+  }
+  40% {
+    stroke-dashoffset: 0;
+    fill: transparent;
+  }
+  60% {
+    stroke-dashoffset: 0;
+    fill: #000000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: #000000;
+  }
 }
 
 .animate {
-    animation: svg-text-anim 2s ease forwards;
+  animation: svg-text-anim 2s ease forwards;
 }
 
 .animate-reverse {
-    animation: svg-text-anim-reverse 2s ease forwards;
+  animation: svg-text-anim-reverse 2s ease forwards;
 }
- 
-  
+
+/* Initial startup sizes */
+@keyframes startup-scale {
+  0% {
+    transform: scale(100%);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0));
+  }
+  50%{
+    transform: scale(110%);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.6));
+  }
+  100% {
+    transform: scale(100%);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0));
+  }
+}
+@-webkit-keyframes startup-scale {
+  0% {
+    transform: scale(10%);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0));
+  }
+  50%{
+    transform: scale(110%);
+    filter: drop-shadow(0 0 5px rgb(255, 255, 255));
+  }
+  100% {
+    transform: scale(100%);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0));
+  }
+}
+.active1 {
+  animation: startup-scale 1.5s ease forwards;
+  -webkit-animation: startup-scale 1.5s ease forwards;
+}
+.active2 {
+  animation: startup-scale 1.5s ease forwards;
+  -webkit-animation: startup-scale 1.5s ease forwards;
+}
+.active3 {
+  animation: startup-scale 1.5s ease forwards;
+  -webkit-animation: startup-scale 1.5s ease forwards;
+}
+.active4 {
+  animation: startup-scale 1.5s ease forwards;
+  -webkit-animation: startup-scale 1.5s ease forwards;
+}

@@ -1,0 +1,268 @@
+/* ========== GLOBAL CONTAINER ========== */
+.about-container {
+  width: 100%;
+  color: #23323f;
+  background-color: #fdf7f4;
+  background-image: url("/public/images/paper-texture.png");
+  background-size: cover;
+  line-height: 1.6;
+}
+
+/* ========== HEADINGS ========== */
+.section-heading {
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: #23323f;
+  text-align: center;
+  position: relative;
+}
+
+.section-heading::after {
+  content: "";
+  width: 60px;
+  height: 6px;
+  background-color: #c96567;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4px;
+}
+
+/* ========================================
+   HERO SECTION
+======================================== */
+.about-hero {
+  padding: 80px 20px 60px;
+  text-align: center;
+}
+
+.about-title {
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  margin-bottom: 40px;
+  color: #23323f;
+  position: relative;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Polaroid styling */
+.polaroid {
+  background: #fdf7f4;
+  padding: 12px;
+  border: 2px solid #97aabd;
+  width: 260px;
+  box-shadow: 2px 4px 10px rgba(0,0,0,0.15);
+  transform: rotate(-2deg);
+  transition: transform 0.2s ease;
+}
+
+.polaroid:hover {
+  transform: rotate(1deg) scale(1.03);
+}
+
+.polaroid img {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+}
+
+/* Hero note card */
+.hero-note {
+  background-color: #eee2dc;
+  padding: 20px;
+  border-radius: 6px;
+  border: 1px solid #97aabd;
+  max-width: 500px;
+  position: relative;
+}
+
+.hero-note::before {
+  content: "";
+  width: 55px;
+  height: 22px;
+  background: #c96567;
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  opacity: 0.9;
+}
+
+.down-arrow {
+  margin-top: 35px;
+  font-size: 2rem;
+  color: #9e5a63;
+}
+
+/* ========================================
+   STORY NOTES
+======================================== */
+.about-story {
+  padding: 60px 20px;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.note-card {
+  background-color: #eee2dc;
+  border: 1px solid #97aabd;
+  padding: 22px;
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.05);
+}
+
+.note-card::before {
+  content: "";
+  width: 50px;
+  height: 18px;
+  background: #9e5a63;
+  position: absolute;
+  top: -10px;
+  left: 40%;
+  transform: rotate(-4deg);
+}
+
+.note-year {
+  font-family: "Caveat", cursive;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #644e5b;
+}
+
+/* ========================================
+   VALUES SECTION
+======================================== */
+.about-values {
+  padding: 60px 20px;
+}
+
+.values-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.value-item {
+  text-align: center;
+  padding: 20px;
+}
+
+.value-item h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #23323f;
+  font-weight: 600;
+}
+
+.value-stamp {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 2px solid #644e5b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #644e5b;
+  font-size: 1.8rem;
+  background-color: rgba(100, 78, 91, 0.07);
+}
+
+/* ========================================
+   TEAM SECTION
+======================================== */
+.about-team {
+  padding: 60px 20px;
+}
+
+.team-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.team-card {
+  text-align: center;
+}
+
+.team-frame {
+  padding: 12px;
+  background: #fdf7f4;
+  border: 2px solid #97aabd;
+  border-radius: 4px;
+  box-shadow: 2px 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.team-frame:hover {
+  transform: rotate(2deg) scale(1.03);
+}
+
+.team-frame img {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+}
+
+.team-card h3 {
+  margin-top: 12px;
+  margin-bottom: 6px;
+  color: #23323f;
+}
+
+/* ========================================
+   CTA SECTION
+======================================== */
+.about-cta {
+  margin-top: 70px;
+  background-image: url("/public/images/atelje-2.jpg");
+  background-size: cover;
+  background-position: center -600px;
+  padding: 120px 20px;
+  position: relative;
+}
+
+.cta-overlay {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(4px);
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 40px;
+  border-radius: 8px;
+}
+
+.cta-button {
+  background-color: #c96567;
+  color: #fdf7f4;
+  border: 2px solid #9e5a63;
+  padding: 14px 32px;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cta-button:hover {
+  background-color: #9e5a63;
+}

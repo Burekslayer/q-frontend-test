@@ -12,6 +12,7 @@ import RegisterPage from './pages/RegisterPage';
 import ProductPage from './pages/ProductPage'
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
+import AbouttPage from './pages/AboutPage';
 import { CartProvider } from './context/CartContext';
 import "./App.css";
 
@@ -80,10 +81,14 @@ function App() {
             {/* Cart page */}
 
             <Route path="/cart" element={<CartPage />} />
-            
+
             {/* Checkout page */}
 
-            <Route path="/checkout" element={ <CheckoutPage />}/>
+            <Route path="/checkout" element={<CheckoutPage />} />
+
+            {/* About page */}
+
+            <Route path="/about" element={<AbouttPage />} />
 
           </Routes>
         </CartProvider>

@@ -1,0 +1,28 @@
+Za desktop:
+	Na home page-u će biti sve (služiće kao nav bar)
+	Header postoji samo u galeriji
+	Footer postoji
+	Skrol na dole je galerija (kao što je sada)
+	Ostale stranice (van galerije) su zasebne za sebe bez ateljea
+	Po visini (ili širini) iste slike za galeriju
+	
+	Galerija:
+		Slike nemaju informacije dok se ne klikne na njih (popup sa profilom, cenom,korpom i "više o 		slici"):
+			popup prekrije većinu ekrana, zamrači se pozadina
+		A,B,C slike (prve tri koje su upload-ovane), smenjuje se dnevno
+		
+
+Footer:
+	Ko smo mi?
+	Ko si ti? (Anketa za preferenciju slika)
+	Login za umjetnike
+
+Mobilni:
+	Po visini iste slike za galeriju
+
+Visina slika smeta ljudima
+Show more funkcionalnost?
+Hover pored kursura cene? (neka druga ideja, vo no)
+
+Glalerija je ista kao na Saatchita
+RETURN TO HOME VRATI GALERIJU NA PRVOBITNO STANJE (TININA IDEJA DUSA MOJA LEPA)

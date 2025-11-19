@@ -1,3 +1,13 @@
+:root {
+  --color-1: #23323f;
+  --color-2: #314455;
+  --color-3: #644e5b;
+  --color-4: #9e5a63;
+  --color-5: #c96567;
+  --color-6: #97aabd;
+  --color-7: #eee2dc;
+  --color-8: #fdf7f4;
+}
 .app {
   font-family: Arial, sans-serif;
   min-height: 100vh;

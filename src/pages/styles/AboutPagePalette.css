@@ -1,0 +1,130 @@
+.about-page {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; /* Ensure mask doesn't cause scrollbars */
+}
+
+/* palette image */
+.paleta {
+    width: 100%;
+    max-width: 1500px;
+    display: block;
+    margin: 0 auto;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* --------------------------
+    SMALL SPOT ON PALETTE (Styling only)
+    -------------------------- */
+.palette-spot {
+    position: absolute;
+    /* top, left, width, height, background are set via inline styles in JSX */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out;
+}
+
+.palette-spot:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+
+/* --------------------------
+    MASK AREA (Covers viewport)
+    -------------------------- */
+.expand-mask {
+    position: fixed;
+    /* Dimensions to cover the desired area (90% of viewport) */
+    width: 90vw;
+    height: 90vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    overflow: hidden;
+    /* Start hidden and prevent interaction */
+    pointer-events: none;
+    opacity: 0;
+
+    transition: opacity 1s ease-out;
+    z-index: 10;
+}
+
+.expand-mask.visible {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 30; /* Bring it above the palette spots when visible */
+}
+
+/* --------------------------
+    EXPANDING SPOT (INSIDE MASK)
+    -------------------------- */
+.expanding-circle {
+    position: absolute;
+    /* top, left, width, height, background are set via inline styles in JSX */
+
+    border-radius: 50%;
+    transform: scale(1);
+    transform-origin: center;
+
+    transition: transform 1s cubic-bezier(0.5, 0, 0.5, 1); /* Custom timing for smooth expansion */
+    z-index: 60;
+}
+
+.expanding-circle.grow {
+    /* Scale factor must be large enough to cover the 90vw/90vh mask area */
+    transform: scale(30); 
+    border-radius: 50%;
+}
+
+/* --------------------------
+    TEXT (Inside the expanded area)
+    -------------------------- */
+.about-text {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    transition-delay: 0s;
+    color: white;
+    padding: 5rem;
+    position: relative;
+    z-index: 70;
+    text-align: center;
+}
+
+.about-text.visible {
+    opacity: 1;
+    transition-delay: 0.2s;
+}
+
+.about-text h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Label inside small palette spot */
+.spot-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    pointer-events: none;
+    user-select: none;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+.spot-label.hidden {
+    opacity: 0;
+}
+
+.spot-label.visible {
+    opacity: 1;
+    transition-delay: 0.1s;
+}

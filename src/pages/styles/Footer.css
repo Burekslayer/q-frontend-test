@@ -1,22 +1,93 @@
-.app-footer {
-    background-color: #f8f8f8;
-    padding: 1rem 0;
-    text-align: center;
-    border-top: 1px solid #e0e0e0;
-    margin-top: 2rem;
-  }
-  
-  .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 0.9rem;
-    color: #666;
-  }
-  
-  .footer-nav {
-    margin-top: 0.5rem;
-  }
-  
+/* ---------------------------------------- */
+/*                 FOOTER                   */
+/* ---------------------------------------- */
+
+.studio-footer {
+  background-color: #23323f;
+  color: #fdf7f4;
+  padding: 50px 0 30px;
+  margin-top: 80px;
+
+  /* subtle grain texture overlay */
+  background-image: url("/public/images/paper-texture-dark.png"); /* optional */
+  background-size: cover;
+  background-position: center;
+
+  border-top: 2px solid #314455;
+}
+
+/* Main grid layout */
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 40px;
+}
+
+/* Section titles */
+.footer-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #97aabd;
+  margin-bottom: 14px;
+}
+
+/* Links with label styling */
+.footer-item {
+  display: inline-block;
+  margin-bottom: 8px;
+
+  padding: 6px 12px;
+  background-color: #314455;
+  color: #fdf7f4;
+  text-decoration: none;
+  font-size: 15px;
+
+  border-radius: 3px;
+  border: 1px solid #97aabd40;
+
+  transform: rotate(-1deg);
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.25);
+
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Hover: lift + straighten */
+.footer-item:hover {
+  transform: rotate(0deg) translateY(-2px);
+  box-shadow: 2px 4px 5px rgba(0,0,0,0.35);
+}
+
+/* Hand-drawn underline */
+.footer-item::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background-color: #eee2dc;
+  transition: width 0.25s ease;
+}
+
+.footer-item:hover::after {
+  width: 80%;
+}
+
+/* Bottom strip */
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  color: #eee2dc;
+  font-size: 14px;
+
+  opacity: 0.85;
+}
+
+.footer-bottom p{
+  color: var(--color-8);
+}

@@ -1,0 +1,79 @@
+/* ---------------------------------------- */
+/*                HEADER                    */
+/* ---------------------------------------- */
+
+.studio-header {
+  width: 100%;
+  background-color: #fdf7f4;
+  border-bottom: 2px solid #23323f;
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  /* subtle paper texture */
+  background-image: url("/public/images/paper-texture.png");
+  background-size: 3000px;
+}
+
+/* Navigation container */
+.studio-nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+/* Links styled as little labels */
+.studio-nav-item {
+  position: relative;
+  padding: 6px 14px;
+  background-color: #eee2dc; /* soft label */
+  color: #23323f;
+  font-family: "Inter", sans-serif;
+  font-size: 17px;
+  text-decoration: none;
+
+  border-radius: 3px;
+  border: 1px solid #31445549;
+
+  /* slight tape-like rotation */
+  transform: rotate(-1deg);
+
+  /* tiny shadow for depth */
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.15);
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Sign In has accent tint */
+.studio-nav-item.accent {
+  background-color: #c96567;
+  color: #fdf7f4;
+  border-color: #9e5a63;
+}
+
+/* Hover: lift & straighten */
+.studio-nav-item:hover {
+  transform: rotate(0deg) translateY(-2px);
+  box-shadow: 2px 4px 5px rgba(0,0,0,0.22);
+}
+
+/* Hand-drawn underline */
+.studio-nav-item::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background-color: #23323f;
+  transition: width 0.25s ease;
+}
+
+.studio-nav-item:hover::after {
+  width: 80%;
+}
