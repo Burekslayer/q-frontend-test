@@ -175,14 +175,14 @@ function HomePage() {
         const length = path.getTotalLength();
         
         // Use a fixed value (e.g., 2) as a safety margin
-        const safetyOffset = length + 2; 
+        const safetyOffset = length; 
         
         path.style.strokeDasharray = length;
         // **FIX:** Set the initial offset larger than the length to guarantee it's hidden.
         path.style.strokeDashoffset = safetyOffset; 
         
         // Optional: If you use the CSS variable in your animation, update it too
-        path.style.setProperty("--dash-length", length); 
+        path.style.setProperty("--dash-length", safetyOffset); 
       });
     };
     // ... rest of your code ...
