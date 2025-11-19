@@ -338,19 +338,7 @@
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0));
   }
 }
-.active1 {
-  animation: startup-scale 1.5s ease forwards;
-  -webkit-animation: startup-scale 1.5s ease forwards;
-}
-.active2 {
-  animation: startup-scale 1.5s ease forwards;
-  -webkit-animation: startup-scale 1.5s ease forwards;
-}
-.active3 {
-  animation: startup-scale 1.5s ease forwards;
-  -webkit-animation: startup-scale 1.5s ease forwards;
-}
-.active4 {
+.active1, .active2, .active3, .active4 {
   animation: startup-scale 1.5s ease forwards;
   -webkit-animation: startup-scale 1.5s ease forwards;
 }

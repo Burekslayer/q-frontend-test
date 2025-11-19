@@ -173,11 +173,19 @@ function HomePage() {
       const paths = svgElement.querySelectorAll("path");
       paths.forEach((path) => {
         const length = path.getTotalLength();
+        
+        // Use a fixed value (e.g., 2) as a safety margin
+        const safetyOffset = length + 2; 
+        
         path.style.strokeDasharray = length;
-        path.style.strokeDashoffset = length;
-        path.style.setProperty("--dash-length", length);
+        // **FIX:** Set the initial offset larger than the length to guarantee it's hidden.
+        path.style.strokeDashoffset = safetyOffset; 
+        
+        // Optional: If you use the CSS variable in your animation, update it too
+        path.style.setProperty("--dash-length", length); 
       });
     };
+    // ... rest of your code ...
     const svgRefs = [
       gallerySvgRef.current,
       aboutSvgRef.current,
