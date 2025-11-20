@@ -233,14 +233,14 @@
   }
   100% {
     stroke-dashoffset: 0;
-    fill: #000000ab;
+    fill: #ffffffab;
   }
 }
 
 @-webkit-keyframes svg-text-anim-reverse {
   0% {
     stroke-dashoffset: 0;
-    fill: #000000ab;
+    fill: #ffffffab;
   }
   100% { /* NEW: Remove fill just before starting to un-draw */
     stroke-dashoffset: 0;
@@ -251,7 +251,7 @@
 @keyframes svg-text-anim-reverse {
   0% {
     stroke-dashoffset: 0;
-    fill: #000000ab;
+    fill: #ffffffab;
   }
   100% { /* NEW: Remove fill just before starting to un-draw */
     stroke-dashoffset: var(--dash-length);
@@ -266,7 +266,7 @@
   }
   100% {
     stroke-dashoffset: 0;
-    fill: #000000ab;
+    fill: #ffffffab;
   }
 }
 
