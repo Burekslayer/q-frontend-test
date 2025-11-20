@@ -231,34 +231,19 @@
     stroke-dashoffset: var(--dash-length);
     fill: transparent;
   }
-  40% {
-    stroke-dashoffset: 0;
-    fill: transparent;
-  }
-  60% {
-    stroke-dashoffset: 0;
-    fill: #000000;
-  }
   100% {
     stroke-dashoffset: 0;
-    fill: #000000;
+    fill: #000000ab;
   }
 }
 
 @-webkit-keyframes svg-text-anim-reverse {
   0% {
     stroke-dashoffset: 0;
-    fill: #000000;
+    fill: #000000ab;
   }
-  40% {
-    stroke-dashoffset: var(--dash-length);
-    fill: transparent;
-  }
-  60% {
-    stroke-dashoffset: var(--dash-length);
-  }
-  100% {
-    stroke-dashoffset: var(--dash-length);
+  100% { /* NEW: Remove fill just before starting to un-draw */
+    stroke-dashoffset: 0;
     fill: transparent;
   }
 }
@@ -266,17 +251,9 @@
 @keyframes svg-text-anim-reverse {
   0% {
     stroke-dashoffset: 0;
-    fill: #000000;
+    fill: #000000ab;
   }
-  40% {
-    stroke-dashoffset: var(--dash-length);
-    fill: transparent;
-  }
-  60% {
-    stroke-dashoffset: var(--dash-length);
-    fill: transparent;
-  }
-  100% {
+  100% { /* NEW: Remove fill just before starting to un-draw */
     stroke-dashoffset: var(--dash-length);
     fill: transparent;
   }
@@ -287,26 +264,18 @@
     stroke-dashoffset: var(--dash-length);
     fill: transparent;
   }
-  40% {
-    stroke-dashoffset: 0;
-    fill: transparent;
-  }
-  60% {
-    stroke-dashoffset: 0;
-    fill: #000000;
-  }
   100% {
     stroke-dashoffset: 0;
-    fill: #000000;
+    fill: #000000ab;
   }
 }
 
 .animate {
-  animation: svg-text-anim 2s ease forwards;
+  animation: svg-text-anim 1s ease forwards;
 }
 
 .animate-reverse {
-  animation: svg-text-anim-reverse 2s ease forwards;
+  animation: svg-text-anim-reverse 1s ease forwards;
 }
 
 /* Initial startup sizes */
