@@ -219,7 +219,7 @@ function HomePage() {
           {/* Base studio image */}
           <img
             className="background"
-            src="/images/jesen/KU-2-autumn.png"
+            src="/images/jesen/KU-2-autumn.webp"
             alt="Studio Background"
           />
 
@@ -237,7 +237,7 @@ function HomePage() {
 
           <img
             className={`easel${active1 ? " active1" : ""}`}
-            src="/images/jesen/gallery.png"
+            src="/images/jesen/gallery.webp"
             alt="Easel"
             onMouseEnter={easelHover.handleMouseEnter}
             onMouseLeave={easelHover.handleMouseLeave}
@@ -246,7 +246,7 @@ function HomePage() {
           {/* Brushes image */}
           <img
             className={`brushes${active2 ? " active2" : ""}`}
-            src="/images/jesen/brushes.png"
+            src="/images/jesen/brushes.webp"
             alt="Brushes"
             onClick={handleBrushesClick}
             onMouseEnter={brushesHover.handleMouseEnter}
@@ -256,7 +256,7 @@ function HomePage() {
           {/* Picture image lel */}
           <img
             className={`picture${active4 ? " active4" : ""}`}
-            src="/images/jesen/picture.png"
+            src="/images/jesen/picture.webp"
             alt="slicka"
             style={{ cursor: "pointer" }}
             onMouseEnter={pictureHover.handleMouseEnter}
@@ -267,7 +267,7 @@ function HomePage() {
           {/* Lupa image */}
           <img
             className={`lupa${active3 ? " active3" : ""}`}
-            src="/images/jesen/search.png"
+            src="/images/jesen/search.webp"
             alt="Lupa"
             style={{ cursor: "pointer" }}
             onMouseEnter={lupaHover.handleMouseEnter}

@@ -21,7 +21,7 @@
 .background {
   width: 100vw;
   position: relative;
-  top: -10%;
+  top: -11.9%;
 }
 
 /* ----------------- GALLERY CONTENT ----------------- */
@@ -95,7 +95,7 @@
 /* Position the easel; adjust coordinates as needed */
 .easel {
   position: absolute;
-  top: 4.3%;
+  top: 2.3%;
   left: 6.8%;
   width: 20.8%;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -111,7 +111,7 @@
 /* Position the brushes; clicking on this navigates to login/register */
 .brushes {
   position: absolute;
-  top: 41.5%;
+  top: 39.5%;
   left: 34.5%;
   width: 5.2%;
   transition: transform 0.2s, box-shadow 0.5s;
@@ -125,7 +125,7 @@
 }
 .picture {
   position: absolute;
-  top: 23%;
+  top: 21%;
   left: 71%;
   width: 6.8%; /* adjust size as needed */
   transition: transform 0.2s, box-shadow 0.5s;
@@ -140,7 +140,7 @@
 
 .lupa {
   position: absolute;
-  top: 41.5%;
+  top: 39.5%;
   left: 60.05%;
   width: 3.9%; /* adjust size as needed */
   transition: transform 0.2s, box-shadow 0.5s;
@@ -186,7 +186,7 @@
 }
 .search-anim {
   position: absolute;
-  top: 33%;
+  top: 31%;
   left: 57%;
   width: 10%;
   height: 8%;
@@ -196,7 +196,7 @@
 
 .galerija-anim {
   position: absolute;
-  top: 36%;
+  top: 34%;
   left: 7.5%;
   width: 20%;
   height: 12%;
@@ -207,7 +207,7 @@
 
 .onama-anim {
   position: absolute;
-  top: 14%;
+  top: 12%;
   left: 68%;
   width: 12%;
   height: 10%;
@@ -218,7 +218,7 @@
 
 .login-anim {
   position: absolute;
-  top: 33%;
+  top: 31%;
   left: 31.5%;
   width: 11%;
   height: 9%;
@@ -233,14 +233,14 @@
   }
   100% {
     stroke-dashoffset: 0;
-    fill: #ffffffab;
+    fill: #000000ab;
   }
 }
 
 @-webkit-keyframes svg-text-anim-reverse {
   0% {
     stroke-dashoffset: 0;
-    fill: #ffffffab;
+    fill: #000000ab;
   }
   100% { /* NEW: Remove fill just before starting to un-draw */
     stroke-dashoffset: 0;
@@ -251,7 +251,7 @@
 @keyframes svg-text-anim-reverse {
   0% {
     stroke-dashoffset: 0;
-    fill: #ffffffab;
+    fill: #000000ab;
   }
   100% { /* NEW: Remove fill just before starting to un-draw */
     stroke-dashoffset: var(--dash-length);
@@ -266,11 +266,12 @@
   }
   100% {
     stroke-dashoffset: 0;
-    fill: #ffffffab;
+    fill: #000000ab;
   }
 }
 
 .animate {
+  stroke: black;
   animation: svg-text-anim 1s ease forwards;
 }
 
@@ -311,3 +312,4 @@
   animation: startup-scale 1.5s ease forwards;
   -webkit-animation: startup-scale 1.5s ease forwards;
 }
+
