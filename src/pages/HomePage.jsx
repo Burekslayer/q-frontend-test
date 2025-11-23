@@ -219,7 +219,7 @@ function HomePage() {
           {/* Base studio image */}
           <img
             className="background"
-            src="/images/jesen/KU-2-autumn.webp"
+            src="/images/jesen/KU-2-autumn-fix.webp"
             alt="Studio Background"
           />
 
