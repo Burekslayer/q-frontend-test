@@ -7,6 +7,14 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 import "./styles/CheckoutPage.css";
 
+
+
+
+const SHIPPING_RATES = {
+  included: 0,
+  express: 25,
+};
+
 export default function CheckoutPage() {
   const { items, totalPrice, totalItems, clearCart } = useContext(CartContext);
 
@@ -41,10 +49,6 @@ export default function CheckoutPage() {
   const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
   // Simple pricing model similar conceptually to Saatchi
-  const SHIPPING_RATES = {
-    included: 0,
-    express: 25,
-  };
 
   const { subtotal, shippingCost, finalTotal } = useMemo(() => {
     const sub = totalPrice || 0;
@@ -167,7 +171,10 @@ export default function CheckoutPage() {
   }
 
   function triggerSubmit() {
-    if (formRef.current && typeof formRef.current.requestSubmit === "function") {
+    if (
+      formRef.current &&
+      typeof formRef.current.requestSubmit === "function"
+    ) {
       formRef.current.requestSubmit();
     } else if (formRef.current) {
       // Fallback
@@ -371,8 +378,7 @@ export default function CheckoutPage() {
                 <span className="section-title">Payment Method</span>
                 {paymentSaved && (
                   <span className="section-subtitle">
-                    Card ending in{" "}
-                    {paymentInfo.cardNumber.slice(-4) || "••••"}
+                    Card ending in {paymentInfo.cardNumber.slice(-4) || "••••"}
                   </span>
                 )}
               </div>
