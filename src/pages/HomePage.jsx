@@ -50,7 +50,7 @@ function HomePage() {
       setTimeout(() => setActive3(true), 400),
       setTimeout(() => setActive3(false), 1900),
       setTimeout(() => setActive4(true), 600),
-      setTimeout(() => setActive4(false), 2100)
+      setTimeout(() => setActive4(false), 2100),
     ];
     return () => timers.forEach(clearTimeout);
   }, []);
@@ -173,16 +173,16 @@ function HomePage() {
       const paths = svgElement.querySelectorAll("path");
       paths.forEach((path) => {
         const length = path.getTotalLength();
-        
+
         // Use a fixed value (e.g., 2) as a safety margin
-        const safetyOffset = length; 
-        
+        const safetyOffset = length;
+
         path.style.strokeDasharray = length;
         // **FIX:** Set the initial offset larger than the length to guarantee it's hidden.
-        path.style.strokeDashoffset = safetyOffset; 
-        
+        path.style.strokeDashoffset = safetyOffset;
+
         // Optional: If you use the CSS variable in your animation, update it too
-        path.style.setProperty("--dash-length", safetyOffset); 
+        path.style.setProperty("--dash-length", safetyOffset);
       });
     };
     // ... rest of your code ...
@@ -219,20 +219,36 @@ function HomePage() {
           {/* Base studio image */}
           <img
             className="background"
-            src="/images/jesen/KU-2-autumn-fix.webp"
+            src="/images/jesen/art_room_comp.webp"
             alt="Studio Background"
           />
-
+          {/* <video className="background" autoPlay muted playsInLine loop>
+            <source src="/images/jesen/art_room_comp.webm" type="video/webm" />
+          </video> */}
           {/* Autumn Animation */}
           {/* <img
             className="autumn-animation-day"
             src="/images/jesen/autumn.webm"
             alt="Loading animation"
           /> */}
-          
-          <video className="autumn-animation-day" autoPlay muted playsInLine loop>
-            <source src="/images/jesen/autumn.webm" type="video/webm" />
+          <video className="fire" autoPlay muted loop>
+            <source src="/images/jesen/art_room_fire.webm" type="video/webm" />
           </video>
+          <video className="landscape" autoPlay muted loop>
+            <source src="/images/jesen/art_room_outside.webm" type="video/webm" />
+          </video>
+          <video className="light-rays" autoPlay muted loop>
+            <source src="/images/jesen/Light_Rays_1.webm" type="video/webm" />
+          </video>
+          {/*  <video
+            className="autumn-animation-day"
+            autoPlay
+            muted
+            playsInLine
+            loop
+          >
+            <source src="/images/jesen/autumn.webm" type="video/webm" />
+          </video> */}
           {/* Easel image */}
 
           <img

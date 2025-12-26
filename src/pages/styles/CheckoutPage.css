@@ -1,162 +1,455 @@
-/* CheckoutPage.css */
-
-/* Overall container: two columns on desktop, single column on narrow screens */
+/* Overall layout */
 .checkout-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  margin: o auto;
+  padding: 0 1.5rem;
+  background-color: #fdf7f4;
+  background-image: url("/public/images/paper-texture.png");
+  background-size: cover;
+}
+
+/* Title styled like About page */
+.checkout-page > h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  text-align: center;
+  color: #23323f;
+  margin: 0 0 1.5rem;
+  position: relative;
+}
+
+.checkout-page > h1::after {
+  content: "";
+  width: 60px;
+  height: 6px;
+  background-color: #c96567;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4px;
+}
+
+/* Grid: left form + right summary */
+.checkout-layout {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr);
   gap: 2rem;
   max-width: 1200px;
-  margin: 1.5rem auto;
-  padding: 0 1rem;
 }
 
-/* Title at the top */
-.checkout-page h1 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  grid-column: 1 / -1; /* span both columns if desired */
-}
-
-/* Accordion Section Container */
-.accordion-section {
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-  overflow: hidden;
-}
-
-.accordion-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f7fafc;
-  padding: 0.75rem 1rem;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #2d3748;
-}
-
-.accordion-header:hover {
-  background: #edf2f7;
-}
-
-.accordion-content {
-  display: none;
-  padding: 1rem;
-  background: white;
-  /* border-top: 1px solid #e2e8f0;  optional */
-}
-
-.accordion-content.show {
-  display: block;
-}
-
-/* Chevron rotation */
-.accordion-header .fa-chevron-down {
-  transition: transform 0.3s ease;
-}
-
-.accordion-header .rotate-180 {
-  transform: rotate(180deg);
-}
-
-/* Within each content, style form fields */
-.accordion-content input,
-.accordion-content select,
-.accordion-content button {
-  width: 100%;
-  padding: 0.6rem;
-  margin-bottom: 0.75rem;
-  border: 1px solid #cbd5e0;
-  border-radius: 4px;
-  font-size: 1rem;
-  box-sizing: border-box;
-}
-
-.accordion-content button {
-  background: #3182ce;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.accordion-content button:hover {
-  background: #2b6cb0;
-}
-
-/* Payment/Shipping forms often two‐column on desktop */
-.accordion-content .two-column {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-/* Right sidebar: order summary */
-.checkout-summary {
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  background: #fff;
-  padding: 1.5rem;
-  position: sticky;
-  top: 1.5rem; /* so it stays visible while scrolling */
+/* LEFT FORM COLUMN */
+.checkout-left {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-/* Summary header */
-.checkout-summary h2 {
-  font-size: 1.25rem;
+/* Generic card base */
+.checkout-card {
+  background-color: #eee2dc;
+  border-radius: 10px;
+  border: 1px solid #97aabd;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* Top "Checkout / Login" card */
+.header-card {
+  background-color: #fdf7f4;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-title {
   font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.header-subtitle {
+  font-size: 0.9rem;
+  color: #644e5b;
+}
+
+/* Tiny outlined login button */
+.outlined-small {
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  border: 1px solid #97aabd;
+  background: #fdf7f4;
+  font-size: 0.85rem;
+  color: #9e5a63;
+  cursor: pointer;
+}
+
+.outlined-small:hover {
+  background-color: #eee2dc;
+}
+
+/* Inline "Log in for faster checkout." link button */
+.link-button {
+  background: none;
+  border: none;
+  color: #9e5a63;
+  font-size: 0.9rem;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Section header row (click to expand/collapse) */
+.section-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  color: inherit;
+
+}
+
+.section-toggle:hover {
+  background: none !important;
+  color: inherit !important;
+}
+
+/* Remove focus ring (blue outline) */
+.section-toggle:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove browser tap/selection color */
+.section-toggle:focus-visible {
+  outline: none !important;
+}
+
+.section-toggle::-moz-focus-inner {
+  border: 0;
+}
+
+.section-title {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.1rem;
+  color: #23323f;
+}
+
+.section-subtitle {
+  font-size: 0.9rem;
+  color: #644e5b;
+}
+
+/* Section body area */
+.section-body {
+  margin-top: 1rem;
+}
+
+/* Reusable field layout */
+.field-group {
+  margin-bottom: 0.75rem;
+}
+
+.field-group label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+  color: #644e5b;
+}
+
+.field-group input {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #97aabd;
+  background-color: #fff;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
   margin-bottom: 0.5rem;
 }
 
-/* Summary lines */
-.checkout-summary .summary-line {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1rem;
-  color: #444;
-}
-
-.checkout-summary .summary-total {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #2d3748;
-}
-
-/* Place Order button */
-.place-order-btn {
-  margin-top: auto;
-  padding: 0.75rem 0;
-  background: #38a169;
-  color: #fff;
-  border: none;
+/* Primary block buttons inside cards */
+.primary-block-button {
+  margin-top: 0.75rem;
+  width: 100%;
+  padding: 0.7rem 0;
+  background-color: #c96567;
+  color: #fdf7f4;
   border-radius: 6px;
+  border: 2px solid #9e5a63;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.primary-block-button:hover {
+  background-color: #9e5a63;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.primary-block-button.subtle {
+  background-color: #fdf7f4;
+  color: #23323f;
+}
+
+/* Cart preview inside "In Your Cart" */
+.cart-preview {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-top: 1px solid #deccc0;
+}
+
+.cart-preview:first-of-type {
+  border-top: none;
+}
+
+.preview-thumb img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #97aabd;
+  background: #fdf7f4;
+}
+
+.preview-info {
+  flex: 1;
+}
+
+.preview-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+}
+
+.preview-meta {
+  font-size: 0.85rem;
+  color: #644e5b;
+}
+
+.preview-price {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #23323f;
+}
+
+/* Full-width place order bar under left column */
+.place-order-bar {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.9rem 0;
+  background-color: #c96567;
+  color: #fdf7f4;
+  border-radius: 6px;
+  border: 2px solid #9e5a63;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.15s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
-.place-order-btn:hover {
-  background: #2f855a;
-}
-
-.place-order-btn:disabled {
-  background: #a0aec0;
+.place-order-bar:disabled {
+  background-color: #b8c1c7;
+  border-color: #b8c1c7;
   cursor: not-allowed;
 }
 
-/* On very narrow screens, switch to one‐column layout */
-@media (max-width: 768px) {
-  .checkout-page {
+/* RIGHT COLUMN */
+.checkout-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Order summary card */
+.summary-card {
+  background-color: #fdf7f4;
+  border-radius: 10px;
+  border: 1px solid #97aabd;
+  padding: 1.5rem 1.5rem 1.25rem;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.summary-card h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.4rem;
+  margin: 0 0 0.75rem;
+  color: #23323f;
+}
+
+/* Small artwork preview */
+.summary-art {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.summary-art img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #97aabd;
+}
+
+.art-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.art-meta {
+  font-size: 0.85rem;
+  color: #644e5b;
+}
+
+/* Lines in summary */
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #444;
+  margin: 0.25rem 0;
+}
+
+.summary-line.total {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  color: #23323f;
+}
+
+/* Shipping radio buttons */
+.shipping-methods {
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #deccc0;
+}
+
+.shipping-methods label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  cursor: pointer;
+}
+
+.shipping-methods input {
+  margin-right: 0.35rem;
+}
+
+/* Right sidePlace Order button */
+.place-order-btn {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.75rem 0;
+  background-color: #c96567;
+  color: #fdf7f4;
+  border-radius: 6px;
+  border: 2px solid #9e5a63;
+  font-size: 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.place-order-btn:disabled {
+  background-color: #b8c1c7;
+  border-color: #b8c1c7;
+  cursor: not-allowed;
+}
+
+/* Benefits card */
+.benefits-card {
+  background-color: #fdf7f4;
+  border-radius: 10px;
+  border: 1px solid #97aabd;
+  padding: 1.25rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.benefits-card h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.benefits-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.benefits-card li + li {
+  margin-top: 0.4rem;
+}
+
+/* Help card */
+.help-card {
+  background-color: #fdf7f4;
+  border-radius: 10px;
+  border: 1px solid #97aabd;
+  padding: 1.25rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.help-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.help-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.secondary-outline {
+  flex: 1;
+  padding: 0.6rem 0.4rem;
+  border-radius: 6px;
+  border: 1px solid #97aabd;
+  background-color: #fdf7f4;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.secondary-outline:hover {
+  background-color: #eee2dc;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .checkout-layout {
     grid-template-columns: 1fr;
   }
-  .checkout-summary {
-    position: static;
-    width: 100%;
+
+  .checkout-right {
+    order: -1; /* summary above form on mobile, if you prefer invert remove this */
+  }
+
+  .field-row {
+    grid-template-columns: 1fr;
   }
 }

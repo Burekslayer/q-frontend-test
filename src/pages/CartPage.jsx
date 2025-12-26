@@ -3,7 +3,9 @@ import React, { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import { FaTimes } from "react-icons/fa";
+
 import "./styles/CartPage.css";
+import "./styles/global.css";
 
 export default function CartPage() {
   const {

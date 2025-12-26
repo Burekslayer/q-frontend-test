@@ -1,194 +1,149 @@
-.product-page{
+.product-page {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100vh;
 }
 
-
-.top-info{
-  height: 10%;
+/* top bar – keep subtle, not black */
+.top-info {
+  height: 70px;
   width: 100%;
-  border-bottom: 1px solid black;
-  background: white;
+  border-bottom: 1px solid #97aabd;
+  background: rgba(253, 247, 244, 0.9);
 }
 
+/* Main section – card-like, warm, like About note cards */
 .product-section {
-  /* if you’re still using grid for page layout… */
   display: grid;
-  grid-template-columns: 2fr 1fr;  /* images on left, details on right */
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   gap: 2rem;
-  padding: 2rem;
+  max-width: 1200px;
+  margin: 2.5rem auto 3rem;
+  padding: 2.5rem 2rem;
+  background-color: #eee2dc;
+  border-radius: 10px;
+  border: 1px solid #97aabd;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-/* —— Product Items Column —— */
-.product-items {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
+/* —— IMAGES —— */
 
-.product-item {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 2rem;
-}
-
-/* Thumbnails + Main Image */
 .item-images {
-  /* make thumbnails + main image sit side-by-side */
   display: flex;
-  align-items: flex-start;            /* vertical centering */
-  justify-content: center;        /* center the pair in their column */
-  border: 0.5px solid grey
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  border: 1px solid #97aabd;
+  border-radius: 8px;
+  padding: 1.25rem;
+  background-color: #fdf7f4;
 }
 
+/* Thumbnail column */
 .thumbnails {
   display: flex;
-  flex-direction: column;        /* center thumbnails vertically */
-  margin-top: 150px;
+  flex-direction: column;
   gap: 0.5rem;
-  max-height: 400px;               /* so they scroll if too tall */
+  max-height: 420px;
   overflow-y: auto;
 }
 
 /* Small preview boxes */
 .thumbnails .thumb {
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   object-fit: cover;
   cursor: pointer;
+  border-radius: 4px;
   border: 2px solid transparent;
-}
-.thumbnails .thumb.selected {
-  border-color: #e03e2d;
-}
-.main-image {
-  margin-top: 150px;
-  margin-left: 1.5rem;            /* space between thumbs & big pic */
-  display: flex;
-  width: 700px;
-  height: 700px;
-}
-.main-image img {
-  max-width: 600px;               /* or whatever max you like */
-  max-height: 400px;
-  object-fit: contain;
-  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  background-color: #eee2dc;
 }
 
-/* Details Panel */
+/* Accent on selected thumb – match About accent color */
+.thumbnails .thumb.selected {
+  border-color: #c96567;
+}
+
+/* Main image area */
+.main-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+}
+
+.main-image img {
+  max-width: 100%;
+  max-height: 460px;
+  object-fit: contain;
+  border-radius: 6px;
+  border: 1px solid #97aabd;
+  background-color: #fdf7f4;
+}
+
+/* —— DETAILS PANEL —— */
+
 .item-details {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 1.5rem;
+  justify-content: flex-start;
 }
 
-.item-title {
-  font-size: 1.2rem;
-  margin: 0;
-}
-
-.item-artist {
-  color: #e03e2d;
-  margin: 0.2rem 0;
-}
-
-.item-medium,
-.item-dimensions {
-  font-size: 0.9rem;
-  color: #555;
-  margin: 0.2rem 0;
-}
-
-.price-qty {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.item-price {
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-.price-qty input {
-  width: 50px;
-  padding: 0.2rem;
-  font-size: 1rem;
-}
-
-.remove-btn {
-  background: none;
+/* The outer button wrapper in JSX */
+.cart-button {
+  background: transparent;
   border: none;
-  color: #888;
-  text-decoration: underline;
-  cursor: pointer;
   padding: 0;
+  align-self: flex-start;
 }
 
-/* —— Order Summary Column —— */
-.order-summary {
-  position: sticky;
-  top: 2rem;
-  border: 1px solid #ddd;
-  padding: 1.5rem;
-  border-radius: 8px;
-  background: #fff;
+/* Figma-style button – adapt to warm palette */
+:root {
+  --border-dugme: linear-gradient(90deg, #c96567, #97aabd, #644e5b);
 }
 
-.order-summary h3 {
-  margin-top: 0;
-}
-
-.summary-line {
+.figma-button-test {
   display: flex;
-  justify-content: space-between;
-  margin: 1rem 0;
-  font-size: 1rem;
-}
-
-.checkout-btn {
-  width: 100%;
-  padding: 0.75rem;
-  background: #e03e2d;
-  color: #fff;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 4px;
-}
-:root{
-  --border-dugme: linear-gradient(90deg, #3AAFA9 , #828a887e, #C96567)
-}
-.figma-button-test{
-  display: flex;
-  width: 116px;
-  height: 39px;
-  padding: 10px 20px;
+  min-width: 140px;
+  height: 42px;
+  padding: 10px 22px;
   justify-content: center;
   align-items: center;
-  margin: 0;
-  gap: 20px;
+  gap: 12px;
   border: double 2px transparent;
   border-radius: 10px;
-  background-image: linear-gradient(white, white), var(--border-dugme);
+  background-image: linear-gradient(#fdf7f4, #fdf7f4), var(--border-dugme);
   background-origin: border-box;
   background-clip: padding-box, border-box;
-}
-.figma-button-test-text, .figma-button-test-text:visited, .figma-button-test-text:active, .figma-button-test-text:focus{
-  color: black;
-  font-size: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
+.figma-button-test-text,
+.figma-button-test-text:visited,
+.figma-button-test-text:active,
+.figma-button-test-text:focus {
+  color: #23323f;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Price style below button */
+.item-details p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #644e5b;
+}
+
+/* —— CART OVERLAY + PANEL —— */
 
 .cart-overlay {
   position: fixed;
-  inset: 0;                      /* top:0; right:0; bottom:0; left:0; */
-  background: rgba(0, 0, 0, 0.6);
+  inset: 0;
+  background: rgba(21, 24, 26, 0.55);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -200,69 +155,74 @@
   pointer-events: auto;
 }
 
-/* Right‐side drawer panel (off‐screen by default) */
 .cart-panel {
   position: fixed;
   top: 0;
   right: 0;
   height: 100vh;
-  width: 320px;                 /* adjust as desired */
+  width: 320px;
   max-width: 90%;
-  background: #fff;
-  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+  background: #fdf7f4;
+  border-left: 1px solid #97aabd;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.18);
   transform: translateX(100%);
   transition: transform 0.3s ease;
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  padding: 10px 10px;
+  padding: 1.5rem;
 }
 
-/* Slide‐in when “.show” is toggled */
 .cart-panel.show {
   transform: translateX(0);
 }
 
-/* Popup heading/message */
 .cart-panel p {
   font-size: 1rem;
   margin-bottom: 1rem;
-  color: #2d3748;
+  color: #23323f;
 }
 
-/* Buttons container inside popup */
+/* Buttons at bottom */
 .cart-panel-buttons {
-  margin-top: auto;  /* push buttons to bottom if you like */
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-/* “Proceed to Cart” and “Continue” buttons */
-.cart-panel-buttons button {
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
+/* Primary: Proceed to Cart */
 .cart-panel-buttons button:first-child {
-  background: #38a169;   /* green */
-  color: white;
+  background-color: #c96567;
+  color: #fdf7f4;
+  border: 2px solid #9e5a63;
+  border-radius: 6px;
 }
 
-.cart-panel-buttons button:first-child:hover {
-  background: #2f855a;
-}
-
+/* Secondary: Continue Admiring */
 .cart-panel-buttons button:last-child {
-  background: transparent;
-  color: #3182ce;       /* blue */
-  border: 1px solid #3182ce;
+  background-color: transparent;
+  color: #9e5a63;
+  border-radius: 6px;
+  border: 1px solid #9e5a63;
 }
 
 .cart-panel-buttons button:last-child:hover {
-  background: #e3f2fd;   /* very light blue */
+  background-color: rgba(238, 226, 220, 0.8);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .product-section {
+    grid-template-columns: 1fr;
+  }
+
+  .item-images {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-image {
+    padding-left: 0;
+  }
 }

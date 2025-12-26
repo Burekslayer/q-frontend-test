@@ -21,9 +21,36 @@
 .background {
   width: 100vw;
   position: relative;
-  top: -11.9%;
+  top: -10%;
 }
-
+.light-rays {
+  z-index: 3;
+  position: absolute;
+  top: -10%;
+  left: 0;
+  width: 100vw;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+}
+.fire {
+  z-index: 3;
+  position: absolute;
+  top: -10%;
+  left: 0;
+  width: 100vw;
+  pointer-events: none;
+  filter: opacity(80%);
+  mix-blend-mode: screen;
+}
+.landscape{
+  z-index: -1;
+  position: absolute;
+  top: -10%;
+  left: 0;
+  width: 100vw;
+  pointer-events: none;
+  filter: saturate(90%)
+}
 /* ----------------- GALLERY CONTENT ----------------- */
 
 .gallery {
@@ -95,9 +122,9 @@
 /* Position the easel; adjust coordinates as needed */
 .easel {
   position: absolute;
-  top: 2.3%;
-  left: 6.8%;
-  width: 20.8%;
+  top: 10.5%;
+  left: 41.2%;
+  width: 14%;
   transition: transform 0.2s, box-shadow 0.2s;
   z-index: 1;
   overflow: hidden;
@@ -111,9 +138,9 @@
 /* Position the brushes; clicking on this navigates to login/register */
 .brushes {
   position: absolute;
-  top: 39.5%;
-  left: 34.5%;
-  width: 5.2%;
+  top: 39.7%;
+  left: 31.25%;
+  width: 3.82%;
   transition: transform 0.2s, box-shadow 0.5s;
   z-index: 1;
   overflow: hidden;
@@ -125,9 +152,9 @@
 }
 .picture {
   position: absolute;
-  top: 21%;
-  left: 71%;
-  width: 6.8%; /* adjust size as needed */
+  top: 27.4%;
+  left: 6.7%;
+  width: 7.5%; /* adjust size as needed */
   transition: transform 0.2s, box-shadow 0.5s;
   z-index: 2;
   overflow: hidden;
@@ -140,9 +167,9 @@
 
 .lupa {
   position: absolute;
-  top: 39.5%;
-  left: 60.05%;
-  width: 3.9%; /* adjust size as needed */
+  top: 42.55%;
+  left: 60.7%;
+  width: 2.9%; /* adjust size as needed */
   transition: transform 0.2s, box-shadow 0.5s;
   z-index: 1;
   overflow: hidden;
@@ -150,29 +177,29 @@
             drop-shadow(-0.01vh 0.01vh 0.6vh rgba(255, 255, 255, 0.4))
             drop-shadow(0.01vh -0.01vh 0.6vh rgba(255, 255, 255, 0.4))
             drop-shadow(-0.01vh -0.01vh 0.6vh rgba(255, 255, 255, 0.4)); */
-  /* filter: grayscale(100%); */         
+  /* filter: grayscale(100%); */
 }
 .lupa:hover {
   transform: scale(1.01);
   cursor: pointer;
-  filter: brightness(120%) contrast(95%); 
+  filter: brightness(120%) contrast(95%);
 }
 
 .picture:hover {
   transform: scale(1.01);
   cursor: pointer;
-  filter: brightness(120%) contrast(95%); 
+  filter: brightness(120%) contrast(95%);
 }
 .brushes:hover {
   transform: scale(1.01);
   cursor: pointer;
-  filter: brightness(120%) contrast(95%); 
+  filter: brightness(120%) contrast(95%);
 }
 
 .easel:hover {
   transform: scale(1.01);
   cursor: pointer;
-  filter: brightness(120%) contrast(95%);  
+  filter: brightness(110%) contrast(95%);
 }
 
 .autumn-animation-day {
@@ -182,7 +209,7 @@
   width: 20%;
   z-index: -1;
   pointer-events: none;
-  filter: brightness(130%)
+  filter: brightness(130%);
 }
 .search-anim {
   position: absolute;
@@ -196,30 +223,30 @@
 
 .galerija-anim {
   position: absolute;
-  top: 34%;
-  left: 7.5%;
-  width: 20%;
+  top: 12%;
+  left: 43.15%;
+  width: 11%;
   height: 12%;
   z-index: 2;
   pointer-events: none;
-  rotate: -3deg;
+  rotate: -1deg;
 }
 
 .onama-anim {
   position: absolute;
-  top: 12%;
-  left: 68%;
+  top: 15%;
+  left: 4%;
   width: 12%;
   height: 10%;
   z-index: 2;
-  transform: rotate(-5deg);
+  transform: rotate(5deg);
   pointer-events: none;
 }
 
 .login-anim {
   position: absolute;
   top: 31%;
-  left: 31.5%;
+  left: 27.8%;
   width: 11%;
   height: 9%;
   z-index: 2;
@@ -233,16 +260,17 @@
   }
   100% {
     stroke-dashoffset: 0;
-    fill: #000000ab;
+    fill: white;
   }
 }
 
 @-webkit-keyframes svg-text-anim-reverse {
   0% {
     stroke-dashoffset: 0;
-    fill: #000000ab;
+    fill: white;
   }
-  100% { /* NEW: Remove fill just before starting to un-draw */
+  100% {
+    /* NEW: Remove fill just before starting to un-draw */
     stroke-dashoffset: 0;
     fill: transparent;
   }
@@ -251,9 +279,10 @@
 @keyframes svg-text-anim-reverse {
   0% {
     stroke-dashoffset: 0;
-    fill: #000000ab;
+    fill: white;
   }
-  100% { /* NEW: Remove fill just before starting to un-draw */
+  100% {
+    /* NEW: Remove fill just before starting to un-draw */
     stroke-dashoffset: var(--dash-length);
     fill: transparent;
   }
@@ -266,12 +295,12 @@
   }
   100% {
     stroke-dashoffset: 0;
-    fill: #000000ab;
+    fill: white;
   }
 }
 
 .animate {
-  stroke: black;
+  stroke: white;
   animation: svg-text-anim 1s ease forwards;
 }
 
@@ -285,7 +314,7 @@
     transform: scale(100%);
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0));
   }
-  50%{
+  50% {
     transform: scale(110%);
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.6));
   }
@@ -299,7 +328,7 @@
     transform: scale(10%);
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0));
   }
-  50%{
+  50% {
     transform: scale(110%);
     filter: drop-shadow(0 0 5px rgb(255, 255, 255));
   }
@@ -308,8 +337,10 @@
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0));
   }
 }
-.active1, .active2, .active3, .active4 {
+.active1,
+.active2,
+.active3,
+.active4 {
   animation: startup-scale 1.5s ease forwards;
   -webkit-animation: startup-scale 1.5s ease forwards;
 }
-

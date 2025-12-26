@@ -2,7 +2,9 @@
 import { useState, useMemo, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+
 import "../pages/styles/ProductPage.css";
+import "./styles/global.css";
 
 const CLOUD_NAME = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
 
