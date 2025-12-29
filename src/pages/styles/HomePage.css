@@ -21,19 +21,19 @@
 .background {
   width: 100vw;
   position: relative;
-  top: -10%;
+  top: -8%;
 }
 .outside{
   width: 100vw;
   position: absolute;
-  top: -10%;
+  top: -7%;
   left: 0;
   z-index: -2;
 }
 .light-rays {
   z-index: 3;
   position: absolute;
-  top: -10%;
+  top: -8%;
   left: 0;
   width: 100vw;
   pointer-events: none;
@@ -42,7 +42,7 @@
 .fire {
   z-index: 3;
   position: absolute;
-  top: -10%;
+  top: -8%;
   left: 0;
   width: 100vw;
   pointer-events: none;
@@ -52,7 +52,7 @@
 .landscape{
   z-index: -1;
   position: absolute;
-  top: -10%;
+  top: -8%;
   left: 0;
   width: 100vw;
   pointer-events: none;
@@ -129,7 +129,7 @@
 /* Position the easel; adjust coordinates as needed */
 .easel {
   position: absolute;
-  top: 10.7%;
+  top: 12.7%;
   left: 41.23%;
   width: 14.018%;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -145,7 +145,7 @@
 /* Position the brushes; clicking on this navigates to login/register */
 .brushes {
   position: absolute;
-  top: 39.7%;
+  top: 41.7%;
   left: 31.25%;
   width: 3.82%;
   transition: transform 0.2s, box-shadow 0.5s;
@@ -159,7 +159,7 @@
 }
 .picture {
   position: absolute;
-  top: 27.4%;
+  top: 29.4%;
   left: 6.7%;
   width: 7.5%; /* adjust size as needed */
   transition: transform 0.2s, box-shadow 0.5s;
@@ -174,7 +174,7 @@
 
 .lupa {
   position: absolute;
-  top: 42.55%;
+  top: 44.55%;
   left: 60.7%;
   width: 2.9%; /* adjust size as needed */
   transition: transform 0.2s, box-shadow 0.5s;
@@ -220,7 +220,7 @@
 }
 .search-anim {
   position: absolute;
-  top: 31%;
+  top: 33%;
   left: 57%;
   width: 10%;
   height: 8%;
@@ -230,7 +230,7 @@
 
 .galerija-anim {
   position: absolute;
-  top: 12%;
+  top: 14%;
   left: 43.15%;
   width: 11%;
   height: 12%;
@@ -241,7 +241,7 @@
 
 .onama-anim {
   position: absolute;
-  top: 15%;
+  top: 17%;
   left: 4%;
   width: 12%;
   height: 10%;
@@ -252,7 +252,7 @@
 
 .login-anim {
   position: absolute;
-  top: 31%;
+  top: 33%;
   left: 27.8%;
   width: 11%;
   height: 9%;

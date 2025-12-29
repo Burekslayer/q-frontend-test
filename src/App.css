@@ -79,3 +79,27 @@ a {
 a:hover {
   text-decoration: underline;
 }
+/* ===== Firefox ===== */
+* {
+  scrollbar-width: thin;                /* auto | thin | none */
+  scrollbar-color: var(--color-6) transparent; /* thumb color | track color */
+}
+
+/* ===== Chrome, Edge, Safari ===== */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-6);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-6);
+}

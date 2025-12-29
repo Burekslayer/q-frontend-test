@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useHoverAnimation from "../hooks/useHoverAnimation";
@@ -20,12 +20,12 @@ import MasonryLayout from "../components/Masonry";
 import "./styles/HomePage.css";
 import "./styles/Masonry.css";
 
-const SEASON_COMPONENTS = {
+/* const SEASON_COMPONENTS = {
   spring: Spring,
   summer: Summer,
   autumn: Autumn,
   winter: Winter,
-};
+}; */
 
 function getSeasonByDate(date = new Date()) {
   const month = date.getMonth() + 1; // JS months are 0-based
@@ -56,6 +56,16 @@ function HomePage() {
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  /* --------- TEST ----------*/
+
+  const [seasonTest, setSeasonTest] = useState("winter"); // "winter" | "autumn"
+
+  const TestComponent = useMemo(() => {
+    return seasonTest === "winter" ? Winter : Autumn;
+  }, [seasonTest]);
+
+  /* --------- TEST ----------*/
+
   const apiUrl = process.env.REACT_APP_API_URL || "https://localhost:5000";
 
   const [active1, setActive1] = useState(true);
@@ -64,7 +74,7 @@ function HomePage() {
   const [active4, setActive4] = useState(false);
 
   const season = getSeasonByDate();
-  const SeasonComponent = SEASON_COMPONENTS[season];
+  //const SeasonComponent = SEASON_COMPONENTS[season];
 
   useEffect(() => {
     setIsLoading(true);
@@ -239,6 +249,26 @@ function HomePage() {
           transition: "opacity 450ms ease",
         }}
       >
+        <button
+        type="button"
+        onClick={() =>
+          setSeasonTest((s) => (s === "winter" ? "autumn" : "winter"))
+        }
+        style={{
+          position: "fixed",
+          top: 16,
+          right: 16,
+          zIndex: 10000,
+          padding: "10px 12px",
+          borderRadius: 10,
+          border: "1px solid rgba(255,255,255,0.25)",
+          background: "rgba(0,0,0,0.55)",
+          color: "#fff",
+          cursor: "pointer",
+        }}
+      >
+        Switch Season (now: {seasonTest})
+      </button>
         <div className="home-fixed">
           <GallerySvg
             ref={gallerySvgRef}
@@ -257,7 +287,7 @@ function HomePage() {
             animationState={pictureHover.animationState}
           />
 
-          <SeasonComponent
+          <TestComponent
             active1={active1}
             active2={active2}
             active3={active3}

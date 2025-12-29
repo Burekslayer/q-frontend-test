@@ -4,9 +4,7 @@ import "./styles/AboutPage.css";
 import Header from "./partials/Header.jsx";
 import Footer from "./partials/Footer.jsx";
 
-
 export default function AboutPage() {
-
   const navigate = useNavigate();
 
   const handleGalleryClick = () => {
@@ -112,11 +110,10 @@ export default function AboutPage() {
       </section>
 
       {/* TEAM */}
-      <section className="about-team">
+      {/* <section className="about-team">
         <h2 className="section-heading">Our Artists</h2>
 
         <div className="team-grid">
-          {/* Example artist — replace with dynamic data if needed */}
           <div className="team-card">
             <div className="team-frame">
               <img src="/images/artist1.jpg" alt="Artist portrait" />
@@ -139,7 +136,7 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA */}
       <section className="about-cta">
@@ -150,10 +147,12 @@ export default function AboutPage() {
             something that feels like home.
           </p>
 
-          <button className="cta-button" onClick={handleGalleryClick}>Visit the Gallery</button>
+          <button className="cta-button" onClick={handleGalleryClick}>
+            Visit the Gallery
+          </button>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
