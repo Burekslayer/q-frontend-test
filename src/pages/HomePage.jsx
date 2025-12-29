@@ -2,6 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useHoverAnimation from "../hooks/useHoverAnimation";
+import Autumn from "../components/seasons/autumn";
+import Winter from "../components/seasons/winter";
+import Spring from "../components/seasons/spring";
+import Summer from "../components/seasons/summer";
+import PreloaderOverlay from "../components/PreLoader";
 
 import {
   GallerySvg,
@@ -14,6 +19,22 @@ import MasonryLayout from "../components/Masonry";
 
 import "./styles/HomePage.css";
 import "./styles/Masonry.css";
+
+const SEASON_COMPONENTS = {
+  spring: Spring,
+  summer: Summer,
+  autumn: Autumn,
+  winter: Winter,
+};
+
+function getSeasonByDate(date = new Date()) {
+  const month = date.getMonth() + 1; // JS months are 0-based
+
+  if (month >= 3 && month < 6) return "spring"; // Mar–May
+  if (month >= 6 && month < 9) return "summer"; // Jun–Aug
+  if (month >= 9 && month < 12) return "autumn"; // Sep–Nov
+  return "winter"; // Dec–Feb
+}
 
 function HomePage() {
   const gallerySvgRef = useRef(null);
@@ -33,6 +54,7 @@ function HomePage() {
   const [galleryPhase, setGalleryPhase] = useState("visible");
   const [showNav, setShowNav] = useState(false);
   const [photos, setPhotos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const apiUrl = process.env.REACT_APP_API_URL || "https://localhost:5000";
 
@@ -40,6 +62,18 @@ function HomePage() {
   const [active2, setActive2] = useState(false);
   const [active3, setActive3] = useState(false);
   const [active4, setActive4] = useState(false);
+
+  const season = getSeasonByDate();
+  const SeasonComponent = SEASON_COMPONENTS[season];
+
+  useEffect(() => {
+    setIsLoading(true);
+  }, [season]);
+
+  const handleSeasonReady = () => {
+    // small delay prevents flashing if it loads instantly
+    setTimeout(() => setIsLoading(false), 150);
+  };
 
   useEffect(() => {
     const timers = [
@@ -197,87 +231,50 @@ function HomePage() {
 
   return (
     <div className="home-page">
-      <div className="home-fixed">
-        <GallerySvg
-          ref={gallerySvgRef}
-          animationState={easelHover.animationState}
-        />
-        <LoginSvg
-          ref={loginSvgRef}
-          animationState={brushesHover.animationState}
-        />
-        <SearchSvg
-          ref={searchSvgRef}
-          animationState={lupaHover.animationState}
-        />
-        <AboutSvg
-          ref={aboutSvgRef}
-          animationState={pictureHover.animationState}
-        />
+      <PreloaderOverlay isVisible={isLoading} />
 
-        <div className="background-parent">
-          {/* Base studio image */}
-          <img
-            className="background"
-            src="/images/zima/ArtStudio_Winter_Composition.webp"
-            alt="Studio Background"
+      <div
+        style={{
+          opacity: isLoading ? 0 : 1,
+          transition: "opacity 450ms ease",
+        }}
+      >
+        <div className="home-fixed">
+          <GallerySvg
+            ref={gallerySvgRef}
+            animationState={easelHover.animationState}
           />
-          <img
-            className="outside"
-            src="/images/zima/ArtStudio_Winter_Background.webp"
-            alt="Studio Background"
+          <LoginSvg
+            ref={loginSvgRef}
+            animationState={brushesHover.animationState}
+          />
+          <SearchSvg
+            ref={searchSvgRef}
+            animationState={lupaHover.animationState}
+          />
+          <AboutSvg
+            ref={aboutSvgRef}
+            animationState={pictureHover.animationState}
           />
 
-          <video className="fire" autoPlay muted loop>
-            <source src="/images/zima/ArtStudio_Winter_Fire_200kb.webm" type="video/webm" />
-          </video>
-          <video className="landscape" autoPlay muted loop>
-            <source src="/images/zima/Snow_1080p_500kb.webm" type="video/webm" />
-          </video>
-          {/* Easel image */}
-
-          <img
-            className={`easel${active1 ? " active1" : ""}`}
-            src="/images/zima/easel.webp"
-            alt="Easel"
-            onMouseEnter={easelHover.handleMouseEnter}
-            onMouseLeave={easelHover.handleMouseLeave}
-            onClick={handleEaselClick}
-          />
-          {/* Brushes image */}
-          <img
-            className={`brushes${active2 ? " active2" : ""}`}
-            src="/images/zima/brushes.webp"
-            alt="Brushes"
-            onClick={handleBrushesClick}
-            onMouseEnter={brushesHover.handleMouseEnter}
-            onMouseLeave={brushesHover.handleMouseLeave}
-          />
-          <audio ref={audioRef} src="/recordings/oNama.wav" />
-          {/* Picture image lel */}
-          <img
-            className={`picture${active4 ? " active4" : ""}`}
-            src="/images/zima/picture.webp"
-            alt="slicka"
-            style={{ cursor: "pointer" }}
-            onMouseEnter={pictureHover.handleMouseEnter}
-            onMouseLeave={pictureHover.handleMouseLeave}
-            onClick={handlePictureClick}
-          />
-
-          {/* Lupa image */}
-          <img
-            className={`lupa${active3 ? " active3" : ""}`}
-            src="/images/zima/search.webp"
-            alt="Lupa"
-            style={{ cursor: "pointer" }}
-            onMouseEnter={lupaHover.handleMouseEnter}
-            onMouseLeave={lupaHover.handleMouseLeave}
-            onClick={handleLupaClick}
+          <SeasonComponent
+            active1={active1}
+            active2={active2}
+            active3={active3}
+            active4={active4}
+            easelHover={easelHover}
+            brushesHover={brushesHover}
+            pictureHover={pictureHover}
+            lupaHover={lupaHover}
+            handleEaselClick={handleEaselClick}
+            handleBrushesClick={handleBrushesClick}
+            handlePictureClick={handlePictureClick}
+            handleLupaClick={handleLupaClick}
+            audioRef={audioRef}
+            onReady={handleSeasonReady}
           />
         </div>
       </div>
-
       {/* Gallery content section that appears below the fixed images */}
 
       <div

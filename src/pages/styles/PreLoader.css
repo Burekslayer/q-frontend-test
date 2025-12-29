@@ -1,0 +1,52 @@
+/* Fullscreen overlay */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 450ms ease;
+}
+
+.preloader.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.preloader.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.preloader-inner {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.preloader-text {
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  opacity: 0.85;
+  color: #fff;
+}
+
+/* Simple spinner */
+.spinner {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: rgba(255, 255, 255, 0.95);
+  animation: spin 900ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
