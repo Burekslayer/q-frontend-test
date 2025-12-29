@@ -219,41 +219,26 @@ function HomePage() {
           {/* Base studio image */}
           <img
             className="background"
-            src="/images/jesen/art_room_comp.webp"
+            src="/images/zima/ArtStudio_Winter_Composition.webp"
             alt="Studio Background"
           />
-          {/* <video className="background" autoPlay muted playsInLine loop>
-            <source src="/images/jesen/art_room_comp.webm" type="video/webm" />
-          </video> */}
-          {/* Autumn Animation */}
-          {/* <img
-            className="autumn-animation-day"
-            src="/images/jesen/autumn.webm"
-            alt="Loading animation"
-          /> */}
+          <img
+            className="outside"
+            src="/images/zima/ArtStudio_Winter_Background.webp"
+            alt="Studio Background"
+          />
+
           <video className="fire" autoPlay muted loop>
-            <source src="/images/jesen/art_room_fire.webm" type="video/webm" />
+            <source src="/images/zima/ArtStudio_Winter_Fire_200kb.webm" type="video/webm" />
           </video>
           <video className="landscape" autoPlay muted loop>
-            <source src="/images/jesen/art_room_outside.webm" type="video/webm" />
+            <source src="/images/zima/Snow_1080p_500kb.webm" type="video/webm" />
           </video>
-          <video className="light-rays" autoPlay muted loop>
-            <source src="/images/jesen/Light_Rays_1.webm" type="video/webm" />
-          </video>
-          {/*  <video
-            className="autumn-animation-day"
-            autoPlay
-            muted
-            playsInLine
-            loop
-          >
-            <source src="/images/jesen/autumn.webm" type="video/webm" />
-          </video> */}
           {/* Easel image */}
 
           <img
             className={`easel${active1 ? " active1" : ""}`}
-            src="/images/jesen/gallery.webp"
+            src="/images/zima/easel.webp"
             alt="Easel"
             onMouseEnter={easelHover.handleMouseEnter}
             onMouseLeave={easelHover.handleMouseLeave}
@@ -262,7 +247,7 @@ function HomePage() {
           {/* Brushes image */}
           <img
             className={`brushes${active2 ? " active2" : ""}`}
-            src="/images/jesen/brushes.webp"
+            src="/images/zima/brushes.webp"
             alt="Brushes"
             onClick={handleBrushesClick}
             onMouseEnter={brushesHover.handleMouseEnter}
@@ -272,7 +257,7 @@ function HomePage() {
           {/* Picture image lel */}
           <img
             className={`picture${active4 ? " active4" : ""}`}
-            src="/images/jesen/picture.webp"
+            src="/images/zima/picture.webp"
             alt="slicka"
             style={{ cursor: "pointer" }}
             onMouseEnter={pictureHover.handleMouseEnter}
@@ -283,7 +268,7 @@ function HomePage() {
           {/* Lupa image */}
           <img
             className={`lupa${active3 ? " active3" : ""}`}
-            src="/images/jesen/search.webp"
+            src="/images/zima/search.webp"
             alt="Lupa"
             style={{ cursor: "pointer" }}
             onMouseEnter={lupaHover.handleMouseEnter}

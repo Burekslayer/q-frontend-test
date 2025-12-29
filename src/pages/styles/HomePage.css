@@ -23,6 +23,13 @@
   position: relative;
   top: -10%;
 }
+.outside{
+  width: 100vw;
+  position: absolute;
+  top: -10%;
+  left: 0;
+  z-index: -2;
+}
 .light-rays {
   z-index: 3;
   position: absolute;
@@ -49,7 +56,7 @@
   left: 0;
   width: 100vw;
   pointer-events: none;
-  filter: saturate(90%)
+  mix-blend-mode: screen;
 }
 /* ----------------- GALLERY CONTENT ----------------- */
 
@@ -122,9 +129,9 @@
 /* Position the easel; adjust coordinates as needed */
 .easel {
   position: absolute;
-  top: 10.5%;
-  left: 41.2%;
-  width: 14%;
+  top: 10.7%;
+  left: 41.23%;
+  width: 14.018%;
   transition: transform 0.2s, box-shadow 0.2s;
   z-index: 1;
   overflow: hidden;
@@ -180,18 +187,18 @@
   /* filter: grayscale(100%); */
 }
 .lupa:hover {
-  transform: scale(1.01);
+  transform: scale(1.03);
   cursor: pointer;
   filter: brightness(120%) contrast(95%);
 }
 
 .picture:hover {
-  transform: scale(1.01);
+  transform: scale(1.02);
   cursor: pointer;
   filter: brightness(120%) contrast(95%);
 }
 .brushes:hover {
-  transform: scale(1.01);
+  transform: scale(1.03);
   cursor: pointer;
   filter: brightness(120%) contrast(95%);
 }
