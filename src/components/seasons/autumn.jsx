@@ -14,12 +14,9 @@ export default function Autumn({
   handleBrushesClick,
   handlePictureClick,
   handleLupaClick,
-  handleLusterClick,
   audioRef,
   onReady,
-  upaliSvgRef,
-  ugasiSvgRef,
-  isDarkTheme,
+  handleLusterClick
 }) {
   const bgLoaded = useRef(false);
   const videoLoaded = useRef(false);
