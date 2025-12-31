@@ -186,6 +186,22 @@
             drop-shadow(-0.01vh -0.01vh 0.6vh rgba(255, 255, 255, 0.4)); */
   /* filter: grayscale(100%); */
 }
+
+.luster {
+  position: absolute;
+  top: -9.25%;
+  left: 46%;
+  width: 4.85%; /* adjust size as needed */
+  transition: transform 0.2s, box-shadow 0.5s;
+  z-index: 1;
+  overflow: hidden;
+  /* filter: drop-shadow(0.01vh 0.01vh 0.6vh rgba(255, 255, 255, 0.4))
+            drop-shadow(-0.01vh 0.01vh 0.6vh rgba(255, 255, 255, 0.4))
+            drop-shadow(0.01vh -0.01vh 0.6vh rgba(255, 255, 255, 0.4))
+            drop-shadow(-0.01vh -0.01vh 0.6vh rgba(255, 255, 255, 0.4)); */
+  /* 
+  filter: grayscale(100%); */
+}
 .lupa:hover {
   transform: scale(1.03);
   cursor: pointer;
@@ -207,6 +223,12 @@
   transform: scale(1.01);
   cursor: pointer;
   filter: brightness(110%) contrast(95%);
+}
+
+.luster:hover {
+  transform: scale(1.03);
+  cursor: pointer;
+  filter: brightness(120%) contrast(95%);
 }
 
 .autumn-animation-day {
@@ -259,6 +281,7 @@
   z-index: 2;
   pointer-events: none;
 }
+
 
 @-webkit-keyframes svg-text-anim {
   0% {

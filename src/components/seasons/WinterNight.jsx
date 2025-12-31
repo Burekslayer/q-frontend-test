@@ -1,5 +1,5 @@
 import { useRef } from "react";
-export default function Winter({
+export default function WinterNight({
   active1,
   active2,
   active3,
@@ -30,17 +30,12 @@ export default function Winter({
       {/* Base studio image */}
       <img
         className="background"
-        src="/images/zima/ArtStudio_Winter_Composition.webp"
+        src="/images/noc/Night_Winter_Composition_NoBackground.webp"
         alt="Studio Background"
         onLoad={() => {
           bgLoaded.current = true;
           tryReady();
         }}
-      />
-      <img
-        className="outside"
-        src="/images/zima/ArtStudio_Winter_Background.webp"
-        alt="Studio Background"
       />
 
       <video
@@ -60,13 +55,13 @@ export default function Winter({
         />
       </video>
       <video className="landscape" autoPlay muted loop preload="auto">
-        <source src="/images/zima/Snow_1080p_500kb.webm" type="video/webm" />
+        <source src="/images/noc/Night_Winter_NoBackground.webm" type="video/webm" />
       </video>
       {/* Easel image */}
 
       <img
         className={`easel${active1 ? " active1" : ""}`}
-        src="/images/zima/easel.webp"
+        src="/images/noc/easel.webp"
         alt="Easel"
         onMouseEnter={easelHover.handleMouseEnter}
         onMouseLeave={easelHover.handleMouseLeave}
@@ -75,7 +70,7 @@ export default function Winter({
       {/* Brushes image */}
       <img
         className={`brushes${active2 ? " active2" : ""}`}
-        src="/images/zima/brushes.webp"
+        src="/images/noc/brushes.webp"
         alt="Brushes"
         onClick={handleBrushesClick}
         onMouseEnter={brushesHover.handleMouseEnter}
@@ -85,7 +80,7 @@ export default function Winter({
       {/* Picture image lel */}
       <img
         className={`picture${active4 ? " active4" : ""}`}
-        src="/images/zima/picture.webp"
+        src="/images/noc/picture.webp"
         alt="slicka"
         style={{ cursor: "pointer" }}
         onMouseEnter={pictureHover.handleMouseEnter}
@@ -96,7 +91,7 @@ export default function Winter({
       {/* Lupa image */}
       <img
         className={`lupa${active3 ? " active3" : ""}`}
-        src="/images/zima/search.webp"
+        src="/images/noc/search.webp"
         alt="Lupa"
         style={{ cursor: "pointer" }}
         onMouseEnter={lupaHover.handleMouseEnter}
@@ -108,7 +103,7 @@ export default function Winter({
 
       <img
         className="luster" // optional active class
-        src="/images/zima/luster.webp" // your lamp image
+        src="/images/noc/luster.webp" // your lamp image
         alt="Luster"
         style={{ cursor: "pointer" }}
         onMouseEnter={lusterHover?.handleMouseEnter}

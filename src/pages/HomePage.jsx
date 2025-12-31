@@ -2,8 +2,9 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useHoverAnimation from "../hooks/useHoverAnimation";
-import Autumn from "../components/seasons/autumn";
-import Winter from "../components/seasons/winter";
+import Autumn from "../components/seasons/Autumn";
+import Winter from "../components/seasons/Winter";
+import WinterNight from "../components/seasons/WinterNight";
 import PreloaderOverlay from "../components/PreLoader";
 
 import {
@@ -17,6 +18,7 @@ import MasonryLayout from "../components/Masonry";
 
 import "./styles/HomePage.css";
 import "./styles/Masonry.css";
+
 
 function getSeasonByDate(date = new Date()) {
   const month = date.getMonth() + 1; // JS months are 0-based
@@ -41,19 +43,29 @@ function HomePage() {
   const pictureHover = useHoverAnimation();
   const brushesHover = useHoverAnimation();
   const lupaHover = useHoverAnimation();
+  const lusterHover = useHoverAnimation();
 
   const [galleryPhase, setGalleryPhase] = useState("visible");
   const [showNav, setShowNav] = useState(false);
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   /* --------- TEST ----------*/
 
   const [seasonTest, setSeasonTest] = useState("winter"); // "winter" | "autumn"
 
   const TestComponent = useMemo(() => {
-    return seasonTest === "winter" ? Winter : Autumn;
-  }, [seasonTest]);
+    if (seasonTest === "winter") {
+      return isDarkTheme ? WinterNight : Winter;
+    }
+
+    if (seasonTest === "autumn") {
+      return Autumn;
+    }
+
+    return null;
+  }, [seasonTest, isDarkTheme]);
 
   /* --------- TEST ----------*/
 
@@ -66,6 +78,10 @@ function HomePage() {
 
   const season = getSeasonByDate();
   //const SeasonComponent = SEASON_COMPONENTS[season];
+
+  const handleThemeToggle = () => {
+    setIsDarkTheme((v) => !v);
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -166,6 +182,9 @@ function HomePage() {
   const handleLupaClick = () => {
     navigate("/search");
   };
+  const handleLusterClick = () => {
+    handleThemeToggle();
+  };
   const handleEaselClick = () => {
     window.scrollTo({ top: window.innerWidth * (5 / 9), behavior: "smooth" });
   };
@@ -241,25 +260,25 @@ function HomePage() {
         }}
       >
         <button
-        type="button"
-        onClick={() =>
-          setSeasonTest((s) => (s === "winter" ? "autumn" : "winter"))
-        }
-        style={{
-          position: "fixed",
-          top: 16,
-          right: 16,
-          zIndex: 10000,
-          padding: "10px 12px",
-          borderRadius: 10,
-          border: "1px solid rgba(255,255,255,0.25)",
-          background: "rgba(0,0,0,0.55)",
-          color: "#fff",
-          cursor: "pointer",
-        }}
-      >
-        Switch Season (now: {seasonTest})
-      </button>
+          type="button"
+          onClick={() =>
+            setSeasonTest((s) => (s === "winter" ? "autumn" : "winter"))
+          }
+          style={{
+            position: "fixed",
+            top: 16,
+            right: 16,
+            zIndex: 10000,
+            padding: "10px 12px",
+            borderRadius: 10,
+            border: "1px solid rgba(255,255,255,0.25)",
+            background: "rgba(0,0,0,0.55)",
+            color: "#fff",
+            cursor: "pointer",
+          }}
+        >
+          Switch Season (now: {seasonTest})
+        </button>
         <div className="home-fixed">
           <GallerySvg
             ref={gallerySvgRef}
@@ -287,10 +306,12 @@ function HomePage() {
             brushesHover={brushesHover}
             pictureHover={pictureHover}
             lupaHover={lupaHover}
+            lusterHover={lusterHover}
             handleEaselClick={handleEaselClick}
             handleBrushesClick={handleBrushesClick}
             handlePictureClick={handlePictureClick}
             handleLupaClick={handleLupaClick}
+            handleLusterClick={handleLusterClick}
             audioRef={audioRef}
             onReady={handleSeasonReady}
           />

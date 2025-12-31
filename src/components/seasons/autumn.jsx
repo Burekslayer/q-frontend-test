@@ -9,12 +9,17 @@ export default function Autumn({
   brushesHover,
   pictureHover,
   lupaHover,
+  lusterHover,
   handleEaselClick,
   handleBrushesClick,
   handlePictureClick,
   handleLupaClick,
+  handleLusterClick,
   audioRef,
   onReady,
+  upaliSvgRef,
+  ugasiSvgRef,
+  isDarkTheme,
 }) {
   const bgLoaded = useRef(false);
   const videoLoaded = useRef(false);
@@ -96,6 +101,17 @@ export default function Autumn({
         onMouseEnter={lupaHover.handleMouseEnter}
         onMouseLeave={lupaHover.handleMouseLeave}
         onClick={handleLupaClick}
+      />
+
+      {/* Luster image */}
+      <img
+        className="luster"
+        src="/images/zima/luster.webp"
+        alt="lustercina"
+        style={{ cursor: "pointer" }}
+        onMouseEnter={lusterHover.handleMouseEnter}
+        onMouseLeave={lusterHover.handleMouseLeave}
+        onClick={handleLusterClick}
       />
     </div>
   );
