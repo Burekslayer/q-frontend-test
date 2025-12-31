@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import useHoverAnimation from "../hooks/useHoverAnimation";
 import Autumn from "../components/seasons/autumn";
 import Winter from "../components/seasons/winter";
-import Spring from "../components/seasons/spring";
-import Summer from "../components/seasons/summer";
 import PreloaderOverlay from "../components/PreLoader";
 
 import {
@@ -19,13 +17,6 @@ import MasonryLayout from "../components/Masonry";
 
 import "./styles/HomePage.css";
 import "./styles/Masonry.css";
-
-/* const SEASON_COMPONENTS = {
-  spring: Spring,
-  summer: Summer,
-  autumn: Autumn,
-  winter: Winter,
-}; */
 
 function getSeasonByDate(date = new Date()) {
   const month = date.getMonth() + 1; // JS months are 0-based
