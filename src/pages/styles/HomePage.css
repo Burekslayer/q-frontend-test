@@ -76,7 +76,6 @@
   top: 0;
   left: 0;
   width: 100%;
-  /* Optionally, set 'top' to the current position or leave it as is */
   opacity: 0;
 }
 
@@ -85,16 +84,6 @@
   top: calc(100vw * 5 / 9); /* This moves it to its starting position */
   opacity: 0;
 }
-
-/* .collapsed {
-    max-height: 2000px;
-    overflow: hidden;
-  }
-
-  .expanded  {
-    max-height: none;
-    overflow: hidden;
-  } */
 
 .yarl__container {
   background-color: rgba(0, 0, 0, 0.92) !important;
