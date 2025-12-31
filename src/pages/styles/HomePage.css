@@ -21,19 +21,19 @@
 .background {
   width: 100vw;
   position: relative;
-  top: -8%;
+  top: -9.25%;
 }
 .outside{
   width: 100vw;
   position: absolute;
-  top: -7%;
+  top: -9.25%;
   left: 0;
   z-index: -2;
 }
 .light-rays {
   z-index: 3;
   position: absolute;
-  top: -8%;
+  top: -9.25%;
   left: 0;
   width: 100vw;
   pointer-events: none;
@@ -42,7 +42,7 @@
 .fire {
   z-index: 3;
   position: absolute;
-  top: -8%;
+  top: -9.25%;
   left: 0;
   width: 100vw;
   pointer-events: none;
@@ -52,7 +52,7 @@
 .landscape{
   z-index: -1;
   position: absolute;
-  top: -8%;
+  top: -9.25%;
   left: 0;
   width: 100vw;
   pointer-events: none;
@@ -129,7 +129,7 @@
 /* Position the easel; adjust coordinates as needed */
 .easel {
   position: absolute;
-  top: 12.7%;
+  top: 11.35%;
   left: 41.23%;
   width: 14.018%;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -145,7 +145,7 @@
 /* Position the brushes; clicking on this navigates to login/register */
 .brushes {
   position: absolute;
-  top: 41.7%;
+  top: 40.45%;
   left: 31.25%;
   width: 3.82%;
   transition: transform 0.2s, box-shadow 0.5s;
@@ -159,7 +159,7 @@
 }
 .picture {
   position: absolute;
-  top: 29.4%;
+  top: 28.15%;
   left: 6.7%;
   width: 7.5%; /* adjust size as needed */
   transition: transform 0.2s, box-shadow 0.5s;
@@ -174,7 +174,7 @@
 
 .lupa {
   position: absolute;
-  top: 44.55%;
+  top: 43.3%;
   left: 60.7%;
   width: 2.9%; /* adjust size as needed */
   transition: transform 0.2s, box-shadow 0.5s;
