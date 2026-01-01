@@ -108,7 +108,9 @@ function HomePage() {
   }, [effectiveSeason]);
 
   useEffect(() => {
-    if (dayReady && nightReady) setIsLoading(false);
+    setTimeout(() => {
+      if (dayReady && nightReady) setIsLoading(false);
+    }, 300)
   }, [dayReady, nightReady]);
 
 
