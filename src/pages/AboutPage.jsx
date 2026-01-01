@@ -16,18 +16,20 @@ export default function AboutPage() {
       <Header />
       {/* HERO */}
       <section className="about-hero">
-        <h1 className="about-title">About Our Studio</h1>
+        <h1 className="about-title">O nama</h1>
 
         <div className="hero-content">
           <div className="polaroid">
-            <img src="/images/studio-photo.jpg" alt="Studio workspace" />
+            <img src="/images/studio-photo.jpg" alt="Radni prostor studija" />
           </div>
 
           <div className="hero-note">
             <p>
-              In a quiet corner between scattered brushes and half-finished
-              thoughts, our studio began as a single table, a warm lamp glow,
-              and a desire to create something honest.
+              Kreativni Univerzum je nastao iz jednostavne ideje: da okupimo
+              umetnike na jednom mestu i učinimo prodaju slika lakšom, lepšom i
+              pristupačnijom. Mi smo grupa prijatelja koja veruje da je umetnost
+              jača kada se deli — i kada ima pravi prostor da pronađe put do
+              publike.
             </p>
           </div>
         </div>
@@ -37,34 +39,37 @@ export default function AboutPage() {
 
       {/* STORY TIMELINE */}
       <section className="about-story">
-        <h2 className="section-heading">Our Story</h2>
+        <h2 className="section-heading">Naša priča</h2>
 
         <div className="notes-grid">
           <div className="note-card">
-            <span className="note-year">The Beginning</span>
+            <span className="note-year">Kako je sve počelo</span>
             <p>
-              What started as a personal workshop slowly grew into a shared
-              space where ideas mixed freely—like pigments in water—each artist
-              bringing their own color to the canvas.
+              Krenuli smo kao mali krug ljudi koji stvaraju iz ljubavi — skice,
+              platna, boje, razgovori do kasno. Vrlo brzo smo shvatili da mnogim
+              umetnicima nedostaje jednostavan način da svoje radove prikažu i
+              prodaju bez komplikacija.
             </p>
           </div>
 
           <div className="note-card">
-            <span className="note-year">A Studio in Motion</span>
+            <span className="note-year">Kreativna radionica</span>
             <p>
-              Over time, our walls filled with sketches, our shelves with tools,
-              and our tables with traces of experiments. This place became more
-              than a workspace: it became a diary of hands learning, failing,
-              and rising again.
+              Želeli smo da napravimo prostor koji nije samo galerija, već i
+              mesto susreta i učenja. Zato smo osmislili „Kreativnu radionicu” —
+              povremena okupljanja u kojima zajedno crtamo, slikamo,
+              razmenjujemo tehnike i gradimo zajednicu.
             </p>
           </div>
 
           <div className="note-card">
-            <span className="note-year">Where We Stand Now</span>
+            <span className="note-year">Umetnička kolonija</span>
             <p>
-              Today our studio exists as both a physical haven and a digital
-              meeting point. Every piece we place into the world begins here,
-              between the quiet rhythm of creation and the hum of imagination.
+              S vremena na vreme iznajmimo veći prostor i organizujemo
+              „Umetničku koloniju” — dan(e) posvećen(e) stvaranju, druženju i
+              inspiraciji. Posebno nam je važno da uključimo decu: da dođu,
+              probaju, uče i otkriju koliko je kreativnost prirodna i
+              oslobađajuća.
             </p>
           </div>
         </div>
@@ -72,83 +77,104 @@ export default function AboutPage() {
 
       {/* VALUES */}
       <section className="about-values">
-        <h2 className="section-heading">Our Values</h2>
+        <h2 className="section-heading">Naše vrednosti</h2>
 
         <div className="values-grid">
           <div className="value-item">
             <div className="value-stamp">✦</div>
-            <h3>Craft</h3>
+            <h3>Zajednica</h3>
             <p>
-              We believe good art comes from slow hands, from time spent
-              listening to the work itself.
+              Povezujemo umetnike i publiku, gradimo prostor u kom su podrška i
+              saradnja važniji od takmičenja.
             </p>
           </div>
 
           <div className="value-item">
             <div className="value-stamp">✦</div>
-            <h3>Imperfection</h3>
+            <h3>Autentičnost</h3>
             <p>
-              The marks, smudges, and unexpected edges—these are the
-              fingerprints of authenticity.
+              Verujemo u radove koji nose trag ruke i karakter — baš tu nastaje
+              ono što je neponovljivo.
             </p>
           </div>
 
           <div className="value-item">
             <div className="value-stamp">✦</div>
-            <h3>Patience</h3>
-            <p>Every piece has a moment when it speaks. We wait for it.</p>
+            <h3>Učenje i rast</h3>
+            <p>
+              Kroz radionice i kolonije podstičemo razvoj, razmenu znanja i
+              hrabrost da se isproba nešto novo.
+            </p>
           </div>
 
           <div className="value-item">
             <div className="value-stamp">✦</div>
-            <h3>Curiosity</h3>
+            <h3>Dostupnost</h3>
             <p>
-              We explore widely, experiment boldly, and never stop learning.
+              Umetnost treba da bude vidljiva i dostupna — i umetnicima koji
+              žele da prodaju, i ljudima koji žele da pronađu delo koje im
+              znači.
             </p>
           </div>
         </div>
       </section>
 
       {/* TEAM */}
-      {/* <section className="about-team">
-        <h2 className="section-heading">Our Artists</h2>
+      <section className="about-team">
+        <h2 className="section-heading">Tim iza ideje</h2>
 
         <div className="team-grid">
           <div className="team-card">
             <div className="team-frame">
-              <img src="/images/artist1.jpg" alt="Artist portrait" />
+              <img src="/images/team-1.jpg" alt="Član tima" />
             </div>
-            <h3>Artist Name</h3>
+            <h3>Osnivači</h3>
             <p>
-              A collector of quiet moments, shaping them into stories of color
-              and form.
+              Mi smo grupa prijatelja koje povezuje ljubav prema crtanju,
+              slikanju i kreativnom radu. Iako nam umetnost nije primarna
+              profesija, ona je deo našeg svakodnevnog života — kao potreba, ne
+              kao titula.
             </p>
           </div>
 
           <div className="team-card">
             <div className="team-frame">
-              <img src="/images/artist2.jpg" alt="Artist portrait" />
+              <img src="/images/team-2.jpg" alt="Organizatori radionica" />
             </div>
-            <h3>Artist Name</h3>
+            <h3>Organizatori radionica</h3>
             <p>
-              Finding meaning in texture, rhythm, and the beauty of small
-              imperfect details.
+              Naša uloga je da stvaramo prostor u kome umetnici mogu da se
+              izraze, a deca i početnici da uče bez pritiska. Brinemo o
+              prostoru, organizaciji i atmosferi — da kreativnost može slobodno
+              da se dogodi.
+            </p>
+          </div>
+
+          <div className="team-card">
+            <div className="team-frame">
+              <img src="/images/team-3.jpg" alt="Podrška umetnicima" />
+            </div>
+            <h3>Podrška umetnicima</h3>
+            <p>
+              Ne stvaramo umesto umetnika — već im pomažemo da njihovi radovi
+              pronađu put do publike. Kreativni Univerzum je platforma, ne
+              potpis.
             </p>
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* CTA */}
       <section className="about-cta">
         <div className="cta-overlay">
-          <h2>Step into the Gallery</h2>
+          <h2>Uđite u galeriju</h2>
           <p>
-            Our gallery is an open invitation. Wander slowly — discover
-            something that feels like home.
+            Pogledajte radove naših umetnika, pronađite sliku koja vam “legne” i
+            podržite kreativnu zajednicu koja raste iz dana u dan.
           </p>
 
           <button className="cta-button" onClick={handleGalleryClick}>
-            Visit the Gallery
+            Poseti galeriju
           </button>
         </div>
       </section>

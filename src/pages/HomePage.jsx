@@ -1,24 +1,16 @@
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useHoverAnimation from "../hooks/useHoverAnimation";
 import Autumn from "../components/seasons/Autumn";
 import Winter from "../components/seasons/Winter";
 import WinterNight from "../components/seasons/WinterNight";
+import AutumnNight from "../components/seasons/AutumnNight";
 import PreloaderOverlay from "../components/PreLoader";
-
-import {
-  GallerySvg,
-  LoginSvg,
-  SearchSvg,
-  AboutSvg,
-} from "../components/SvgIcons";
-
 import MasonryLayout from "../components/Masonry";
 
 import "./styles/HomePage.css";
 import "./styles/Masonry.css";
-
 
 function getSeasonByDate(date = new Date()) {
   const month = date.getMonth() + 1; // JS months are 0-based
@@ -29,11 +21,17 @@ function getSeasonByDate(date = new Date()) {
   return "winter"; // Dec–Feb
 }
 
+const SeasonDayMap = {
+  winter: Winter,
+  autumn: Autumn,
+};
+
+const SeasonNightMap = {
+  winter: WinterNight,
+  autumn: AutumnNight,
+};
+
 function HomePage() {
-  const gallerySvgRef = useRef(null);
-  const aboutSvgRef = useRef(null);
-  const loginSvgRef = useRef(null);
-  const searchSvgRef = useRef(null);
   const galleryRef = useRef(null);
   const audioRef = useRef(null);
 
@@ -50,22 +48,13 @@ function HomePage() {
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [dayReady, setDayReady] = useState(false);
+  const [nightReady, setNightReady] = useState(false);
 
   /* --------- TEST ----------*/
 
   const [seasonTest, setSeasonTest] = useState("winter"); // "winter" | "autumn"
 
-  const TestComponent = useMemo(() => {
-    if (seasonTest === "winter") {
-      return isDarkTheme ? WinterNight : Winter;
-    }
-
-    if (seasonTest === "autumn") {
-      return Autumn;
-    }
-
-    return null;
-  }, [seasonTest, isDarkTheme]);
 
   /* --------- TEST ----------*/
 
@@ -76,21 +65,52 @@ function HomePage() {
   const [active3, setActive3] = useState(false);
   const [active4, setActive4] = useState(false);
 
-  const season = getSeasonByDate();
-  //const SeasonComponent = SEASON_COMPONENTS[season];
+  const effectiveSeason = seasonTest || getSeasonByDate();
+
+  const DayComp = SeasonDayMap[effectiveSeason];
+  const NightComp = SeasonNightMap[effectiveSeason];
+  const dayLayerRef = useRef(null);
+  const nightLayerRef = useRef(null);
 
   const handleThemeToggle = () => {
     setIsDarkTheme((v) => !v);
   };
 
   useEffect(() => {
-    setIsLoading(true);
-  }, [season]);
+    const pauseVideos = (root) => {
+      root?.querySelectorAll("video").forEach((v) => {
+        try {
+          v.pause();
+        } catch {}
+      });
+    };
+    const playVideos = (root) => {
+      root?.querySelectorAll("video").forEach((v) => {
+        try {
+          v.play();
+        } catch {}
+      });
+    };
 
-  const handleSeasonReady = () => {
-    // small delay prevents flashing if it loads instantly
-    setTimeout(() => setIsLoading(false), 150);
-  };
+    if (isDarkTheme) {
+      pauseVideos(dayLayerRef.current);
+      playVideos(nightLayerRef.current);
+    } else {
+      pauseVideos(nightLayerRef.current);
+      playVideos(dayLayerRef.current);
+    }
+  }, [isDarkTheme]);
+
+  useEffect(() => {
+    setDayReady(false);
+    setNightReady(false);
+    setIsLoading(true);
+  }, [effectiveSeason]);
+
+  useEffect(() => {
+    if (dayReady && nightReady) setIsLoading(false);
+  }, [dayReady, nightReady]);
+
 
   useEffect(() => {
     const timers = [
@@ -220,35 +240,23 @@ function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // SVG animations ref
-  useEffect(() => {
-    const initPaths = (svgElement) => {
-      if (!svgElement) return;
-      const paths = svgElement.querySelectorAll("path");
-      paths.forEach((path) => {
-        const length = path.getTotalLength();
-
-        // Use a fixed value (e.g., 2) as a safety margin
-        const safetyOffset = length;
-
-        path.style.strokeDasharray = length;
-        // **FIX:** Set the initial offset larger than the length to guarantee it's hidden.
-        path.style.strokeDashoffset = safetyOffset;
-
-        // Optional: If you use the CSS variable in your animation, update it too
-        path.style.setProperty("--dash-length", safetyOffset);
-      });
-    };
-    // ... rest of your code ...
-    const svgRefs = [
-      gallerySvgRef.current,
-      aboutSvgRef.current,
-      loginSvgRef.current,
-      searchSvgRef.current,
-    ];
-    svgRefs.forEach(initPaths);
-  }, []);
-
+  const seasonProps = {
+    active1,
+    active2,
+    active3,
+    active4,
+    easelHover,
+    brushesHover,
+    pictureHover,
+    lupaHover,
+    lusterHover,
+    handleEaselClick,
+    handleBrushesClick,
+    handlePictureClick,
+    handleLupaClick,
+    audioRef,
+    handleLusterClick,
+  };
   return (
     <div className="home-page">
       <PreloaderOverlay isVisible={isLoading} />
@@ -280,41 +288,63 @@ function HomePage() {
           Switch Season (now: {seasonTest})
         </button>
         <div className="home-fixed">
-          <GallerySvg
-            ref={gallerySvgRef}
-            animationState={easelHover.animationState}
-          />
-          <LoginSvg
-            ref={loginSvgRef}
-            animationState={brushesHover.animationState}
-          />
-          <SearchSvg
-            ref={searchSvgRef}
-            animationState={lupaHover.animationState}
-          />
-          <AboutSvg
-            ref={aboutSvgRef}
-            animationState={pictureHover.animationState}
-          />
+          <div
+            className={`hover-label galerija-label ${
+              easelHover.isHovered ? "visible" : ""
+            }`}
+          >
+            Galerija
+          </div>
+          <div
+            className={`hover-label brushes-label ${
+              brushesHover.isHovered ? "visible" : ""
+            }`}
+          >
+            Prijava
+          </div>
 
-          <TestComponent
-            active1={active1}
-            active2={active2}
-            active3={active3}
-            active4={active4}
-            easelHover={easelHover}
-            brushesHover={brushesHover}
-            pictureHover={pictureHover}
-            lupaHover={lupaHover}
-            lusterHover={lusterHover}
-            handleEaselClick={handleEaselClick}
-            handleBrushesClick={handleBrushesClick}
-            handlePictureClick={handlePictureClick}
-            handleLupaClick={handleLupaClick}
-            handleLusterClick={handleLusterClick}
-            audioRef={audioRef}
-            onReady={handleSeasonReady}
-          />
+          <div
+            className={`hover-label lupa-label ${
+              lupaHover.isHovered ? "visible" : ""
+            }`}
+          >
+            Pretraga
+          </div>
+
+          <div
+            className={`hover-label picture-label ${
+              pictureHover.isHovered ? "visible" : ""
+            }`}
+          >
+            O nama
+          </div>
+
+          <div className="season-pair">
+            {/* DAY layer */}
+            <div
+              ref={dayLayerRef}
+              className={`season-layer ${isDarkTheme ? "hidden" : "shown"}`}
+            >
+              {DayComp && (
+                <DayComp {...seasonProps} onReady={() => setDayReady(true)} />
+              )}
+            </div>
+
+            {/* NIGHT layer */}
+            <div
+              ref={nightLayerRef}
+              className={`season-layer ${isDarkTheme ? "shown" : "hidden"}`}
+            >
+              {NightComp && (
+                <NightComp
+                  {...seasonProps}
+                  onReady={() => setNightReady(true)}
+                />
+              )}
+            </div>
+
+            {isLoading && <PreloaderOverlay />}
+          </div>
         </div>
       </div>
       {/* Gallery content section that appears below the fixed images */}

@@ -1,6 +1,5 @@
 import { useRef } from "react";
-
-export default function Autumn({
+export default function AutumnNight({
   active1,
   active2,
   active3,
@@ -26,19 +25,19 @@ export default function Autumn({
       onReady?.();
     }
   };
-
   return (
     <div className="background-parent">
       {/* Base studio image */}
       <img
         className="background"
-        src="/images/jesen/art_room_comp.webp"
+        src="/images/noc/Night_Winter_Composition_NoBackground.webp"
         alt="Studio Background"
         onLoad={() => {
           bgLoaded.current = true;
           tryReady();
         }}
       />
+
       <video
         className="fire"
         autoPlay
@@ -50,19 +49,19 @@ export default function Autumn({
           tryReady();
         }}
       >
-        <source src="/images/jesen/art_room_fire.webm" type="video/webm" />
+        <source
+          src="/images/zima/ArtStudio_Winter_Fire_200kb.webm"
+          type="video/webm"
+        />
       </video>
       <video className="landscape" autoPlay muted loop preload="auto">
-        <source src="/images/jesen/art_room_outside.webm" type="video/webm" />
-      </video>
-      <video className="light-rays" autoPlay muted loop preload="auto">
-        <source src="/images/jesen/Light_Rays_1.webm" type="video/webm" />
+        <source src="/images/noc/Night_Winter_NoBackground.webm" type="video/webm" />
       </video>
       {/* Easel image */}
 
       <img
         className={`easel${active1 ? " active1" : ""}`}
-        src="/images/jesen/gallery.webp"
+        src="/images/noc/easel.webp"
         alt="Easel"
         onMouseEnter={easelHover.handleMouseEnter}
         onMouseLeave={easelHover.handleMouseLeave}
@@ -71,7 +70,7 @@ export default function Autumn({
       {/* Brushes image */}
       <img
         className={`brushes${active2 ? " active2" : ""}`}
-        src="/images/jesen/brushes.webp"
+        src="/images/noc/brushes.webp"
         alt="Brushes"
         onClick={handleBrushesClick}
         onMouseEnter={brushesHover.handleMouseEnter}
@@ -81,7 +80,7 @@ export default function Autumn({
       {/* Picture image lel */}
       <img
         className={`picture${active4 ? " active4" : ""}`}
-        src="/images/jesen/picture.webp"
+        src="/images/noc/picture.webp"
         alt="slicka"
         style={{ cursor: "pointer" }}
         onMouseEnter={pictureHover.handleMouseEnter}
@@ -92,7 +91,7 @@ export default function Autumn({
       {/* Lupa image */}
       <img
         className={`lupa${active3 ? " active3" : ""}`}
-        src="/images/jesen/search.webp"
+        src="/images/noc/search.webp"
         alt="Lupa"
         style={{ cursor: "pointer" }}
         onMouseEnter={lupaHover.handleMouseEnter}
@@ -101,13 +100,14 @@ export default function Autumn({
       />
 
       {/* Luster image */}
+
       <img
-        className="luster"
-        src="/images/jesen/luster.webp"
-        alt="lustercina"
+        className="luster" // optional active class
+        src="/images/noc/luster.webp" // your lamp image
+        alt="Luster"
         style={{ cursor: "pointer" }}
-        onMouseEnter={lusterHover.handleMouseEnter}
-        onMouseLeave={lusterHover.handleMouseLeave}
+        onMouseEnter={lusterHover?.handleMouseEnter}
+        onMouseLeave={lusterHover?.handleMouseLeave}
         onClick={handleLusterClick}
       />
     </div>

@@ -1,4 +1,11 @@
 /* src/pages/HomePage.css */
+@font-face {
+  font-family: "Allison";
+  src: url("../../assets/fonts/Allison-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .home-page {
   display: flex;
   flex-direction: column;
@@ -23,7 +30,7 @@
   position: relative;
   top: -9.25%;
 }
-.outside{
+.outside {
   width: 100vw;
   position: absolute;
   top: -9.25%;
@@ -49,7 +56,7 @@
   filter: opacity(80%);
   mix-blend-mode: screen;
 }
-.landscape{
+.landscape {
   z-index: -1;
   position: absolute;
   top: -9.25%;
@@ -229,102 +236,45 @@
   pointer-events: none;
   filter: brightness(130%);
 }
-.search-anim {
+
+.hover-label {
+  z-index: 2;
   position: absolute;
+  font-family: "Allison", cursive;
+
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
+  transform: translate3d(0,0,0);
+  will-change: opacity;
+  backface-visibility: hidden;
+}
+
+.hover-label.visible {
+  opacity: 1;
+}
+
+.galerija-label {
+  top: 16%;
+  left: 43.5%;
+  font-size: clamp(1px, 5vw, 120px);
+}
+.picture-label {
+  top: 20%;
+  left: 6%;
+  font-size: clamp(1px, 4vw, 80px); 
+}
+.brushes-label {
   top: 33%;
-  left: 57%;
-  width: 10%;
-  height: 8%;
-  z-index: 2;
-  pointer-events: none;
+  left: 29.7%;
+  font-size: clamp(1px, 4vw, 80px); 
 }
-
-.galerija-anim {
-  position: absolute;
-  top: 14%;
-  left: 43.15%;
-  width: 11%;
-  height: 12%;
-  z-index: 2;
-  pointer-events: none;
-  rotate: -1deg;
-}
-
-.onama-anim {
-  position: absolute;
-  top: 17%;
-  left: 4%;
-  width: 12%;
-  height: 10%;
-  z-index: 2;
-  transform: rotate(5deg);
-  pointer-events: none;
-}
-
-.login-anim {
-  position: absolute;
-  top: 33%;
-  left: 27.8%;
-  width: 11%;
-  height: 9%;
-  z-index: 2;
-  pointer-events: none;
-}
-
-
-@-webkit-keyframes svg-text-anim {
-  0% {
-    stroke-dashoffset: var(--dash-length);
-    fill: transparent;
-  }
-  100% {
-    stroke-dashoffset: 0;
-    fill: white;
-  }
-}
-
-@-webkit-keyframes svg-text-anim-reverse {
-  0% {
-    stroke-dashoffset: 0;
-    fill: white;
-  }
-  100% {
-    /* NEW: Remove fill just before starting to un-draw */
-    stroke-dashoffset: 0;
-    fill: transparent;
-  }
-}
-
-@keyframes svg-text-anim-reverse {
-  0% {
-    stroke-dashoffset: 0;
-    fill: white;
-  }
-  100% {
-    /* NEW: Remove fill just before starting to un-draw */
-    stroke-dashoffset: var(--dash-length);
-    fill: transparent;
-  }
-}
-
-@keyframes svg-text-anim {
-  0% {
-    stroke-dashoffset: var(--dash-length);
-    fill: transparent;
-  }
-  100% {
-    stroke-dashoffset: 0;
-    fill: white;
-  }
-}
-
-.animate {
-  stroke: white;
-  animation: svg-text-anim 1s ease forwards;
-}
-
-.animate-reverse {
-  animation: svg-text-anim-reverse 1s ease forwards;
+.lupa-label {
+  top: 35%;
+  left: 58%;
+  font-size: clamp(1px, 4vw, 80px); 
 }
 
 /* Initial startup sizes */
@@ -362,4 +312,28 @@
 .active4 {
   animation: startup-scale 1.5s ease forwards;
   -webkit-animation: startup-scale 1.5s ease forwards;
+}
+
+/* ------- COMPONENT TRANSITIONS ------- */
+.season-pair {
+  position: relative;
+  width: 100vw;
+  aspect-ratio: 16 / 9;  /* ensures visible height */
+  overflow: hidden;
+}
+
+.season-layer {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.5s ease;
+}
+
+.season-layer.shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.season-layer.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
