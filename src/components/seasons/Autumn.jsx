@@ -16,7 +16,7 @@ export default function Autumn({
   handleLupaClick,
   audioRef,
   onReady,
-  handleLusterClick
+  handleLusterClick,
 }) {
   const bgLoaded = useRef(false);
   const videoLoaded = useRef(false);
@@ -32,7 +32,7 @@ export default function Autumn({
       {/* Base studio image */}
       <img
         className="background"
-        src="/images/jesen/art_room_comp.webp"
+        src="/images/jesen/dan/art_room_comp.webp"
         alt="Studio Background"
         onLoad={() => {
           bgLoaded.current = true;
@@ -50,19 +50,32 @@ export default function Autumn({
           tryReady();
         }}
       >
-        <source src="/images/jesen/art_room_fire.webm" type="video/webm" />
+        <source src="/images/jesen/dan/art_room_fire.webm" type="video/webm" />
       </video>
-      <video className="landscape" autoPlay muted loop preload="auto">
-        <source src="/images/jesen/art_room_outside.webm" type="video/webm" />
+      <video
+        className="landscape"
+        autoPlay
+        muted
+        loop
+        preload="auto"
+        onLoadedData={() => {
+          videoLoaded.current = true;
+          tryReady();
+        }}
+      >
+        <source
+          src="/images/jesen/dan/art_room_outside.webm"
+          type="video/webm"
+        />
       </video>
       <video className="light-rays" autoPlay muted loop preload="auto">
-        <source src="/images/jesen/Light_Rays_1.webm" type="video/webm" />
+        <source src="/images/jesen/dan/Light_Rays_1.webm" type="video/webm" />
       </video>
       {/* Easel image */}
 
       <img
         className={`easel${active1 ? " active1" : ""}`}
-        src="/images/jesen/gallery.webp"
+        src="/images/jesen/dan/gallery.webp"
         alt="Easel"
         onMouseEnter={easelHover.handleMouseEnter}
         onMouseLeave={easelHover.handleMouseLeave}
@@ -71,7 +84,7 @@ export default function Autumn({
       {/* Brushes image */}
       <img
         className={`brushes${active2 ? " active2" : ""}`}
-        src="/images/jesen/brushes.webp"
+        src="/images/jesen/dan/brushes.webp"
         alt="Brushes"
         onClick={handleBrushesClick}
         onMouseEnter={brushesHover.handleMouseEnter}
@@ -81,7 +94,7 @@ export default function Autumn({
       {/* Picture image lel */}
       <img
         className={`picture${active4 ? " active4" : ""}`}
-        src="/images/jesen/picture.webp"
+        src="/images/jesen/dan/picture.webp"
         alt="slicka"
         style={{ cursor: "pointer" }}
         onMouseEnter={pictureHover.handleMouseEnter}
@@ -92,7 +105,7 @@ export default function Autumn({
       {/* Lupa image */}
       <img
         className={`lupa${active3 ? " active3" : ""}`}
-        src="/images/jesen/search.webp"
+        src="/images/jesen/dan/search.webp"
         alt="Lupa"
         style={{ cursor: "pointer" }}
         onMouseEnter={lupaHover.handleMouseEnter}
@@ -103,7 +116,7 @@ export default function Autumn({
       {/* Luster image */}
       <img
         className="luster"
-        src="/images/jesen/luster.webp"
+        src="/images/jesen/dan/luster.webp"
         alt="lustercina"
         style={{ cursor: "pointer" }}
         onMouseEnter={lusterHover.handleMouseEnter}

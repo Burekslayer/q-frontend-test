@@ -15,7 +15,7 @@ export default function Winter({
   handleLupaClick,
   audioRef,
   onReady,
-  handleLusterClick
+  handleLusterClick,
 }) {
   const bgLoaded = useRef(false);
   const videoLoaded = useRef(false);
@@ -59,7 +59,17 @@ export default function Winter({
           type="video/webm"
         />
       </video>
-      <video className="landscape" autoPlay muted loop preload="auto">
+      <video
+        className="landscape"
+        autoPlay
+        muted
+        loop
+        preload="auto"
+        onLoadedData={() => {
+          videoLoaded.current = true;
+          tryReady();
+        }}
+      >
         <source src="/images/zima/Snow_1080p_500kb.webm" type="video/webm" />
       </video>
       {/* Easel image */}

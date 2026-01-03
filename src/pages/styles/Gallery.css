@@ -1,0 +1,229 @@
+.gallery-page {
+  background: #fff;
+  color: #111;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.gallery-top {
+  margin: 0 auto;
+  padding: 26px 18px 10px;
+}
+
+.gallery-breadcrumb {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+
+.gallery-title {
+  font-size: 44px;
+  line-height: 1.08;
+  font-weight: 500;
+  margin: 0 0 14px;
+}
+
+.gallery-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+}
+
+.gallery-filterToggle {
+  border: 1px solid #d8d8d8;
+  background: #fff;
+  color: #111;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+}
+
+.gallery-filterToggle:hover {
+  background: #fafafa;
+}
+
+.gallery-filterCount {
+  margin-left: 6px;
+  color: #666;
+}
+
+.gallery-sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.gallery-sortLabel {
+  font-size: 13px;
+  color: #444;
+}
+
+.gallery-sortSelect {
+  border: 1px solid #d8d8d8;
+  background: #fff;
+  border-radius: 6px;
+  padding: 10px 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.gallery-body {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 18px 24px;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 22px;
+}
+
+.gallery-filters {
+  position: sticky;
+  top: 12px;
+  align-self: start;
+  border-right: 1px solid #eee;
+  padding-right: 16px;
+}
+
+.filters-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0 18px;
+}
+
+.filters-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.filters-clear {
+  border: 1px solid #d8d8d8;
+  background: #fff;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.filters-clear:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.filters-section {
+  margin-bottom: 22px;
+}
+
+.filters-sectionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.filters-chipGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  border: 1px solid #eee;
+  background: #f7f4ee;
+  color: #111;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.chip:hover {
+  filter: brightness(0.98);
+}
+
+.chip--active {
+  border-color: #c9c0b1;
+  background: #efe9df;
+}
+
+.gallery-grid {
+  min-width: 0;
+}
+
+.gallery-resultsMeta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 6px 0 10px;
+}
+
+.gallery-resultsCount {
+  font-size: 13px;
+  color: #555;
+}
+
+/* Photo cards + hover overlay (Saatchi-like: subtle, shows on hover) */
+.ga-card {
+  position: relative;
+  width: 100%;
+}
+
+.ga-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ga-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 10px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0));
+  color: #fff;
+  opacity: 0;
+  transition: opacity 160ms ease;
+  pointer-events: none;
+}
+
+.ga-card:hover .ga-overlay {
+  opacity: 1;
+}
+
+.ga-artist {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.ga-price {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* Responsive: collapse to 1 column layout, filters toggle becomes meaningful */
+@media (max-width: 980px) {
+  .gallery-body {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-filters {
+    position: relative;
+    top: auto;
+    border-right: 0;
+    padding-right: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 6px;
+  }
+
+  .gallery-title {
+    font-size: 34px;
+  }
+}

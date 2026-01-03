@@ -7,7 +7,7 @@ import Winter from "../components/seasons/Winter";
 import WinterNight from "../components/seasons/WinterNight";
 import AutumnNight from "../components/seasons/AutumnNight";
 import PreloaderOverlay from "../components/PreLoader";
-import MasonryLayout from "../components/Masonry";
+import Gallery from "../components/Gallery";
 
 import "./styles/HomePage.css";
 import "./styles/Masonry.css";
@@ -356,7 +356,7 @@ function HomePage() {
         className={`gallery ${galleryPhase}`}
         style={{ position: "relative", zIndex: 10 }}
       >
-        <MasonryLayout images={photos} />
+        <Gallery images={photos} />
       </div>
 
       {/* Navigation Bar with a button to return home */}

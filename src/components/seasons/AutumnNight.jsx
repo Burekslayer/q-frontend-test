@@ -30,7 +30,7 @@ export default function AutumnNight({
       {/* Base studio image */}
       <img
         className="background"
-        src="/images/noc/Night_Winter_Composition_NoBackground.webp"
+        src="/images/jesen/noc/Autmn_Night_Composition.webp"
         alt="Studio Background"
         onLoad={() => {
           bgLoaded.current = true;
@@ -50,18 +50,18 @@ export default function AutumnNight({
         }}
       >
         <source
-          src="/images/zima/ArtStudio_Winter_Fire_200kb.webm"
+          src="/images/jesen/dan/art_room_fire.webm"
           type="video/webm"
         />
       </video>
       <video className="landscape" autoPlay muted loop preload="auto">
-        <source src="/images/noc/Night_Winter_NoBackground.webm" type="video/webm" />
+        <source src="/images/jesen/noc/Clouds.webm" type="video/webm" />
       </video>
       {/* Easel image */}
 
       <img
         className={`easel${active1 ? " active1" : ""}`}
-        src="/images/noc/easel.webp"
+        src="/images/jesen/noc/easel.webp"
         alt="Easel"
         onMouseEnter={easelHover.handleMouseEnter}
         onMouseLeave={easelHover.handleMouseLeave}
@@ -70,7 +70,7 @@ export default function AutumnNight({
       {/* Brushes image */}
       <img
         className={`brushes${active2 ? " active2" : ""}`}
-        src="/images/noc/brushes.webp"
+        src="/images/jesen/noc/brushes.webp"
         alt="Brushes"
         onClick={handleBrushesClick}
         onMouseEnter={brushesHover.handleMouseEnter}
@@ -80,7 +80,7 @@ export default function AutumnNight({
       {/* Picture image lel */}
       <img
         className={`picture${active4 ? " active4" : ""}`}
-        src="/images/noc/picture.webp"
+        src="/images/jesen/noc/picture.webp"
         alt="slicka"
         style={{ cursor: "pointer" }}
         onMouseEnter={pictureHover.handleMouseEnter}
@@ -91,7 +91,7 @@ export default function AutumnNight({
       {/* Lupa image */}
       <img
         className={`lupa${active3 ? " active3" : ""}`}
-        src="/images/noc/search.webp"
+        src="/images/jesen/noc/search.webp"
         alt="Lupa"
         style={{ cursor: "pointer" }}
         onMouseEnter={lupaHover.handleMouseEnter}
@@ -103,7 +103,7 @@ export default function AutumnNight({
 
       <img
         className="luster" // optional active class
-        src="/images/noc/luster.webp" // your lamp image
+        src="/images/jesen/noc/luster.webp" // your lamp image
         alt="Luster"
         style={{ cursor: "pointer" }}
         onMouseEnter={lusterHover?.handleMouseEnter}
