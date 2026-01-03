@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import axios from "axios";
 import PhotoAlbum from "react-photo-album";
 import "react-photo-album/columns.css";
 import "../pages/styles/Gallery.css";
@@ -38,7 +37,6 @@ const MEDIUM_MATERIAL_OPTIONS = [
  * :contentReference[oaicite:1]{index=1}
  */
 export default function Gallery({ images = null }) {
-  const apiUrl = process.env.REACT_APP_API_URL || "https://localhost:5000";
 
   const [photos, setPhotos] = useState([]);
   const [filtersOpen, setFiltersOpen] = useState(true);
