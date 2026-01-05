@@ -11,6 +11,7 @@ import Winter from "../components/seasons/Winter";
 import Spring from "../components/seasons/Spring";
 import WinterNight from "../components/seasons/WinterNight";
 import AutumnNight from "../components/seasons/AutumnNight";
+import SpringNight from "../components/seasons/SpringNight";
 
 import "./styles/HomePage.css";
 import "./styles/Masonry.css";
@@ -26,14 +27,14 @@ function getSeasonByDate(date = new Date()) {
 
 const SeasonDayMap = {
   winter: Winter,
-  autumn: Autumn,
   spring: Spring,
+  autumn: Autumn,
 };
 
 const SeasonNightMap = {
   winter: WinterNight,
+  spring: SpringNight,
   autumn: AutumnNight,
-  spring: AutumnNight,
 };
 
 function HomePage() {
@@ -59,7 +60,7 @@ function HomePage() {
   /* --------- TEST ----------*/
 
   const [seasonTest, setSeasonTest] = useState("winter"); // "winter" | "autumn"
-
+  const SEASONS = ["winter", "spring", "autumn"];
 
   /* --------- TEST ----------*/
 
@@ -115,9 +116,8 @@ function HomePage() {
   useEffect(() => {
     setTimeout(() => {
       if (dayReady && nightReady) setIsLoading(false);
-    }, 300)
+    }, 300);
   }, [dayReady, nightReady]);
-
 
   useEffect(() => {
     const timers = [
@@ -264,6 +264,7 @@ function HomePage() {
     audioRef,
     handleLusterClick,
   };
+
   return (
     <div className="home-page">
       <PreloaderOverlay isVisible={isLoading} />
@@ -277,7 +278,10 @@ function HomePage() {
         <button
           type="button"
           onClick={() =>
-            setSeasonTest((s) => (s === "winter" ? "spring" : "winter"))
+            setSeasonTest((current) => {
+              const index = SEASONS.indexOf(current);
+              return SEASONS[(index + 1) % SEASONS.length];
+            })
           }
           style={{
             position: "fixed",
