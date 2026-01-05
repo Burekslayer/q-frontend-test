@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useHoverAnimation from "../hooks/useHoverAnimation";
-import Autumn from "../components/seasons/Autumn";
-import Winter from "../components/seasons/Winter";
-import WinterNight from "../components/seasons/WinterNight";
-import AutumnNight from "../components/seasons/AutumnNight";
+import axios from "axios";
+
 import PreloaderOverlay from "../components/PreLoader";
 import Gallery from "../components/Gallery";
+
+import Autumn from "../components/seasons/Autumn";
+import Winter from "../components/seasons/Winter";
+import Spring from "../components/seasons/Spring";
+import WinterNight from "../components/seasons/WinterNight";
+import AutumnNight from "../components/seasons/AutumnNight";
 
 import "./styles/HomePage.css";
 import "./styles/Masonry.css";
@@ -24,11 +27,13 @@ function getSeasonByDate(date = new Date()) {
 const SeasonDayMap = {
   winter: Winter,
   autumn: Autumn,
+  spring: Spring,
 };
 
 const SeasonNightMap = {
   winter: WinterNight,
   autumn: AutumnNight,
+  spring: AutumnNight,
 };
 
 function HomePage() {
@@ -272,7 +277,7 @@ function HomePage() {
         <button
           type="button"
           onClick={() =>
-            setSeasonTest((s) => (s === "winter" ? "autumn" : "winter"))
+            setSeasonTest((s) => (s === "winter" ? "spring" : "winter"))
           }
           style={{
             position: "fixed",

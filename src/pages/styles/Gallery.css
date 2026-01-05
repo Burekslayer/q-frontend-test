@@ -1,30 +1,32 @@
-.gallery-page {
-  background: #fff;
-  color: #111;
+/* === Base page === */
+.sg-page {
   width: 100%;
   min-height: 100vh;
+  background: #fff;
+  color: #111;
 }
 
-.gallery-top {
-  margin: 0 auto;
-  padding: 26px 18px 10px;
+/* Saatchi-like top area */
+.sg-top {
+  width: 100%;
+  padding: 26px 56px 10px;
+  box-sizing: border-box;
 }
 
-.gallery-breadcrumb {
+.sg-breadcrumb {
   font-size: 13px;
   color: #666;
   margin-bottom: 10px;
 }
 
-
-.gallery-title {
+.sg-title {
   font-size: 44px;
   line-height: 1.08;
   font-weight: 500;
   margin: 0 0 14px;
 }
 
-.gallery-controls {
+.sg-controls {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -32,7 +34,7 @@
   padding-bottom: 12px;
 }
 
-.gallery-filterToggle {
+.sg-filterToggle {
   border: 1px solid #d8d8d8;
   background: #fff;
   color: #111;
@@ -43,66 +45,67 @@
   cursor: pointer;
 }
 
-.gallery-filterToggle:hover {
+.sg-filterToggle:hover {
   background: #fafafa;
 }
 
-.gallery-filterCount {
-  margin-left: 6px;
-  color: #666;
-}
-
-.gallery-sort {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: auto;
-}
-
-.gallery-sortLabel {
-  font-size: 13px;
-  color: #444;
-}
-
-.gallery-sortSelect {
-  border: 1px solid #d8d8d8;
-  background: #fff;
-  border-radius: 6px;
-  padding: 10px 10px;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.gallery-body {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 18px 24px;
+/* === Main layout (responsive rail) ===
+   Rail scales with viewport: min 220px, fluid 18vw, max 300px
+*/
+.sg-body {
   display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 22px;
+  grid-template-columns: clamp(220px, 18vw, 300px) 1fr;
+  gap: 24px;
+  width: 100%;
+  padding: 0 56px 24px;
+  box-sizing: border-box;
+  align-items: start;
 }
 
-.gallery-filters {
+/* When filters hidden, reclaim full width */
+.sg-body--noFilters {
+  grid-template-columns: 1fr;
+}
+
+/* Filters */
+.sg-filters {
+  width: 100%;
+  min-width: 0;
   position: sticky;
   top: 12px;
   align-self: start;
+
   border-right: 1px solid #eee;
   padding-right: 16px;
+  box-sizing: border-box;
 }
 
-.filters-header {
+/* Results */
+.sg-results {
+  min-width: 0;
+  width: 100%;
+}
+
+.sg-resultsMeta {
+  font-size: 13px;
+  color: #555;
+  margin: 6px 0 10px;
+}
+
+/* === Filter styling (Saatchi-like lists) === */
+.sg-filtersHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 8px 0 18px;
 }
 
-.filters-title {
+.sg-filtersTitle {
   font-size: 20px;
   font-weight: 500;
 }
 
-.filters-clear {
+.sg-clear {
   border: 1px solid #d8d8d8;
   background: #fff;
   border-radius: 999px;
@@ -111,119 +114,138 @@
   cursor: pointer;
 }
 
-.filters-clear:disabled {
+.sg-clear:disabled {
   opacity: 0.4;
   cursor: default;
 }
 
-.filters-section {
-  margin-bottom: 22px;
+.sg-section {
+  border-top: 1px solid #eee;
+  padding-top: 14px;
+  margin-top: 14px;
 }
 
-.filters-sectionTitle {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.filters-chipGrid {
+.sg-sectionHead {
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
+  align-items: center;
+  justify-content: space-between;
 
-.chip {
-  border: 1px solid #eee;
-  background: #f7f4ee;
-  color: #111;
-  border-radius: 999px;
-  padding: 10px 14px;
-  font-size: 13px;
+  background: transparent;
+  border: 0;
+  padding: 0;
   cursor: pointer;
 }
 
-.chip:hover {
-  filter: brightness(0.98);
+.sg-sectionTitle {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: #111;
 }
 
-.chip--active {
-  border-color: #c9c0b1;
-  background: #efe9df;
+.sg-sectionChevron {
+  color: #777;
+  font-size: 14px;
 }
 
-.gallery-grid {
+.sg-sectionBody {
+  padding-top: 12px;
+}
+
+.sg-checkRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 13px;
+  color: #222;
+}
+
+.sg-checkRow input {
+  width: 14px;
+  height: 14px;
+}
+
+/* === Saatchi-like stacked columns ===
+   Container is a grid of columns; each column is a flex stack
+*/
+.sg-polaroidColumns {
+  display: grid;
+  gap: 24px;          /* gap between columns */
+  width: 100%;
+  align-items: start;
+  box-sizing: border-box;
+}
+
+.sg-polaroidCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;          /* vertical gap between cards */
+}
+
+/* Card */
+.sg-polaroid {
+  margin: 0;
   min-width: 0;
 }
 
-.gallery-resultsMeta {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin: 6px 0 10px;
-}
-
-.gallery-resultsCount {
-  font-size: 13px;
-  color: #555;
-}
-
-/* Photo cards + hover overlay (Saatchi-like: subtle, shows on hover) */
-.ga-card {
-  position: relative;
+.sg-imageWrap {
   width: 100%;
 }
 
-.ga-img {
+.sg-img {
   width: 100%;
   height: auto;
   display: block;
 }
 
-.ga-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 10px 10px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0));
-  color: #fff;
-  opacity: 0;
-  transition: opacity 160ms ease;
-  pointer-events: none;
+/* Caption */
+.sg-meta {
+  padding-top: 10px;
 }
 
-.ga-card:hover .ga-overlay {
-  opacity: 1;
+.sg-metaPrice {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
 }
 
-.ga-artist {
-  font-size: 13px;
+.sg-metaTitle {
+  font-size: 14px;
   font-weight: 600;
   margin-bottom: 4px;
 }
 
-.ga-price {
-  font-size: 12px;
-  opacity: 0.9;
+.sg-metaArtist {
+  font-size: 13px;
+  color: #555;
 }
 
-/* Responsive: collapse to 1 column layout, filters toggle becomes meaningful */
+/* === Responsive === */
 @media (max-width: 980px) {
-  .gallery-body {
-    grid-template-columns: 1fr;
+  .sg-top {
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
-  .gallery-filters {
+  .sg-body {
+    padding-left: 18px;
+    padding-right: 18px;
+    gap: 16px;
+    grid-template-columns: 1fr; /* stack filters above results */
+  }
+
+  .sg-filters {
     position: relative;
     top: auto;
     border-right: 0;
     padding-right: 0;
     padding-bottom: 10px;
     border-bottom: 1px solid #eee;
-    margin-bottom: 6px;
   }
 
-  .gallery-title {
+  .sg-title {
     font-size: 34px;
   }
 }

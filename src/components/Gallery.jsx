@@ -1,10 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
-import PhotoAlbum from "react-photo-album";
-import "react-photo-album/columns.css";
+import React, { useEffect, useMemo, useState } from "react";
 import "../pages/styles/Gallery.css";
 
-const STYLE_SUBJECT_OPTIONS = [
-  "Fine Art",
+/**
+ * Keep these lists small and simple. You can expand later.
+ * Filtering logic expects your images to have:
+ * - tags: string[] (optional)
+ * - src: string
+ * - title, artistName, price (optional)
+ */
+const STYLE_OPTIONS = [
   "Abstract",
   "Modern",
   "Street Art",
@@ -15,45 +19,57 @@ const STYLE_SUBJECT_OPTIONS = [
   "Landscape",
   "Nature",
   "Still Life",
-  "Beach",
-  "Nude",
   "Floral",
   "Animal",
 ];
 
-const MEDIUM_MATERIAL_OPTIONS = [
-  "Oil",
-  "Watercolor",
-  "Acrylic",
-  "Airbrush",
-  "Color",
-  "Ink",
-  "Latex",
-];
+const MEDIUM_OPTIONS = ["Oil", "Watercolor", "Acrylic", "Ink", "Mixed Media"];
 
-/**
- * Your API already returns images with width/height stored.
- * We keep the same mapping you use on HomePage for consistency.
- * :contentReference[oaicite:1]{index=1}
- */
-export default function Gallery({ images = null }) {
+function splitIntoColumns(items, columns) {
+  const cols = Array.from({ length: columns }, () => []);
+  items.forEach((item, i) => cols[i % columns].push(item)); // round-robin (Saatchi-like)
+  return cols;
+}
 
-  const [photos, setPhotos] = useState([]);
+export default function Gallery({ images = [] }) {
   const [filtersOpen, setFiltersOpen] = useState(true);
 
-  // chip filters
+  // Responsive breakpoint like Saatchi (1440px)
+  const [isWide1440, setIsWide1440] = useState(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(min-width: 1440px)").matches
+      : true
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(min-width: 1440px)");
+    const onChange = (e) => setIsWide1440(e.matches);
+
+    // Safari fallback
+    if (mq.addEventListener) mq.addEventListener("change", onChange);
+    else mq.addListener(onChange);
+
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", onChange);
+      else mq.removeListener(onChange);
+    };
+  }, []);
+
+  // Accordion open/close
+  const [openSections, setOpenSections] = useState({
+    style: true,
+    medium: true,
+  });
+  const toggleSection = (key) =>
+    setOpenSections((s) => ({ ...s, [key]: !s[key] }));
+
+  // Filters state
   const [selectedStyles, setSelectedStyles] = useState(() => new Set());
   const [selectedMediums, setSelectedMediums] = useState(() => new Set());
 
-  // optional: sort (minimal Saatchi-like control)
-  const [sortMode, setSortMode] = useState("featured"); // "featured" | "newest" | "price_asc" | "price_desc"
-
-  useEffect(() => {
-    if (Array.isArray(images)) setPhotos(images);
-  }, [images]);
-
-  const toggleChip = (setSetter, value) => {
-    setSetter((prev) => {
+  const toggleSet = (setter, value) => {
+    setter((prev) => {
       const next = new Set(prev);
       if (next.has(value)) next.delete(value);
       else next.add(value);
@@ -66,208 +82,180 @@ export default function Gallery({ images = null }) {
     setSelectedMediums(new Set());
   };
 
-  const filteredPhotos = useMemo(() => {
-    const styleArr = Array.from(selectedStyles);
-    const mediumArr = Array.from(selectedMediums);
+  const activeFilterCount = selectedStyles.size + selectedMediums.size;
 
-    const matchesChips = (photo) => {
-      // You likely store tags already; we treat tags as the matching surface.
-      // - styles: matches any selected style
-      // - mediums: matches any selected medium
-      const tagsLower = (photo.tags || []).map((t) => String(t).toLowerCase());
+  const filtered = useMemo(() => {
+    const list = Array.isArray(images) ? images : [];
+
+    const styleArr = Array.from(selectedStyles).map((s) => s.toLowerCase());
+    const mediumArr = Array.from(selectedMediums).map((m) => m.toLowerCase());
+
+    const matches = (img) => {
+      const tagsLower = (img.tags || []).map((t) => String(t).toLowerCase());
 
       const styleOk =
-        styleArr.length === 0 ||
-        styleArr.some((s) => tagsLower.includes(String(s).toLowerCase()));
+        styleArr.length === 0 || styleArr.some((s) => tagsLower.includes(s));
 
       const mediumOk =
-        mediumArr.length === 0 ||
-        mediumArr.some((m) => tagsLower.includes(String(m).toLowerCase()));
+        mediumArr.length === 0 || mediumArr.some((m) => tagsLower.includes(m));
 
       return styleOk && mediumOk;
     };
 
-    const list = photos.filter(matchesChips);
+    return list.filter(matches);
+  }, [images, selectedStyles, selectedMediums]);
 
-    // sorting
-    const toNumber = (v) => {
-      if (v === null || v === undefined) return NaN;
-      const n = Number(String(v).replace(",", "."));
-      return Number.isFinite(n) ? n : NaN;
-    };
+  // Saatchi rules:
+  // filters open: 3 cols >=1440, else 2
+  // filters closed: 4 cols >=1440, else 3
+  const columnCount = useMemo(() => {
+    if (filtersOpen) return isWide1440 ? 3 : 2;
+    return isWide1440 ? 4 : 3;
+  }, [filtersOpen, isWide1440]);
 
-    const sorted = [...list];
-    if (sortMode === "featured") {
-      sorted.sort((a, b) => Number(b.__isFeatured) - Number(a.__isFeatured));
-    } else if (sortMode === "newest") {
-      // If you have createdAt per image, use it here.
-      // Fallback: keep current order.
-      sorted.sort((a, b) => 0);
-    } else if (sortMode === "price_asc") {
-      sorted.sort(
-        (a, b) =>
-          (toNumber(a.price) || Infinity) - (toNumber(b.price) || Infinity)
-      );
-    } else if (sortMode === "price_desc") {
-      sorted.sort(
-        (a, b) =>
-          (toNumber(b.price) || -Infinity) - (toNumber(a.price) || -Infinity)
-      );
-    }
-
-    return sorted;
-  }, [photos, selectedStyles, selectedMediums, sortMode]);
+  const columns = useMemo(
+    () => splitIntoColumns(filtered, columnCount),
+    [filtered, columnCount]
+  );
 
   return (
-    <div className="gallery-page">
-      <div className="gallery-top">
-        <div className="gallery-breadcrumb">All Artworks / Paintings</div>
-        <h1 className="gallery-title">Original Paintings For Sale</h1>
+    <div className="sg-page">
+      <div className="sg-top">
+        <div className="sg-breadcrumb">All Artworks / Paintings</div>
+        <h1 className="sg-title">Original Paintings For Sale</h1>
 
-        <div className="gallery-controls">
+        <div className="sg-controls">
           <button
             type="button"
-            className="gallery-filterToggle"
+            className="sg-filterToggle"
             onClick={() => setFiltersOpen((v) => !v)}
           >
-            {filtersOpen ? "HIDE FILTERS" : "SHOW FILTERS"}
-            <span className="gallery-filterCount">
-              ({selectedStyles.size + selectedMediums.size})
-            </span>
+            {filtersOpen ? "HIDE FILTERS" : "FILTERS"} ({activeFilterCount})
           </button>
-
-          <div className="gallery-sort">
-            <label className="gallery-sortLabel" htmlFor="gallerySort">
-              Sort
-            </label>
-            <select
-              id="gallerySort"
-              className="gallery-sortSelect"
-              value={sortMode}
-              onChange={(e) => setSortMode(e.target.value)}
-            >
-              <option value="featured">Featured</option>
-              <option value="newest">Newest</option>
-              <option value="price_asc">Price: Low to High</option>
-              <option value="price_desc">Price: High to Low</option>
-            </select>
-          </div>
         </div>
       </div>
 
-      <div className="gallery-body">
+      <div className={`sg-body ${filtersOpen ? "" : "sg-body--noFilters"}`}>
         {filtersOpen && (
-          <aside className="gallery-filters" aria-label="Narrow Your Results">
-            <div className="filters-header">
-              <div className="filters-title">Narrow Your Results</div>
+          <aside className="sg-filters" aria-label="Narrow Your Results">
+            <div className="sg-filtersHeader">
+              <div className="sg-filtersTitle">Narrow Your Results</div>
+
               <button
                 type="button"
-                className="filters-clear"
+                className="sg-clear"
                 onClick={clearAllFilters}
-                disabled={selectedStyles.size + selectedMediums.size === 0}
+                disabled={activeFilterCount === 0}
               >
                 Clear
               </button>
             </div>
 
-            <div className="filters-section">
-              <div className="filters-sectionTitle">Styles &amp; Subjects</div>
-              <div className="filters-chipGrid">
-                {STYLE_SUBJECT_OPTIONS.map((label) => {
-                  const active = selectedStyles.has(label);
-                  return (
-                    <button
-                      key={label}
-                      type="button"
-                      className={`chip ${active ? "chip--active" : ""}`}
-                      onClick={() => toggleChip(setSelectedStyles, label)}
-                    >
-                      {label}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            {/* STYLE */}
+            <section className="sg-section">
+              <button
+                type="button"
+                className="sg-sectionHead"
+                onClick={() => toggleSection("style")}
+                aria-expanded={openSections.style}
+              >
+                <span className="sg-sectionTitle">STYLE</span>
+                <span className="sg-sectionChevron" aria-hidden>
+                  {openSections.style ? "▾" : "▸"}
+                </span>
+              </button>
 
-            <div className="filters-section">
-              <div className="filters-sectionTitle">
-                Mediums &amp; Materials
-              </div>
-              <div className="filters-chipGrid">
-                {MEDIUM_MATERIAL_OPTIONS.map((label) => {
-                  const active = selectedMediums.has(label);
-                  return (
-                    <button
-                      key={label}
-                      type="button"
-                      className={`chip ${active ? "chip--active" : ""}`}
-                      onClick={() => toggleChip(setSelectedMediums, label)}
-                    >
-                      {label}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+              {openSections.style && (
+                <div className="sg-sectionBody">
+                  {STYLE_OPTIONS.map((label) => (
+                    <label key={label} className="sg-checkRow">
+                      <input
+                        type="checkbox"
+                        checked={selectedStyles.has(label)}
+                        onChange={() => toggleSet(setSelectedStyles, label)}
+                      />
+                      <span>{label}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
+            </section>
 
-            {/* IMPORTANT:
-                You requested removing these controls entirely, so we do NOT render them:
-                - Category
-                - Subject
-                - Artist Country
-                - Featured in
-                - Ready to hang
-                - Color
-                - Framed
-            */}
+            {/* MEDIUMS */}
+            <section className="sg-section">
+              <button
+                type="button"
+                className="sg-sectionHead"
+                onClick={() => toggleSection("medium")}
+                aria-expanded={openSections.medium}
+              >
+                <span className="sg-sectionTitle">MEDIUMS &amp; MATERIALS</span>
+                <span className="sg-sectionChevron" aria-hidden>
+                  {openSections.medium ? "▾" : "▸"}
+                </span>
+              </button>
+
+              {openSections.medium && (
+                <div className="sg-sectionBody">
+                  {MEDIUM_OPTIONS.map((label) => (
+                    <label key={label} className="sg-checkRow">
+                      <input
+                        type="checkbox"
+                        checked={selectedMediums.has(label)}
+                        onChange={() => toggleSet(setSelectedMediums, label)}
+                      />
+                      <span>{label}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
+            </section>
           </aside>
         )}
 
-        <main className="gallery-grid" aria-label="Gallery results">
-          <div className="gallery-resultsMeta">
-            <span className="gallery-resultsCount">
-              {filteredPhotos.length} works
-            </span>
-          </div>
+        <main className="sg-results" aria-label="Gallery results">
+          <div className="sg-resultsMeta">{filtered.length} works</div>
 
-          <PhotoAlbum
-            layout="columns"
-            photos={filteredPhotos}
-            targetColumnWidth={320}
-            spacing={12}
-            padding={0}
-            render={{
-              photo: ({ photo, imageProps }) => {
-                // Defensive: in some edge cases `photo` can be undefined.
-                if (!imageProps) return null;
-
-                const safeAlt = imageProps.alt ?? photo?.alt ?? "";
-
-                return (
-                  <div className="ga-card">
-                    <img {...imageProps} alt={safeAlt} className="ga-img" />
-                    <div className="ga-overlay">
-                      <div className="ga-artist">
-                        {photo?.artistName || safeAlt}
-                      </div>
-                      {photo?.price !== undefined &&
-                        photo?.price !== null &&
-                        String(photo.price).trim() !== "" && (
-                          <div className="ga-price">{String(photo.price)}</div>
-                        )}
+          {/* True Saatchi-style: render actual columns, each stacks vertically */}
+          <div
+            className={`sg-polaroidColumns ${
+              filtersOpen ? "isFiltersOpen" : "isFiltersClosed"
+            }`}
+            style={{ gridTemplateColumns: `repeat(${columnCount}, 1fr)` }}
+          >
+            {columns.map((col, colIndex) => (
+              <div className="sg-polaroidCol" key={colIndex}>
+                {col.map((p) => (
+                  <figure key={p.id || p._id || p.src} className="sg-polaroid">
+                    <div className="sg-imageWrap">
+                      <img
+                        className="sg-img"
+                        src={p.src}
+                        alt={p.alt || p.artistName || ""}
+                        loading="lazy"
+                      />
                     </div>
-                  </div>
-                );
-              },
-            }}
-          />
+
+                    <figcaption className="sg-meta">
+                      {p.price !== undefined &&
+                        p.price !== null &&
+                        String(p.price).trim() !== "" && (
+                          <div className="sg-metaPrice">{String(p.price)}</div>
+                        )}
+
+                      <div className="sg-metaTitle">{p.title || "Untitled"}</div>
+
+                      {p.artistName && (
+                        <div className="sg-metaArtist">{p.artistName}</div>
+                      )}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            ))}
+          </div>
         </main>
       </div>
-
-      {/* IMPORTANT:
-          You requested removing the “text block between gallery and footer” (Saatchi SEO content).
-          We intentionally render nothing here.
-      */}
     </div>
   );
 }

@@ -56,6 +56,16 @@
   filter: opacity(80%);
   mix-blend-mode: screen;
 }
+.fire-prolece {
+  z-index: 3;
+  position: absolute;
+  top: -9.25%;
+  left: 0;
+  width: 100vw;
+  pointer-events: none;
+  filter: opacity(100%);
+  mix-blend-mode: screen;
+}
 .landscape {
   z-index: -1;
   position: absolute;
@@ -65,6 +75,7 @@
   pointer-events: none;
   mix-blend-mode: screen;
 }
+
 /* ----------------- GALLERY CONTENT ----------------- */
 
 .gallery {
