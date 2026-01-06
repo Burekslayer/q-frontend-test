@@ -1,13 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "../pages/styles/Gallery.css";
 
-/**
- * Keep these lists small and simple. You can expand later.
- * Filtering logic expects your images to have:
- * - tags: string[] (optional)
- * - src: string
- * - title, artistName, price (optional)
- */
 const STYLE_OPTIONS = [
   "Abstract",
   "Modern",
@@ -40,6 +33,26 @@ export default function Gallery({ images = [] }) {
       ? window.matchMedia("(min-width: 1440px)").matches
       : true
   );
+
+  const [isMobile980, setIsMobile980] = useState(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(max-width: 980px)").matches
+      : false
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(max-width: 980px)");
+    const onChange = (e) => setIsMobile980(e.matches);
+
+    if (mq.addEventListener) mq.addEventListener("change", onChange);
+    else mq.addListener(onChange);
+
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", onChange);
+      else mq.removeListener(onChange);
+    };
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -109,9 +122,13 @@ export default function Gallery({ images = [] }) {
   // filters open: 3 cols >=1440, else 2
   // filters closed: 4 cols >=1440, else 3
   const columnCount = useMemo(() => {
+    // Mobile rule: always 2 columns, whether filters are open or not
+    if (isMobile980) return 2;
+
+    // Desktop/tablet rule (Saatchi-like)
     if (filtersOpen) return isWide1440 ? 3 : 2;
     return isWide1440 ? 4 : 3;
-  }, [filtersOpen, isWide1440]);
+  }, [filtersOpen, isWide1440, isMobile980]);
 
   const columns = useMemo(
     () => splitIntoColumns(filtered, columnCount),
@@ -243,7 +260,9 @@ export default function Gallery({ images = [] }) {
                           <div className="sg-metaPrice">{String(p.price)}</div>
                         )}
 
-                      <div className="sg-metaTitle">{p.title || "Untitled"}</div>
+                      <div className="sg-metaTitle">
+                        {p.title || "Untitled"}
+                      </div>
 
                       {p.artistName && (
                         <div className="sg-metaArtist">{p.artistName}</div>

@@ -30,7 +30,7 @@ export default function WinterNight({
       {/* Base studio image */}
       <img
         className="background"
-        src="/images/noc/Night_Winter_Composition_NoBackground.webp"
+        src="/images/zima/noc/winter_night_comp.webp"
         alt="Studio Background"
         onLoad={() => {
           bgLoaded.current = true;
@@ -50,18 +50,18 @@ export default function WinterNight({
         }}
       >
         <source
-          src="/images/zima/ArtStudio_Winter_Fire_200kb.webm"
+          src="/images/zima/dan/winter_fire.webm"
           type="video/webm"
         />
       </video>
       <video className="landscape" autoPlay muted loop preload="auto">
-        <source src="/images/noc/Night_Winter_NoBackground.webm" type="video/webm" />
+        <source src="/images/zima/noc/winter_night_background.webm" type="video/webm" />
       </video>
       {/* Easel image */}
 
       <img
         className={`easel${active1 ? " active1" : ""}`}
-        src="/images/noc/easel.webp"
+        src="/images/zima/noc/easel.webp"
         alt="Easel"
         onMouseEnter={easelHover.handleMouseEnter}
         onMouseLeave={easelHover.handleMouseLeave}
@@ -70,7 +70,7 @@ export default function WinterNight({
       {/* Brushes image */}
       <img
         className={`brushes${active2 ? " active2" : ""}`}
-        src="/images/noc/brushes.webp"
+        src="/images/zima/noc/brushes.webp"
         alt="Brushes"
         onClick={handleBrushesClick}
         onMouseEnter={brushesHover.handleMouseEnter}
@@ -80,7 +80,7 @@ export default function WinterNight({
       {/* Picture image lel */}
       <img
         className={`picture${active4 ? " active4" : ""}`}
-        src="/images/noc/picture.webp"
+        src="/images/zima/noc/picture.webp"
         alt="slicka"
         style={{ cursor: "pointer" }}
         onMouseEnter={pictureHover.handleMouseEnter}
@@ -91,7 +91,7 @@ export default function WinterNight({
       {/* Lupa image */}
       <img
         className={`lupa${active3 ? " active3" : ""}`}
-        src="/images/noc/search.webp"
+        src="/images/zima/noc/search.webp"
         alt="Lupa"
         style={{ cursor: "pointer" }}
         onMouseEnter={lupaHover.handleMouseEnter}
@@ -103,7 +103,7 @@ export default function WinterNight({
 
       <img
         className="luster" // optional active class
-        src="/images/noc/luster.webp" // your lamp image
+        src="/images/zima/noc/luster.webp" // your lamp image
         alt="Luster"
         style={{ cursor: "pointer" }}
         onMouseEnter={lusterHover?.handleMouseEnter}

@@ -15,7 +15,7 @@ export default function SpringNight({
   handleLupaClick,
   audioRef,
   onReady,
-  handleLusterClick
+  handleLusterClick,
 }) {
   const bgLoaded = useRef(false);
   const videoLoaded = useRef(false);
@@ -30,7 +30,7 @@ export default function SpringNight({
       {/* Base studio image */}
       <img
         className="background"
-        src="/images/jesen/noc/Autmn_Night_Composition.webp"
+        src="/images/prolece/noc/spring_night_comp.webp"
         alt="Studio Background"
         onLoad={() => {
           bgLoaded.current = true;
@@ -39,10 +39,28 @@ export default function SpringNight({
       />
 
       <video
+        className="landscape"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        onLoadedData={() => {
+          videoLoaded.current = true;
+          tryReady();
+        }}
+      >
+        <source
+          src="/images/prolece/noc/spring_night_background.webm"
+          type="video/webm"
+        />
+      </video>
+      <video
         className="fire"
         autoPlay
         muted
         loop
+        playsInline
         preload="auto"
         onLoadedData={() => {
           videoLoaded.current = true;
@@ -54,14 +72,11 @@ export default function SpringNight({
           type="video/webm"
         />
       </video>
-      <video className="landscape" autoPlay muted loop preload="auto">
-        <source src="/images/jesen/noc/Clouds.webm" type="video/webm" />
-      </video>
       {/* Easel image */}
 
       <img
         className={`easel${active1 ? " active1" : ""}`}
-        src="/images/jesen/noc/easel.webp"
+        src="/images/prolece/noc/easel.webp"
         alt="Easel"
         onMouseEnter={easelHover.handleMouseEnter}
         onMouseLeave={easelHover.handleMouseLeave}
@@ -70,7 +85,7 @@ export default function SpringNight({
       {/* Brushes image */}
       <img
         className={`brushes${active2 ? " active2" : ""}`}
-        src="/images/jesen/noc/brushes.webp"
+        src="/images/prolece/noc/brushes.webp"
         alt="Brushes"
         onClick={handleBrushesClick}
         onMouseEnter={brushesHover.handleMouseEnter}
@@ -80,7 +95,7 @@ export default function SpringNight({
       {/* Picture image lel */}
       <img
         className={`picture${active4 ? " active4" : ""}`}
-        src="/images/jesen/noc/picture.webp"
+        src="/images/prolece/noc/picture.webp"
         alt="slicka"
         style={{ cursor: "pointer" }}
         onMouseEnter={pictureHover.handleMouseEnter}
@@ -91,7 +106,7 @@ export default function SpringNight({
       {/* Lupa image */}
       <img
         className={`lupa${active3 ? " active3" : ""}`}
-        src="/images/jesen/noc/search.webp"
+        src="/images/prolece/noc/search.webp"
         alt="Lupa"
         style={{ cursor: "pointer" }}
         onMouseEnter={lupaHover.handleMouseEnter}
@@ -103,7 +118,7 @@ export default function SpringNight({
 
       <img
         className="luster" // optional active class
-        src="/images/jesen/noc/luster.webp" // your lamp image
+        src="/images/prolece/noc/luster.webp" // your lamp image
         alt="Luster"
         style={{ cursor: "pointer" }}
         onMouseEnter={lusterHover?.handleMouseEnter}

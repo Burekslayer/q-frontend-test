@@ -18,13 +18,15 @@ export default function Spring({
   handleLusterClick,
 }) {
   const bgLoaded = useRef(false);
-  const videoLoaded = useRef(false);
+  const v1Loaded = useRef(false);
+  const v2Loaded = useRef(false);
 
   const tryReady = () => {
-    if (bgLoaded.current && videoLoaded.current) {
+    if (bgLoaded.current && v1Loaded.current && v2Loaded.current) {
       onReady?.();
     }
   };
+
   return (
     <div className="background-parent">
       {/* Base studio image */}
@@ -50,14 +52,11 @@ export default function Spring({
         loop
         preload="auto"
         onLoadedData={() => {
-          videoLoaded.current = true;
+          v1Loaded.current = true;
           tryReady();
         }}
       >
-        <source
-          src="/images/prolece/dan/Smoke.webm"
-          type="video/webm"
-        />
+        <source src="/images/prolece/dan/Smoke.webm" type="video/webm" />
       </video>
       <video
         className="landscape"
@@ -66,7 +65,7 @@ export default function Spring({
         loop
         preload="auto"
         onLoadedData={() => {
-          videoLoaded.current = true;
+          v2Loaded.current = true;
           tryReady();
         }}
       >
