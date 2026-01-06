@@ -55,7 +55,7 @@ export default function Spring({
         }}
       >
         <source
-          src="/images/prolece/dan/Smoke_Alpha.webm"
+          src="/images/prolece/dan/Smoke.webm"
           type="video/webm"
         />
       </video>
