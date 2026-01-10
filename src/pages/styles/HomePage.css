@@ -54,6 +54,7 @@
   width: 100vw;
   pointer-events: none;
   object-fit: contain;
+  filter: opacity(75%);
   mix-blend-mode: screen;
 }
 .summer-butterfly{
