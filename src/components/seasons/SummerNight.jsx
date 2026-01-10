@@ -1,5 +1,5 @@
 import { useRef } from "react";
-export default function Spring({
+export default function SpringNight({
   active1,
   active2,
   active3,
@@ -18,79 +18,65 @@ export default function Spring({
   handleLusterClick,
 }) {
   const bgLoaded = useRef(false);
-  const v1Loaded = useRef(false);
-  const v2Loaded = useRef(false);
-  const v3Loaded = useRef(false);
+  const videoLoaded = useRef(false);
 
   const tryReady = () => {
-    if (bgLoaded.current && v1Loaded.current && v2Loaded.current && v3Loaded.current) {
+    if (bgLoaded.current && videoLoaded.current) {
       onReady?.();
     }
   };
-
   return (
     <div className="background-parent">
       {/* Base studio image */}
       <img
         className="background"
-        src="/images/leto/dan/ArtStudio_Summer_Composition.webp"
+        src="/images/prolece/noc/spring_night_comp.webp"
         alt="Studio Background"
         onLoad={() => {
           bgLoaded.current = true;
           tryReady();
         }}
       />
-      <img
-        className="outside"
-        src="/images/leto/dan/ArtStudio_Summer_Background.webp"
-        alt="Studio Background"
-      />
 
       <video
-        className="summer-birds"
+        className="landscape"
         autoPlay
         muted
         loop
+        playsInline
         preload="auto"
         onLoadedData={() => {
-          v1Loaded.current = true;
+          videoLoaded.current = true;
           tryReady();
         }}
       >
-        <source src="/images/leto/dan/Summer_Birds.webm" type="video/webm" />
+        <source
+          src="/images/prolece/noc/spring_night_background.webm"
+          type="video/webm"
+        />
       </video>
       <video
-        className="summer-butterfly"
+        className="fire"
         autoPlay
         muted
         loop
+        playsInline
         preload="auto"
         onLoadedData={() => {
-          v2Loaded.current = true;
+          videoLoaded.current = true;
           tryReady();
         }}
       >
-        <source src="/images/leto/dan/Summer_Butterfly.webm" type="video/webm" />
-      </video>
-
-      <video
-        className="summer-dust"
-        autoPlay
-        muted
-        loop
-        preload="auto"
-        onLoadedData={() => {
-          v3Loaded.current = true;
-          tryReady();
-        }}
-      >
-        <source src="/images/leto/dan/Summer_Dust.webm" type="video/webm" />
+        <source
+          src="/images/jesen/dan/art_room_fire.webm"
+          type="video/webm"
+        />
       </video>
       {/* Easel image */}
 
       <img
         className={`easel${active1 ? " active1" : ""}`}
-        src="/images/leto/dan/easel.webp"
+        src="/images/prolece/noc/easel.webp"
         alt="Easel"
         onMouseEnter={easelHover.handleMouseEnter}
         onMouseLeave={easelHover.handleMouseLeave}
@@ -99,7 +85,7 @@ export default function Spring({
       {/* Brushes image */}
       <img
         className={`brushes${active2 ? " active2" : ""}`}
-        src="/images/leto/dan/brushes.webp"
+        src="/images/prolece/noc/brushes.webp"
         alt="Brushes"
         onClick={handleBrushesClick}
         onMouseEnter={brushesHover.handleMouseEnter}
@@ -109,7 +95,7 @@ export default function Spring({
       {/* Picture image lel */}
       <img
         className={`picture${active4 ? " active4" : ""}`}
-        src="/images/leto/dan/picture.webp"
+        src="/images/prolece/noc/picture.webp"
         alt="slicka"
         style={{ cursor: "pointer" }}
         onMouseEnter={pictureHover.handleMouseEnter}
@@ -120,7 +106,7 @@ export default function Spring({
       {/* Lupa image */}
       <img
         className={`lupa${active3 ? " active3" : ""}`}
-        src="/images/leto/dan/search.webp"
+        src="/images/prolece/noc/search.webp"
         alt="Lupa"
         style={{ cursor: "pointer" }}
         onMouseEnter={lupaHover.handleMouseEnter}
@@ -132,7 +118,7 @@ export default function Spring({
 
       <img
         className="luster" // optional active class
-        src="/images/leto/dan/luster.webp" // your lamp image
+        src="/images/prolece/noc/luster.webp" // your lamp image
         alt="Luster"
         style={{ cursor: "pointer" }}
         onMouseEnter={lusterHover?.handleMouseEnter}

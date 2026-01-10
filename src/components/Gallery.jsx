@@ -18,10 +18,53 @@ const STYLE_OPTIONS = [
 
 const MEDIUM_OPTIONS = ["Oil", "Watercolor", "Acrylic", "Ink", "Mixed Media"];
 
+// Saatchi-like page size options
+const PER_PAGE_OPTIONS = [30, 60, 100];
+
 function splitIntoColumns(items, columns) {
   const cols = Array.from({ length: columns }, () => []);
   items.forEach((item, i) => cols[i % columns].push(item)); // round-robin (Saatchi-like)
   return cols;
+}
+
+// Build a compact pagination model: 1 2 3 4 5 … last (with current centered)
+function getPageModel(current, total) {
+  if (total <= 1) return [1];
+
+  const clamp = (n) => Math.max(1, Math.min(total, n));
+  const c = clamp(current);
+
+  // If few pages, show all
+  if (total <= 9) return Array.from({ length: total }, (_, i) => i + 1);
+
+  // Saatchi-like: show first, last, and a sliding window around current
+  const windowSize = 5; // number of numeric buttons in the middle window
+  const half = Math.floor(windowSize / 2);
+
+  let start = c - half;
+  let end = c + half;
+
+  // Keep window inside [2, total-1]
+  if (start < 2) {
+    start = 2;
+    end = start + windowSize - 1;
+  }
+  if (end > total - 1) {
+    end = total - 1;
+    start = end - windowSize + 1;
+  }
+
+  const pages = [1];
+
+  if (start > 2) pages.push("…");
+
+  for (let p = start; p <= end; p++) pages.push(p);
+
+  if (end < total - 1) pages.push("…");
+
+  pages.push(total);
+
+  return pages;
 }
 
 export default function Gallery({ images = [] }) {
@@ -59,7 +102,6 @@ export default function Gallery({ images = [] }) {
     const mq = window.matchMedia("(min-width: 1440px)");
     const onChange = (e) => setIsWide1440(e.matches);
 
-    // Safari fallback
     if (mq.addEventListener) mq.addEventListener("change", onChange);
     else mq.addListener(onChange);
 
@@ -97,6 +139,10 @@ export default function Gallery({ images = [] }) {
 
   const activeFilterCount = selectedStyles.size + selectedMediums.size;
 
+  // Pagination state
+  const [perPage, setPerPage] = useState(30);
+  const [page, setPage] = useState(1);
+
   const filtered = useMemo(() => {
     const list = Array.isArray(images) ? images : [];
 
@@ -118,6 +164,29 @@ export default function Gallery({ images = [] }) {
     return list.filter(matches);
   }, [images, selectedStyles, selectedMediums]);
 
+  // Reset pagination when filters or per-page changes
+  useEffect(() => {
+    setPage(1);
+  }, [selectedStyles, selectedMediums, perPage]);
+
+  const totalResults = filtered.length;
+
+  const totalPages = useMemo(() => {
+    const tp = Math.ceil(totalResults / perPage);
+    return Math.max(1, tp);
+  }, [totalResults, perPage]);
+
+  // Clamp page if totalPages shrinks (defensive)
+  useEffect(() => {
+    setPage((p) => Math.min(Math.max(1, p), totalPages));
+  }, [totalPages]);
+
+  const startIndex = (page - 1) * perPage;
+
+  const paged = useMemo(() => {
+    return filtered.slice(startIndex, startIndex + perPage);
+  }, [filtered, startIndex, perPage]);
+
   // Saatchi rules:
   // filters open: 3 cols >=1440, else 2
   // filters closed: 4 cols >=1440, else 3
@@ -130,10 +199,33 @@ export default function Gallery({ images = [] }) {
     return isWide1440 ? 4 : 3;
   }, [filtersOpen, isWide1440, isMobile980]);
 
+  const pagedWithKeys = useMemo(() => {
+    return paged.map((p, i) => ({
+      ...p,
+      __key:
+        String(p._id ?? p.id ?? p.src ?? "img") + "-" + String(startIndex + i),
+    }));
+  }, [paged, startIndex]);
+
   const columns = useMemo(
-    () => splitIntoColumns(filtered, columnCount),
-    [filtered, columnCount]
+    () => splitIntoColumns(pagedWithKeys, columnCount),
+    [pagedWithKeys, columnCount]
   );
+
+  const pageModel = useMemo(
+    () => getPageModel(page, totalPages),
+    [page, totalPages]
+  );
+
+  const goToPage = (p) => {
+    const next = Math.max(1, Math.min(totalPages, p));
+    setPage(next);
+
+    // Optional: scroll user to top of results (Saatchi-like behavior)
+    // Adjust selector to your page if needed
+    const el = document.querySelector(".sg-resultsMeta");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <div className="sg-page">
@@ -231,7 +323,7 @@ export default function Gallery({ images = [] }) {
         )}
 
         <main className="sg-results" aria-label="Gallery results">
-          <div className="sg-resultsMeta">{filtered.length} works</div>
+          <div className="sg-resultsMeta">{totalResults} works</div>
 
           {/* True Saatchi-style: render actual columns, each stacks vertically */}
           <div
@@ -243,7 +335,7 @@ export default function Gallery({ images = [] }) {
             {columns.map((col, colIndex) => (
               <div className="sg-polaroidCol" key={colIndex}>
                 {col.map((p) => (
-                  <figure key={p.id || p._id || p.src} className="sg-polaroid">
+                  <figure key={p.__key} className="sg-polaroid">
                     <div className="sg-imageWrap">
                       <img
                         className="sg-img"
@@ -272,6 +364,76 @@ export default function Gallery({ images = [] }) {
                 ))}
               </div>
             ))}
+          </div>
+
+          {/* Pagination footer */}
+          <div className="sg-paginationBar" aria-label="Pagination controls">
+            <div className="sg-pagination">
+              <button
+                type="button"
+                className="sg-pageNav"
+                onClick={() => goToPage(page - 1)}
+                disabled={page <= 1}
+                aria-label="Previous page"
+              >
+                ‹
+              </button>
+
+              <div className="sg-pageNums" role="navigation" aria-label="Pages">
+                {pageModel.map((item, idx) => {
+                  if (item === "…") {
+                    return (
+                      <span key={`dots-${idx}`} className="sg-dots" aria-hidden>
+                        …
+                      </span>
+                    );
+                  }
+
+                  const n = item;
+                  const isActive = n === page;
+
+                  return (
+                    <button
+                      key={n}
+                      type="button"
+                      className={`sg-pageNum ${isActive ? "isActive" : ""}`}
+                      onClick={() => goToPage(n)}
+                      aria-current={isActive ? "page" : undefined}
+                    >
+                      {n}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                type="button"
+                className="sg-pageNav"
+                onClick={() => goToPage(page + 1)}
+                disabled={page >= totalPages}
+                aria-label="Next page"
+              >
+                ›
+              </button>
+            </div>
+
+            <div className="sg-perPage">
+              <label className="sg-perPageLabel" htmlFor="sg-perPageSelect">
+                Results Per Page
+              </label>
+              <select
+                id="sg-perPageSelect"
+                className="sg-perPageSelect"
+                value={perPage}
+                onChange={(e) => setPerPage(Number(e.target.value))}
+              >
+                {PER_PAGE_OPTIONS.map((n) => (
+                  <option key={n} value={n}>
+                    {n} Results Per Page
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </main>
       </div>

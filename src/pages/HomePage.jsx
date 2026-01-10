@@ -9,9 +9,11 @@ import Gallery from "../components/Gallery";
 import Autumn from "../components/seasons/Autumn";
 import Winter from "../components/seasons/Winter";
 import Spring from "../components/seasons/Spring";
+import Summer from "../components/seasons/Summer";
 import WinterNight from "../components/seasons/WinterNight";
 import AutumnNight from "../components/seasons/AutumnNight";
 import SpringNight from "../components/seasons/SpringNight";
+import SummerNight from "../components/seasons/SummerNight";
 
 import "./styles/HomePage.css";
 import "./styles/Masonry.css";
@@ -28,12 +30,14 @@ function getSeasonByDate(date = new Date()) {
 const SeasonDayMap = {
   winter: Winter,
   spring: Spring,
+  summer: Summer,
   autumn: Autumn,
 };
 
 const SeasonNightMap = {
   winter: WinterNight,
   spring: SpringNight,
+  summer: SummerNight,
   autumn: AutumnNight,
 };
 
@@ -59,8 +63,8 @@ function HomePage() {
 
   /* --------- TEST ----------*/
 
-  const [seasonTest, setSeasonTest] = useState("winter"); // "winter" | "autumn"
-  const SEASONS = ["winter", "spring", "autumn"];
+  const [seasonTest, setSeasonTest] = useState("summer"); // "winter" | "autumn"
+  const SEASONS = ["winter", "spring", "summer", "autumn"];
 
   /* --------- TEST ----------*/
 

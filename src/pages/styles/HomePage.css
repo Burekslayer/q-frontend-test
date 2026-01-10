@@ -46,6 +46,24 @@
   pointer-events: none;
   mix-blend-mode: lighten;
 }
+.summer-dust {
+  z-index: 1;
+  position: absolute;
+  top: -9.25%;
+  left: 0;
+  width: 100vw;
+  pointer-events: none;
+  object-fit: contain;
+  mix-blend-mode: screen;
+}
+.summer-butterfly{
+  z-index: 1;
+  position: absolute;
+  top: -9.25%;
+  left: 0;
+  width: 100vw;
+  pointer-events: none;
+}
 .fire {
   z-index: 3;
   position: absolute;
@@ -74,6 +92,14 @@
   width: 100vw;
   pointer-events: none;
   mix-blend-mode: screen;
+}
+.summer-birds{
+  z-index: -1;
+  position: absolute;
+  top: -9.25%;
+  left: 0%;
+  width: 100vw;
+  pointer-events: none;
 }
 
 /* ----------------- GALLERY CONTENT ----------------- */

@@ -249,3 +249,100 @@
     font-size: 34px;
   }
 }
+
+/* === Pagination (Saatchi-like) === */
+.sg-paginationBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 26px 0 10px;
+}
+
+.sg-pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sg-pageNums {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sg-pageNav,
+.sg-pageNum {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  color: #111;
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+
+.sg-pageNav {
+  font-size: 18px;
+  line-height: 1;
+  padding: 6px 10px;
+}
+
+.sg-pageNav:disabled,
+.sg-pageNum:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.sg-pageNum.isActive {
+  background: #111;
+  color: #fff;
+}
+
+.sg-dots {
+  color: #666;
+  padding: 0 4px;
+}
+
+/* Per-page dropdown */
+.sg-perPage {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sg-perPageLabel {
+  font-size: 13px;
+  color: #111;
+  white-space: nowrap;
+}
+
+.sg-perPageSelect {
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* Mobile: keep it usable and avoid cramming */
+@media (max-width: 980px) {
+  .sg-paginationBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .sg-pageNums {
+    flex-wrap: wrap;
+  }
+
+  .sg-perPage {
+    width: 100%;
+  }
+
+  .sg-perPageSelect {
+    width: 100%;
+  }
+}
