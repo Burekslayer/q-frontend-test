@@ -56,7 +56,7 @@ export default function SpringNight({
         />
       </video>
       <video
-        className="fire"
+        className="fire fire-spring-night"
         autoPlay
         muted
         loop

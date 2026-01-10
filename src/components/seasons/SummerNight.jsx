@@ -30,7 +30,7 @@ export default function SpringNight({
       {/* Base studio image */}
       <img
         className="background"
-        src="/images/prolece/noc/spring_night_comp.webp"
+        src="/images/leto/noc/Night_Summer_Comp.webp"
         alt="Studio Background"
         onLoad={() => {
           bgLoaded.current = true;
@@ -39,7 +39,7 @@ export default function SpringNight({
       />
 
       <video
-        className="landscape"
+        className="landscape-leto-night"
         autoPlay
         muted
         loop
@@ -51,32 +51,16 @@ export default function SpringNight({
         }}
       >
         <source
-          src="/images/prolece/noc/spring_night_background.webm"
+          src="/images/leto/noc/Falling_Star.webm"
           type="video/webm"
         />
       </video>
-      <video
-        className="fire"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        onLoadedData={() => {
-          videoLoaded.current = true;
-          tryReady();
-        }}
-      >
-        <source
-          src="/images/jesen/dan/art_room_fire.webm"
-          type="video/webm"
-        />
-      </video>
+
       {/* Easel image */}
 
       <img
         className={`easel${active1 ? " active1" : ""}`}
-        src="/images/prolece/noc/easel.webp"
+        src="/images/leto/noc/easel.webp"
         alt="Easel"
         onMouseEnter={easelHover.handleMouseEnter}
         onMouseLeave={easelHover.handleMouseLeave}
@@ -85,7 +69,7 @@ export default function SpringNight({
       {/* Brushes image */}
       <img
         className={`brushes${active2 ? " active2" : ""}`}
-        src="/images/prolece/noc/brushes.webp"
+        src="/images/leto/noc/brushes.webp"
         alt="Brushes"
         onClick={handleBrushesClick}
         onMouseEnter={brushesHover.handleMouseEnter}
@@ -95,7 +79,7 @@ export default function SpringNight({
       {/* Picture image lel */}
       <img
         className={`picture${active4 ? " active4" : ""}`}
-        src="/images/prolece/noc/picture.webp"
+        src="/images/leto/noc/picture.webp"
         alt="slicka"
         style={{ cursor: "pointer" }}
         onMouseEnter={pictureHover.handleMouseEnter}
@@ -106,7 +90,7 @@ export default function SpringNight({
       {/* Lupa image */}
       <img
         className={`lupa${active3 ? " active3" : ""}`}
-        src="/images/prolece/noc/search.webp"
+        src="/images/leto/noc/search.webp"
         alt="Lupa"
         style={{ cursor: "pointer" }}
         onMouseEnter={lupaHover.handleMouseEnter}
@@ -118,7 +102,7 @@ export default function SpringNight({
 
       <img
         className="luster" // optional active class
-        src="/images/prolece/noc/luster.webp" // your lamp image
+        src="/images/leto/noc/luster.webp" // your lamp image
         alt="Luster"
         style={{ cursor: "pointer" }}
         onMouseEnter={lusterHover?.handleMouseEnter}
