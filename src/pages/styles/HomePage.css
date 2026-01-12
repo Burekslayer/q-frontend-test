@@ -5,6 +5,9 @@
   font-weight: normal;
   font-style: normal;
 }
+:root {
+  --top-offset: -9.25%;
+}
 
 .home-page {
   display: flex;
@@ -28,19 +31,19 @@
 .background {
   width: 100vw;
   position: relative;
-  top: -9.25%;
+  top: var(--top-offset);
 }
 .outside {
   width: 100vw;
   position: absolute;
-  top: -9.25%;
+  top: var(--top-offset);
   left: 0;
   z-index: -2;
 }
 .light-rays {
   z-index: 3;
   position: absolute;
-  top: -9.25%;
+  top: var(--top-offset);
   left: 0;
   width: 100vw;
   pointer-events: none;
@@ -49,7 +52,7 @@
 .summer-dust {
   z-index: 0;
   position: absolute;
-  top: -9.25%;
+  top: var(--top-offset);
   left: 0;
   width: 100vw;
   pointer-events: none;
@@ -60,7 +63,7 @@
 .summer-butterfly{
   z-index: 0;
   position: absolute;
-  top: -9.25%;
+  top: var(--top-offset);
   left: 0;
   width: 100vw;
   pointer-events: none;
@@ -68,7 +71,7 @@
 .fire {
   z-index: 3;
   position: absolute;
-  top: -9.25%;
+  top: var(--top-offset);
   left: 0;
   width: 100vw;
   pointer-events: none;
@@ -81,7 +84,7 @@ video.fire-spring-night{
 .fire-prolece {
   z-index: 3;
   position: absolute;
-  top: -9.25%;
+  top: var(--top-offset);
   left: 0;
   width: 100vw;
   pointer-events: none;
@@ -91,7 +94,7 @@ video.fire-spring-night{
 .landscape {
   z-index: -1;
   position: absolute;
-  top: -9.25%;
+  top: var(--top-offset);
   left: 0%;
   width: 100vw;
   pointer-events: none;
@@ -100,7 +103,7 @@ video.fire-spring-night{
 .landscape-leto-night{
   z-index: 0;
   position: absolute;
-  top: -9.25%;
+  top: var(--top-offset);
   left: 0%;
   width: 100vw;
   pointer-events: none;
@@ -109,7 +112,7 @@ video.fire-spring-night{
 .summer-birds{
   z-index: -1;
   position: absolute;
-  top: -9.25%;
+  top: var(--top-offset);
   left: 0%;
   width: 100vw;
   pointer-events: none;
@@ -175,7 +178,7 @@ video.fire-spring-night{
 /* Position the easel; adjust coordinates as needed */
 .easel {
   position: absolute;
-  top: 11.35%;
+  top: calc(20.6% + var(--top-offset));
   left: 41.23%;
   width: 14.018%;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -191,7 +194,7 @@ video.fire-spring-night{
 /* Position the brushes; clicking on this navigates to login/register */
 .brushes {
   position: absolute;
-  top: 40.45%;
+  top: calc(49.7% + var(--top-offset));
   left: 31.25%;
   width: 3.82%;
   transition: transform 0.2s, box-shadow 0.5s;
@@ -205,7 +208,7 @@ video.fire-spring-night{
 }
 .picture {
   position: absolute;
-  top: 28.15%;
+  top: calc(37.4% + var(--top-offset));
   left: 6.7%;
   width: 7.5%; /* adjust size as needed */
   transition: transform 0.2s, box-shadow 0.5s;
@@ -220,7 +223,7 @@ video.fire-spring-night{
 
 .lupa {
   position: absolute;
-  top: 43.3%;
+  top: calc(52.55% + var(--top-offset));
   left: 60.7%;
   width: 2.9%; /* adjust size as needed */
   transition: transform 0.2s, box-shadow 0.5s;
@@ -235,7 +238,7 @@ video.fire-spring-night{
 
 .luster {
   position: absolute;
-  top: -9.25%;
+  top: var(--top-offset);
   left: 46%;
   width: 4.85%; /* adjust size as needed */
   transition: transform 0.2s, box-shadow 0.5s;
@@ -307,22 +310,22 @@ video.fire-spring-night{
 }
 
 .galerija-label {
-  top: 16%;
+  top: calc(25.25% + var(--top-offset));
   left: 43.5%;
   font-size: clamp(1px, 5vw, 120px);
 }
 .picture-label {
-  top: 20%;
+  top: calc(29.25% + var(--top-offset));
   left: 6%;
   font-size: clamp(1px, 4vw, 80px); 
 }
 .brushes-label {
-  top: 33%;
+  top: calc(42.25% + var(--top-offset));
   left: 29.7%;
   font-size: clamp(1px, 4vw, 80px); 
 }
 .lupa-label {
-  top: 35%;
+  top: calc(44.25% + var(--top-offset));
   left: 58%;
   font-size: clamp(1px, 4vw, 80px); 
 }
@@ -386,4 +389,10 @@ video.fire-spring-night{
 .season-layer.hidden {
   opacity: 0;
   pointer-events: none;
+}
+
+@media (min-aspect-ratio: 16/10) {
+  :root {
+    --top-offset: 0%;
+  }
 }
