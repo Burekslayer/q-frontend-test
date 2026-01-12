@@ -6,7 +6,9 @@
   font-style: normal;
 }
 :root {
-  --top-offset: 0%;
+  --top-offset-device: 0%;
+  --top-offset-vp: 0%;
+  --top-offset: calc(var(--top-offset-vp) + var(--top-offset-device));
 }
 
 .home-page {
