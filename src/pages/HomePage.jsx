@@ -82,30 +82,6 @@ function HomePage() {
   const dayLayerRef = useRef(null);
   const nightLayerRef = useRef(null);
 
-  useEffect(() => {
-    const root = document.documentElement;
-
-    const applyDeviceBias = () => {
-      // Physical screen ratio (approx). Note: not perfect in multi-monitor cases,
-      // but good enough for your “brother has 16:10” scenario.
-      const r = window.screen.width / window.screen.height;
-
-      // 16:10 ≈ 1.6, allow tolerance
-      const is16by10ish = r > 1.55 && r < 1.7;
-
-      // If device is 16:10-ish, we "neutralize" the viewport's -9.25% when it fires.
-      root.style.setProperty(
-        "--top-offset-device",
-        is16by10ish ? "9.25%" : "0%"
-      );
-    };
-
-    applyDeviceBias();
-    window.addEventListener("resize", applyDeviceBias);
-
-    return () => window.removeEventListener("resize", applyDeviceBias);
-  }, []);
-
   const handleThemeToggle = () => {
     setIsDarkTheme((v) => !v);
   };

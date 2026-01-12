@@ -6,9 +6,7 @@
   font-style: normal;
 }
 :root {
-  --top-offset-device: 0%;
-  --top-offset-vp: 0%;
-  --top-offset: calc(var(--top-offset-vp) + var(--top-offset-device));
+  --top-offset: 0%;
 }
 
 .home-page {
@@ -393,11 +391,8 @@ video.fire-spring-night{
   pointer-events: none;
 }
 
-@media (min-aspect-ratio: 16/10) and (max-aspect-ratio: 1599/900) {
-  :root { --top-offset: 0%; }
-}
-
-/* “16:9-ish and wider” */
-@media (min-aspect-ratio: 16/9) {
-  :root { --top-offset: -9.25%; }
+@media (min-aspect-ratio: 2/1) {
+  :root {
+    --top-offset: -9.25%;
+  }
 }
